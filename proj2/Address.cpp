@@ -1,7 +1,6 @@
 #include "Address.h"
 
 Address::Address(){}
-
 Address::Address(string street, unsigned short doorNumber, string floor, string postalCode, string location)
 {
   this->setStreet(street);
