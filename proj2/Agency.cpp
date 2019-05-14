@@ -2,7 +2,45 @@
 
 Agency::Agency(string fileName)
 {
+    vector<string> content;
+    string agency_file_str, line;
+    ifstream fin;
+    cout << "\nType the name of the file (agency): ";
 
+    cin >> agency_file_str;
+
+    pathToFile = pathToFile + agency_file_str;
+    fin.open(pathToFile);
+
+    int count_fails = 0;
+    if (fin.fail())
+    {
+        if (count_fails == 4)
+        {
+            "\n\nCheck filename in the folders...\nExiting now.";
+            exit(1);
+        }
+        count_fails++;
+        cerr << "File not found. Type a different file name below\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Type the name of the file (agency): ";
+        cin >> agency_file_str;
+    }
+
+    while (!fin.eof())
+    {
+        getline(fin, line);
+        if (line == "")
+            continue;
+        content.push_back(line);
+    }
+
+    cout << "Content successfully read from '" << agency_file_str << "'\n";
+
+    fin.close();
+    reset_pathToFile();
+    return content;
     //IMPLEMENTATION REQUIRED 
 }
 

@@ -7,13 +7,11 @@
 #include <limits>
 using namespace std;
 
-// Declared externally (main.cpp)
-extern string pathToFile;
-extern string limit;
-extern string clients_file;
-extern string clients_file2;
-extern string packs_file;
-extern string packs_file2; 
+string pathToFile = "textfiles/";
+string limit = "::::::::::";
+string AGENCY_FILE_NAME;
+string CLIENTS_FILE_NAME;
+string PACKS_FILE_NAME;
 
 // "ADDRESS.H" BELOW
 class Address

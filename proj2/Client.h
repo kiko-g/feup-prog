@@ -1,17 +1,15 @@
 #pragma once
-
 #include <iostream>
 #include <string>
 #include <vector>
 
-
 #include "defs.h"
 #include "Packet.h"
 #include "Address.h"
-
 using namespace std;
 
-class Client{
+class Client
+{
  private:
   string name; // name of the client
   unsigned VATnumber; // VAT number of client
@@ -25,7 +23,6 @@ class Client{
   Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased);  // client read from file
 
   // GET methods
-  
   string getName() const;
   unsigned getVATnumber() const;
   unsigned short getFamilySize() const;
@@ -34,7 +31,6 @@ class Client{
   unsigned getTotalPurchased() const;
   
   // SET methods
-  
   void setName(string name);
   void setVATnumber(unsigned VATnumber);
   void setFamilySize(unsigned short familySize);
@@ -43,6 +39,5 @@ class Client{
   unsigned setTotalPurchased(unsigned totalPurchased);
   
   // other methods
-
   friend ostream& operator<<(ostream& out, const Client & client);
 };

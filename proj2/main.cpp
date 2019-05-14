@@ -1,6 +1,9 @@
 #include "Agency.h"
 #include "Menus.h"
 // #include "utils.h"
+#include "Other.h"
+using namespace std;
+
 
 int main()
 {
@@ -12,15 +15,6 @@ int main()
 }
 
 /*
-#include "Other.h"
-using namespace std;
-
-string pathToFile = "textfiles/";
-string limit = "::::::::::";
-string clients_file;
-string packs_file;
-string clients_file2 = "clientsnew.txt";
-string packs_file2 = "packsnew.txt";
 
 int main()
 {
