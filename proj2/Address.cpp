@@ -4,35 +4,38 @@ Address::Address(){}
 
 Address::Address(string street, unsigned short doorNumber, string floor, string postalCode, string location)
 {
-  // REQUIRES IMPLEMENTATION
+  this->setStreet(street);
+  this->setDoorNumber(doorNumber);
+  this->setFloor(floor);
+  this->setPostalCode(postalCode);
+  this->setLocation(location);
 }
 
   // metodos GET
 
 string Address::getStreet() const
 {
-  // REQUIRES IMPLEMENTATION
+  return this->street;
 }
 
 unsigned short Address::getDoorNumber() const
 {
-  // REQUIRES IMPLEMENTATION
+  return this->doorNumber;
 }
 
 string Address::getFloor() const
 {
-  
-  // REQUIRES IMPLEMENTATION
+  return this->floor;
 }
 
 string Address::getPostalCode() const
 {
-  // REQUIRES IMPLEMENTATION
+  return this->postalCode;
 }
 
 string Address::getLocation() const
 {
-  // REQUIRES IMPLEMENTATION
+  return this->location;
 }
 
   // metodos SET
