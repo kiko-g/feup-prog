@@ -1,4 +1,20 @@
 #include "Agency.h"
+#include "myLib.h"
+
+Agency::Agency(string fileName)
+{
+    
+    ifstream fp;
+    fp.open(fileName);
+  
+    if(!fp.is_open())
+    {
+      cout << "Error, "<< fileName <<" file not found" << endl;
+      exit(1);
+    }
+
+
+
 
 Agency::Agency(string fileName)
 {

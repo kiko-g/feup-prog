@@ -1,40 +1,9 @@
 #include "Menus.h"
+#include "defs.h"
+#include "myLib.h"
 
-unsigned mainMenu(Agency agency)
-{
+unsigned mainMenu(Agency agency){
 
-  // A IMPLEMENTAR
-  
-  return 0;
-}
-    
-
-
-
-
-
-
-
-#include "Other.h"
-
-void initNavigation(vector<Client> CL, vector<Pack> PK)
-{
-    char cond;
-    fflush(stdin);
-    cout << "\nPRESS ENTER TO CONTINUE ";
-    while (cond != '\n')
-    {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cond = cin.get();
-        main_interface(CL, PK);
-    }
-}
-
-
-// ============ MAIN MENU =================
-void main_interface(vector<Client> CL, vector<Pack> PK)
-{
     int input;
     while(1)
     {
@@ -50,15 +19,15 @@ void main_interface(vector<Client> CL, vector<Pack> PK)
         switch(input)
         {
          case 1:
-            browsing_interface(CL, PK);
+            browsing_interface(agency);
             break;
 
          case 2:
-            clients_interface(CL, PK);
+            clients_interface(agency);
             break;
 
          case 3:
-            packs_interface(CL, PK);
+            packs_interface(agency);
             break;
 
          case 4:
@@ -72,7 +41,7 @@ void main_interface(vector<Client> CL, vector<Pack> PK)
 
 
 // DEALING WITH OPTION 1
-void browsing_interface(vector<Client> CL, vector<Pack> PK)
+void browsing_interface(Agency agency)
 {
     int input;
     while (1)
@@ -87,11 +56,11 @@ void browsing_interface(vector<Client> CL, vector<Pack> PK)
         switch (input)
         {
         case 1:
-            browse_clients_interface(CL, PK);
+            browse_clients_interface(agency);
             break;
 
         case 2:
-            browse_packs_interface(CL, PK);
+            browse_packs_interface(agency);
             break;
 
         case 3:
@@ -100,7 +69,7 @@ void browsing_interface(vector<Client> CL, vector<Pack> PK)
     }
 }
 
-void browse_clients_interface(vector<Client> CL, vector<Pack> PK)
+void browse_clients_interface(Agency agency)
 {
     int input;
     int condition = -1;
@@ -152,7 +121,7 @@ void browse_clients_interface(vector<Client> CL, vector<Pack> PK)
     }
 }
 
-void browse_packs_interface(vector<Client> CL, vector<Pack> PK)
+void browse_packs_interface(Agency agency)
 {
     int input;
     clearScreen();
@@ -178,7 +147,7 @@ void browse_packs_interface(vector<Client> CL, vector<Pack> PK)
 
 
 // DEALING WITH OPTION 2
-void clients_interface(vector<Client> &CL, vector<Pack> &PK)
+void clients_interface(Agency agency)
 {
     int input;
     while(1)
@@ -220,7 +189,7 @@ void clients_interface(vector<Client> &CL, vector<Pack> &PK)
 
 
 // DEALING WITH OPTION 3
-void packs_interface(vector<Client> &CL, vector<Pack> &PK)
+void packs_interface(Agency agency)
 {
     int input = -1;
     while(1)
@@ -259,3 +228,4 @@ void packs_interface(vector<Client> &CL, vector<Pack> &PK)
         write_packs(PK, packs_file);
     }
 }
+    

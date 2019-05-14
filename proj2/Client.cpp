@@ -2,44 +2,52 @@
 
 Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address){
   
-  // REQUIRES IMPLEMENTATION 
+  this->setName(name);
+  this->setVATnumber(VATnumber);
+  this->setFamilySize(familySize);
+  this->setAddress(address);
 }
 
 Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased){
   
-  // REQUIRES IMPLEMENTATION 
+  this->setName(name);
+  this->setVATnumber(VATnumber);
+  this->setFamilySize(familySize);
+  this->setAddress(address);
+  this->setPacketList(packets);
+  this->setTotalPurchased(totalPurchased);
 }
 
   // GET methods
 
 string Client::getName() const{
   
-  // REQUIRES IMPLEMENTATION 
+  return this->name; 
 }
   
 unsigned Client::getVATnumber() const{
   
-  // REQUIRES IMPLEMENTATION 
+  return this->VATnumber;
 }
 
 unsigned short Client::getFamilySize() const{
   
-  // REQUIRES IMPLEMENTATION 
+  return this->familySize;
 }
 
 Address Client::getAddress() const{
   
-  // REQUIRES IMPLEMENTATION 
+  return this->address;
 }
 
 vector<Packet> Client::getPacketList() const{
   
-  // REQUIRES IMPLEMENTATION 
+  return this->packets;
 }
 
 unsigned Client::getTotalPurchased() const{
   
-  // REQUIRES IMPLEMENTATION 
+  return this->totalPurchased;
 }
   
   // metodos SET
