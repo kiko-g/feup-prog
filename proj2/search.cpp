@@ -1,4 +1,4 @@
-#include "myLib.h"
+#include "Other.h"
 
 //Consider there are not equal names
 vector<int> search_client_name(vector<Client> CL)

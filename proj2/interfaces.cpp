@@ -1,4 +1,4 @@
-#include "myLib.h"
+#include "Other.h"
 
 void init_navigation(vector<Client> CL, vector<Pack> PK)
 {
@@ -241,6 +241,3 @@ void packs_interface(vector<Client> &CL, vector<Pack> &PK)
         write_packs(PK, packs_file);
     }
 }
-
-
-

@@ -1,4 +1,4 @@
-#include "myLib.h"
+#include "Other.h"
 
 void write_clients(vector<Client> list, string filename)
 {

@@ -11,9 +11,44 @@ using namespace std;
 extern string pathToFile;
 extern string limit;
 extern string clients_file;
-extern string packs_file;
 extern string clients_file2;
+extern string packs_file;
 extern string packs_file2; 
+
+// "ADDRESS.H" BELOW
+class Address
+{
+ private:
+  string street; // street name
+  unsigned short doorNumber; // door number
+  string floor; // floor number ("-" is not applicable)
+  string postalCode; // postal code
+  string location; // site
+
+ public:
+  Address();
+  Address(string street, unsigned short doorNumber, string floor, string postalCode, string location);
+
+  // metodos GET
+  string getStreet() const;
+  unsigned short getDoorNumber() const;
+  string getFloor() const;
+  string getPostalCode() const;
+  string getLocation() const;
+  
+  // metodos SET
+  void setStreet(string street);
+  void setDoorNumber(unsigned short doorNumber);
+  void setFloor(string floor);
+  void setPostalCode(string postalCode);
+  void setLocation(string  location);
+
+  // outros */
+  
+  friend ostream& operator<<(ostream& out, const Address & address);
+
+};
+
 
 //Structures
 struct Date
@@ -76,7 +111,7 @@ struct Client
 #endif
 
 // INSIDE READ.CPP ----> READING AND ORGANIZING
-vector<string> read_agency();
+vector<string> readAgency();
 vector<string> read_clients(string clients_file_str);
 vector<string> read_packs(string packs_file_str);
 Agency decompose_agency(vector<string> rawAG);

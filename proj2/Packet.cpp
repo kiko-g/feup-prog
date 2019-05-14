@@ -7,28 +7,28 @@ Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, 
 
   // metodos GET
 
-unsigned Packet::getId() const{
-
+unsigned Packet::getId() const
+{
   // REQUIRES IMPLEMENTATION
 }
 
-vector<string> Packet::getSites() const{
-
+vector<string> Packet::getSites() const
+{
   // REQUIRES IMPLEMENTATION
 }
 
-Date Packet::getBeginDate() const{
-
+Date Packet::getBeginDate() const
+{
   // REQUIRES IMPLEMENTATION
 }
 
-Date Packet::getEndDate() const{
-
+Date Packet::getEndDate() const
+{
   // REQUIRES IMPLEMENTATION
 }
 
-double Packet::getPricePerPerson() const{
-
+double Packet::getPricePerPerson() const
+{
   // REQUIRES IMPLEMENTATION
 }
 

@@ -12,7 +12,7 @@ int main()
 }
 
 /*
-#include "myLib.h"
+#include "Other.h"
 using namespace std;
 
 string pathToFile = "textfiles/";

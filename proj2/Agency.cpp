@@ -1,39 +1,42 @@
 #include "Agency.h"
 
+Agency::Agency(string fileName)
+{
 
-
-Agency::Agency(string fileName){
-
-  //  IMPLEMENTATION REQUIRED 
+    //IMPLEMENTATION REQUIRED 
 }
 
   // metodos GET
-string Agency::getName() const{
+string Agency::getName() const
+{
+  //  IMPLEMENTATION REQUIRED 
+}
+
+unsigned Agency::getVATnumber() const
+{
+  //  IMPLEMENTATION REQUIRED 
+}
+
+Address Agency::getAddress() const
+{
 
   //  IMPLEMENTATION REQUIRED 
 }
 
-unsigned Agency::getVATnumber() const{
+string Agency::getURL() const
+{
 
   //  IMPLEMENTATION REQUIRED 
 }
 
-Address Agency::getAddress() const{
+vector<Client> Agency::getClients() const
+{
 
   //  IMPLEMENTATION REQUIRED 
 }
 
-string Agency::getURL() const{
-
-  //  IMPLEMENTATION REQUIRED 
-}
-
-vector<Client> Agency::getClients() const{
-
-  //  IMPLEMENTATION REQUIRED 
-}
-
-vector<Packet> Agency::getPackets() const{
+vector<Packet> Agency::getPackets() const
+{
 
   //  IMPLEMENTATION REQUIRED 
 }

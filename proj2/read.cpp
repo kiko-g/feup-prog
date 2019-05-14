@@ -1,5 +1,5 @@
 //Read and organize the contents of the text files
-#include "myLib.h"
+#include "Other.h"
 
 int numberOf(string fileName)
 {

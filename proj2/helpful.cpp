@@ -1,4 +1,4 @@
-#include "myLib.h"
+#include "Other.h"
 // HELPFUL FUNCTIONS
 vector<string> strtok_cpp(string h, string n)
 {
