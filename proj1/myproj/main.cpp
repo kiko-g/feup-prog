@@ -1,6 +1,3 @@
-/*
-Text files are in a folder called 'textfiles' inside the 'myproj' folder
-*/
 #include "Agency.h"
 #include "Menus.h"
 // #include "utils.h"
@@ -14,6 +11,7 @@ int main()
     return 0;
 }
 
+/*
 #include "myLib.h"
 using namespace std;
 
@@ -45,3 +43,5 @@ int main()
 
     init_navigation(clients_pure, packs_pure);
 }
+Text files are in a folder called 'textfiles' inside the 'myproj' folder
+*/
