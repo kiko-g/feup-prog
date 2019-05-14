@@ -1,34 +1,34 @@
 #include "Address.h"
 
 
-Address::Address(){
-}
+Address::Address(){}
 
-Address::Address(string street, unsigned short doorNumber, string floor, string postalCode, string location){
-
+Address::Address(string street, unsigned short doorNumber, string floor, string postalCode, string location)
+{
   // REQUIRES IMPLEMENTATION
 }
 
   // metodos GET
 
 
-string Address::getStreet() const{
-
+string Address::getStreet() const
+{
   // REQUIRES IMPLEMENTATION
 }
 
-unsigned short Address::getDoorNumber() const{
-
+unsigned short Address::getDoorNumber() const
+{
   // REQUIRES IMPLEMENTATION
 }
 
-string Address::getFloor() const{
+string Address::getFloor() const
+{
   
   // REQUIRES IMPLEMENTATION
 }
 
-string Address::getPostalCode() const{
-
+string Address::getPostalCode() const
+{
   // REQUIRES IMPLEMENTATION
 }
 
