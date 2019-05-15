@@ -1,13 +1,10 @@
 #include "Agency.h"
 
-Agency::Agency(string fileName)
+Agency::Agency(string agency_file_str)
 {
     vector<string> content;
     string agency_file_str, line;
     ifstream fin;
-    cout << "\nType the name of the file (agency): ";
-
-    cin >> agency_file_str;
 
     pathToFile = pathToFile + agency_file_str;
     fin.open(pathToFile);
@@ -40,14 +37,42 @@ Agency::Agency(string fileName)
 
     fin.close();
     reset_pathToFile();
-    return content;
-    //IMPLEMENTATION REQUIRED 
+    
+    this->setName(content[0]);
+    int VATnr;
+    stoint(content[1], VATnr);
+    this->setVATnumber(VATnr);
+
+    string street; // street name
+    unsigned short doorNumber; // door number
+    string floor; // floor number ("-" is not applicable)
+    string postalCode; // postal code
+    string location; // site
+
+    funcao_a_implementar(const[2], street, doorNumber, floor, postalCode, location); //FUNÇÃO QUE DIVIDE AS CENAS
+    
+    Address adress(street, doorNumber, floor, postalCode, location);
+    
+    this->setAddress(adress);
+    this->setURL(content[3]);
+
+    //FALTA
+    // CRIADOR DE VETOR CLIENTES + MAX CLIENTS ID
+    // CRIADOR DE VETOR PACKETS + MAX PACKETS ID
+
+    this->setClients(vetor de clients);
+    this->setPackets(vetor de packets);
+
+    this->clientsInfoHasChanged = false;
+    this->packetsInfoHasChanged = false;
+    this->maxClientsId = max_clients_id;
+    this->maxPacketsId = max_packets_id;
 }
 
   // metodos GET
 string Agency::getName() const
 {
-  //  IMPLEMENTATION REQUIRED 
+  //  IMPLEMENTATION REQUIRED   
 }
 
 unsigned Agency::getVATnumber() const
@@ -84,7 +109,7 @@ vector<Packet> Agency::getPackets() const
 
 void Agency::setName(string name){
 
-  //  IMPLEMENTATION REQUIRED 
+  this->name = name;  
 }
 
 void Agency::setVATnumber(unsigned VATnumber){

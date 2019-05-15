@@ -28,7 +28,7 @@ class Agency{
   unsigned int maxPacketsId; // maximum value among all packets identifiers
 
  public:
-  Agency(string fileName);
+  Agency(string agency_file_str);
 
   // methods GET
   string getName() const;
