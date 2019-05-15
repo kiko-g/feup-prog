@@ -12,8 +12,8 @@ Agency::Agency(string agency_file_str)
     clientContent = read_clients(agencyContent[4]);
     packContent = read_packs(agencyContent[5]);
 
-    vector<Client> clients = decompose_clients(clientContent);
-
+    vector<Client> clients = decompose_clients(clientContent, agencyContent[4]);
+    vector<Packet> packets = decompose_packs(packContent, agencyContent[5]);
 
     this->setName(agencyContent[0]);
     int VATnr;
@@ -31,17 +31,14 @@ Agency::Agency(string agency_file_str)
     this->setAddress(address);
     this->setURL(agencyContent[3]);
 
-    //FALTA
-    // CRIADOR DE VETOR CLIENTES + MAX CLIENTS ID
-    // CRIADOR DE VETOR PACKETS + MAX PACKETS ID
-    
     this->setClients(clients);
     this->setPackets(packets);
 
     this->clientsInfoHasChanged = false;
     this->packetsInfoHasChanged = false;
-    this->maxClientsId = max_clients_id;
-    this->maxPacketsId = max_packets_id;
+
+    //this->maxClientsId = max_clients_id;
+    //this->maxPacketsId = max_packets_id;
 }
 
   // metodos GET

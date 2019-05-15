@@ -175,30 +175,41 @@ vector<Client> decompose_clients(vector<string> rawCL, string filename)
 // ======================================
 // ======================================
 
-vector<Pack> decompose_packs(vector<string> rawPK, string filename)
+vector<Packet> decompose_packs(vector<string> rawPK, string filename)
 {
     int i=0, pack_number = numberOf(filename);
-    vector<Pack> PK;
+    vector<Packet> PK;
+    vector<string> divSITES; 
     vector<string> divDATE;       // DIVIDING PACKS STRING INTO A VECTOR OF PACK NUMBERS OF STRING TYPE
+
+    unsigned id; // packet unique identifier
+    vector<string> sites; // touristic sites to visit
+    double pricePerPerson; // price per person
+    unsigned maxPersons;
+    unsigned nrSold;
 
     // 8*i helps us advance to the correct client info
     while(i < pack_number)
     {
-        Pack p;
-        p.id = stoi(rawPK.at(1 + 8*i));                 //PART 1
-        p.destination = rawPK.at(2 + 8*i);              //PART 2
-        divDATE = strtok_cpp(rawPK.at(3 + 8*i), "/");   //PART 3
-        p.startDate.year = stoi(divDATE.at(0));
-        p.startDate.month = stoi(divDATE.at(1));
-        p.startDate.day  = stoi(divDATE.at(2));
-        divDATE = strtok_cpp(rawPK.at(4 + 8*i), "/");   // PART 4
-        p.endDate.year = stoi(divDATE.at(0));
-        p.endDate.month = stoi(divDATE.at(1));
-        p.endDate.day = stoi(divDATE.at(2));
-        p.price_pp = stoi(rawPK.at(5 + 8*i));           // PART 5
-        p.availableSeats = stoi(rawPK.at(6 + 8*i));     // PART 6
-        p.soldSeats = stoi(rawPK.at(7 + 8*i));          // PART 7
 
+        id = stoi(rawPK.at(1 + 8*i));                 //PART 1
+        divSITES = strtok_cpp(rawPK.at(3 + 8*i), "-");              //PART 2
+        sites.push_back(divSITES.at(0));
+        divSITES = strtok_cpp(divSITES.at(1), ";");              //PART 2
+        while(!divSITES.empty){
+            sites.push_back(divSITES.pop_back);
+        }
+        divDATE = strtok_cpp(rawPK.at(3 + 8*i), "/");   //PART 3
+        Date begin(stoi(divDATE.at(2)),stoi(divDATE.at(1)),stoi(divDATE.at(0)));
+   
+        divDATE = strtok_cpp(rawPK.at(4 + 8*i), "/");   // PART 4
+        Date end(stoi(divDATE.at(2)),stoi(divDATE.at(1)),stoi(divDATE.at(0)));
+
+        pricePerPerson = stoi(rawPK.at(5 + 8*i));           // PART 5
+        maxPersons = stoi(rawPK.at(6 + 8*i));     // PART 6
+        nrSold = stoi(rawPK.at(7 + 8*i));          // PART 7
+
+        Packet p(id, sites, begin, end, pricePerPerson, maxPersons, nrSold);
         PK.push_back(p);
         i++;
     }

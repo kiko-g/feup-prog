@@ -17,7 +17,6 @@ class Date{
 
  public:
   Date();
-  Date(string date);
   Date(unsigned short day, unsigned short month, unsigned year);
 
   // GET methods
