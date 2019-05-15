@@ -28,26 +28,17 @@ int numberOf(string fileName)
 vector<string> read_agency(string agency_file_str)
 {
     vector<string> content;
-    string line;
+    string agency_file_str, line;
     ifstream fin;
 
     pathToFile = pathToFile + agency_file_str;
     fin.open(pathToFile);
 
-    int count_fails = 0;
     if (fin.fail())
     {
-        if(count_fails == 4)
-        {
-            "\n\nCheck filename in the folders...\nExiting now.";
-            exit(1);
-        }
-        count_fails++;
-        cerr << "File not found. Type a different file name below\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Type the name of the file (agency): ";
-        cin >> agency_file_str;
+        cout << "\n\nCHECK AGENCY FILENAME IN THE FOLDERS AND"
+             << "COMPARE IT TO THE DEFINITION IN defs.h\nExiting now.";
+        exit(1);
     }
 
     while (!fin.eof())
@@ -57,9 +48,8 @@ vector<string> read_agency(string agency_file_str)
         content.push_back(line);
     }
 
-    
     cout << "Content successfully read from '" << agency_file_str << "'\n";
-    
+
     fin.close();
     reset_pathToFile();
     return content;
