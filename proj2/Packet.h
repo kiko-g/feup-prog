@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-#include "defs.h"
 #include "Date.h"
 
 using namespace std;

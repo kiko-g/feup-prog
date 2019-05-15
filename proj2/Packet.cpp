@@ -25,12 +25,12 @@ vector<string> Packet::getSites() const
 
 Date Packet::getBeginDate() const
 {
-  return this->getBeginDate;
+  return this->begin;
 }
 
 Date Packet::getEndDate() const
 {
-  return this->getEndDate;
+  return this->end;
 }
 
 double Packet::getPricePerPerson() const
@@ -61,12 +61,12 @@ void Packet::setSites(vector<string> sites){
 
 void Packet::setBeginDate(Date begin){
 
-  this->getBeginDate = begin;
+  this->begin = begin;
 }
 
 void Packet::setEndDate(Date end){
 
-  this->getEndDate = end;
+  this->end = end;
 }
 
 void Packet::setPricePerPerson(double pricePerPerson){

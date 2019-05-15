@@ -1,7 +1,6 @@
 #include "Menus.h"
 #include "defs.h"
-#include "Other.h"
-
+/*
 unsigned mainMenu(Agency agency){
 
     int input;
@@ -228,4 +227,4 @@ void packs_interface(Agency agency)
         write_packs(PK, packs_file);
     }
 }
-    
+*/

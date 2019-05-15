@@ -6,8 +6,6 @@
 #include <fstream>
 #include <limits>
 
-#include "read.cpp"
-
 #include "Agency.h"
 #include "Client.h"
 #include "Date.h"
@@ -36,7 +34,7 @@ vector<Client> decompose_clients(vector<string> rawCL, string filename);
 vector<Packet> decompose_packs(vector<string> rawPK, string filename);
 Address string_to_address(string address_str);
 
-
+/*
 // CLIENT MANAGEMENT
 void add_client(vector<Client> &CL);
 void edit_client(vector<Client> &CL);
@@ -81,7 +79,7 @@ void browse_packs_interface(vector<Client> CL, vector<Packet> PK);
 
 //CALC
 void determine_packs_money(vector<Packet> PK);
-
+*/
 // INPUT DEALING FUNCTIONS
 int stoint(const string &str, int &value);
 int validate_interface_input(int a, int b);

@@ -28,7 +28,7 @@ int numberOf(string fileName)
 vector<string> read_agency(string agency_file_str)
 {
     vector<string> content;
-    string agency_file_str, line;
+    string line;
     ifstream fin;
 
     pathToFile = pathToFile + agency_file_str;
@@ -153,7 +153,7 @@ vector<Client> decompose_clients(vector<string> rawCL, string filename)
         stoint(rawCL.at(1 + 6*i), VATnumber);            // PART 2
         stoint(rawCL.at(2 + 6*i), familySize);        // PART 3
         // PART 4
-        Address address = string_to_adress(rawCL.at(2 + 6*i));
+        Address address = string_to_address(rawCL.at(2 + 6*i));
         // PART 5
         divPK = strtok_cpp(rawCL.at(4 + 6*i), " ; ");
 /*
@@ -196,9 +196,12 @@ vector<Packet> decompose_packs(vector<string> rawPK, string filename)
         divSITES = strtok_cpp(rawPK.at(3 + 8*i), "-");              //PART 2
         sites.push_back(divSITES.at(0));
         divSITES = strtok_cpp(divSITES.at(1), ";");              //PART 2
-        while(!divSITES.empty){
-            sites.push_back(divSITES.pop_back);
+
+        for (size_t i = 0; i < divSITES.size(); i++)
+        {
+            sites.push_back(divSITES.at(i));
         }
+        
         divDATE = strtok_cpp(rawPK.at(3 + 8*i), "/");   //PART 3
         Date begin(stoi(divDATE.at(2)),stoi(divDATE.at(1)),stoi(divDATE.at(0)));
    
