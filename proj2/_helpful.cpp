@@ -1,4 +1,4 @@
-#include "Other.h"
+#include "defs.h"
 // HELPFUL FUNCTIONS
 vector<string> strtok_cpp(string h, string n)
 {

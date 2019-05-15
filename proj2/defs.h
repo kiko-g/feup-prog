@@ -52,54 +52,6 @@ public:
     friend ostream &operator<<(ostream &out, const Address &address);
 };
 
-//Structures
-struct Date
-{
-    int day;
-    int month;
-    int year;
-};
-
-struct Address
-{
-    string street;
-    int doorNumber;
-    string floor;
-    string CP;
-    int CP1;
-    int CP2;
-    string location;
-};
-
-struct Pack
-{
-    int id;
-    string destination;
-    Date startDate;
-    Date endDate;
-    int price_pp; // pp = per person
-    int availableSeats;
-    int soldSeats;
-};
-
-struct Agency
-{
-    string name;
-    int NIF;
-    string webURL;
-    Address address;
-};
-
-struct Client
-{
-    string name;
-    int NIF;
-    int nFamAgr;
-    Address address;
-    string packs_str;
-    vector<int> packs;
-};
-
 #ifdef _WIN32
 #define clearScreen() system("cls");
 #else
