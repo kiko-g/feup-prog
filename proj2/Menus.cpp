@@ -1,6 +1,6 @@
 #include "Menus.h"
 #include "defs.h"
-/*
+
 unsigned mainMenu(Agency agency){
 
     int input;
@@ -89,27 +89,27 @@ void browse_clients_interface(Agency agency)
         case 1:
             cout << "\n== SEARCH NAME ==\n";
             int decwhich;
-            vpos = search_client_name(CL);
+            //vpos = search_client_name(CL);         <----------------------------
 
             for (int j = 0; j < vpos.size(); j++)
             {
-                cout << CL.at(vpos.at(j)).name << "\n";
+         //       cout << CL.at(vpos.at(j)).name << "\n"; <-------------------------------------------
             }
             cout << "\nSelect which one you wish to view, ";
             decwhich = validate_interface_input(1, vpos.size());
-            print_client(CL, decwhich - 1);
+            //print_client(CL, decwhich - 1);   <----------------------------------------
             cout << "\nType '0' (zero) to see just the recent MENU: ";
             cin >> condition; while(!cin_test) cin >> condition;
             break;
 
         case 2:
-            print_client(CL, search_client_NIF(CL));
+           // print_client(CL, search_client_NIF(CL)); <-------------------------------------------
             cout << "\nType '0' (zero) to see just the recent MENU: ";
             cin >> condition; while(!cin_test) cin >> condition;
             break;
 
         case 3:
-            print_all_clients(CL);
+           // print_all_clients(CL); <-------------------------------------------
             cout << "\nType '0' (zero) to see just the recent MENU: ";
             cin >> condition; while(!cin_test) cin >> condition;
             break;
@@ -135,7 +135,7 @@ void browse_packs_interface(Agency agency)
     switch (input)
     {
     case 1:
-        search_pack_ID(PK);
+        // search_pack_ID(PK); <-------------------------------------------
         break;
 
     case 2:
@@ -164,19 +164,19 @@ void clients_interface(Agency agency)
         switch(input)
         {
          case 1:
-            add_client(CL);
+            // add_client(CL); <-------------------------------------------
             break;
 
          case 2:
-            edit_client(CL);
+           // edit_client(CL); <-------------------------------------------
             break;
 
          case 3:
-            remove_client(CL);
+           // remove_client(CL); <-------------------------------------------
             break;
 
          case 4:
-            purchase_pack(CL, PK);
+            // purchase_pack(CL, PK); <-------------------------------------------
             break;
 
          case 5:
@@ -206,25 +206,24 @@ void packs_interface(Agency agency)
         switch(input)
         {
             case 1:
-            add_pack(PK);
+           // add_pack(PK); <-------------------------------------------
             break;
 
             case 2:
-            edit_pack(PK);
+          //  edit_pack(PK); <-------------------------------------------
             break;
 
             case 3:
-            remove_pack(PK);
+           // remove_pack(PK); <-------------------------------------------
             break;
 
             case 4:
-            determine_packs_money(PK);
+          //  determine_packs_money(PK); <-------------------------------------------
             break;
 
             case 5:
             return;
         }
-        write_packs(PK, packs_file);
+       // write_packs(PK, packs_file); <-------------------------------------------
     }
 }
-*/
