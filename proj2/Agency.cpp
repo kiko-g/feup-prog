@@ -1,5 +1,4 @@
 #include "Agency.h"
-#include "Other.h"
 
 Agency::Agency(string fileName)
 {
