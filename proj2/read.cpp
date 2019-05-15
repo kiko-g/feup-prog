@@ -1,5 +1,7 @@
 //Read and organize the contents of the text files
-#include "myLib.h"
+#include "defs.h"
+
+using namespace std;
 
 int numberOf(string fileName)
 {
@@ -23,15 +25,12 @@ int numberOf(string fileName)
 // ======================================
 // ======================================
 
-vector<string> read_agency()
+vector<string> read_agency(string agency_file_str)
 {
     vector<string> content;
     string agency_file_str, line;
     ifstream fin;
-    cout << "\nType the name of the file (agency): ";
-    
-    cin >> agency_file_str; 
-    
+
     pathToFile = pathToFile + agency_file_str;
     fin.open(pathToFile);
 
@@ -133,69 +132,40 @@ vector<string> read_packs(string packs_file_str)
 // ======================================
 // ======================================
 
-Agency decompose_agency(vector<string> rawAG)
-{
-    Agency AG;
-    int NIF;
-    vector<string> divAD = strtok_cpp(rawAG.at(3), " | ");  // LINE 4 HOLDS ADDRESS
-    vector<string> divCP = strtok_cpp(divAD.at(3), "-");    // SECTION 4 OF LINE 4 HOLD CP 
-
-    //PART 1
-    AG.name = rawAG.at(0);
-    //PART 2
-    stoint(rawAG.at(1), AG.NIF);
-    //PART 3
-    AG.webURL = rawAG.at(2);
-    //PART 4
-    AG.address.street = divAD.at(0);            // 4.0
-    stoint(divAD.at(1), AG.address.doorNumber); // 4.1
-    AG.address.floor = divAD.at(2);             // 4.2
-    AG.address.CP = divAD.at(3);                // 4.3
-    AG.address.CP1 = stoi(divCP.at(0));         
-    AG.address.CP2 = stoi(divCP.at(1));
-    AG.address.location = divAD.at(4);          // 4.4
-    return AG;
-}
-
-// ======================================
-// ======================================
-
 vector<Client> decompose_clients(vector<string> rawCL, string filename)
 {
     vector<Client> CL;
     int i=0, client_number = numberOf(filename);
-    vector<string> divAD;       // DIVIDING ADDRESS,     LINE 4 HOLDS ADDRESS
-    vector<string> divCP;       // DIVIDING POSTAL CODE, SECTION 4 OF LINE 4 HOLD CP
     vector<string> divPK;       // DIVIDING PACKS STRING INTO A VECTOR OF PACK NUMBERS OF STRING TYPE
+
+    string name; // name of the client
+    int VATnumber; // VAT number of client
+    int familySize;  // number of family members
+    Address address; // client's address
+    vector<Packet> packets; // vector to store client's packets bought
+    int totalPurchased; // total value spent by the client
 
     // 6*i helps us advance to the correct client info
     while(i < client_number)
     {
-        Client c;
-        c.name = rawCL.at(0 + 6*i);                 // PART 1
-        stoint(rawCL.at(1 + 6*i), c.NIF);            // PART 2
-        stoint(rawCL.at(2 + 6*i), c.nFamAgr);        // PART 3
+        
+        name = (rawCL.at(0 + 6*i));                 // PART 1
+        stoint(rawCL.at(1 + 6*i), VATnumber);            // PART 2
+        stoint(rawCL.at(2 + 6*i), familySize);        // PART 3
         // PART 4
-        divAD = strtok_cpp(rawCL.at(3 + 6*i), " | ");
-        divCP = strtok_cpp(divAD.at(3), "-");
-
-        c.address.street = divAD.at(0);             // 4.0
-        stoint(divAD.at(1), c.address.doorNumber);  // 4.1
-        c.address.floor = divAD.at(2);              // 4.2
-        c.address.CP = divAD.at(3);                 // 4.3
-        stoint(divCP.at(0), c.address.CP1);         // 4.3
-        stoint(divCP.at(1), c.address.CP2);         // 4.3
-        c.address.location = divAD.at(4);           // 4.4
+        Address address = string_to_adress(rawCL.at(2 + 6*i));
         // PART 5
-        c.packs_str = rawCL.at(4 + 6*i);
-        divPK = strtok_cpp(c.packs_str, " ; ");
-
+        divPK = strtok_cpp(rawCL.at(4 + 6*i), " ; ");
+/*
         int value_pk;
         for(int j = 0; j < divPK.size(); j++)
         {
             stoint(divPK.at(j), value_pk);
             c.packs.push_back(value_pk);
         }
+        */
+       //NOT IMPLEMENTED PACKETS PURCHASED BY CLIENTS
+        Client c(name, VATnumber, familySize, address);
         CL.push_back(c);
         i++;
     }
@@ -205,32 +175,64 @@ vector<Client> decompose_clients(vector<string> rawCL, string filename)
 // ======================================
 // ======================================
 
-vector<Pack> decompose_packs(vector<string> rawPK, string filename)
+vector<Packet> decompose_packs(vector<string> rawPK, string filename)
 {
     int i=0, pack_number = numberOf(filename);
-    vector<Pack> PK;
+    vector<Packet> PK;
+    vector<string> divSITES; 
     vector<string> divDATE;       // DIVIDING PACKS STRING INTO A VECTOR OF PACK NUMBERS OF STRING TYPE
+
+    unsigned id; // packet unique identifier
+    vector<string> sites; // touristic sites to visit
+    double pricePerPerson; // price per person
+    unsigned maxPersons;
+    unsigned nrSold;
 
     // 8*i helps us advance to the correct client info
     while(i < pack_number)
     {
-        Pack p;
-        p.id = stoi(rawPK.at(1 + 8*i));                 //PART 1
-        p.destination = rawPK.at(2 + 8*i);              //PART 2
-        divDATE = strtok_cpp(rawPK.at(3 + 8*i), "/");   //PART 3
-        p.startDate.year = stoi(divDATE.at(0));
-        p.startDate.month = stoi(divDATE.at(1));
-        p.startDate.day  = stoi(divDATE.at(2));
-        divDATE = strtok_cpp(rawPK.at(4 + 8*i), "/");   // PART 4
-        p.endDate.year = stoi(divDATE.at(0));
-        p.endDate.month = stoi(divDATE.at(1));
-        p.endDate.day = stoi(divDATE.at(2));
-        p.price_pp = stoi(rawPK.at(5 + 8*i));           // PART 5
-        p.availableSeats = stoi(rawPK.at(6 + 8*i));     // PART 6
-        p.soldSeats = stoi(rawPK.at(7 + 8*i));          // PART 7
 
+        id = stoi(rawPK.at(1 + 8*i));                 //PART 1
+        divSITES = strtok_cpp(rawPK.at(3 + 8*i), "-");              //PART 2
+        sites.push_back(divSITES.at(0));
+        divSITES = strtok_cpp(divSITES.at(1), ";");              //PART 2
+        while(!divSITES.empty){
+            sites.push_back(divSITES.pop_back);
+        }
+        divDATE = strtok_cpp(rawPK.at(3 + 8*i), "/");   //PART 3
+        Date begin(stoi(divDATE.at(2)),stoi(divDATE.at(1)),stoi(divDATE.at(0)));
+   
+        divDATE = strtok_cpp(rawPK.at(4 + 8*i), "/");   // PART 4
+        Date end(stoi(divDATE.at(2)),stoi(divDATE.at(1)),stoi(divDATE.at(0)));
+
+        pricePerPerson = stoi(rawPK.at(5 + 8*i));           // PART 5
+        maxPersons = stoi(rawPK.at(6 + 8*i));     // PART 6
+        nrSold = stoi(rawPK.at(7 + 8*i));          // PART 7
+
+        Packet p(id, sites, begin, end, pricePerPerson, maxPersons, nrSold);
         PK.push_back(p);
         i++;
     }
     return PK;
+}
+
+Address string_to_adress(string address_str){
+    
+    vector<string> divAD;  
+
+    string street;
+    int doorNumber;
+    string floor;
+    string postalCode;
+    string location;
+
+    divAD = strtok_cpp(address_str, " | ");
+
+    street = divAD.at(0);             // 4.0
+    stoint(divAD.at(1), doorNumber);  // 4.1
+    floor = divAD.at(2);              // 4.2
+    postalCode = divAD.at(3);                 // 4.3
+    location = divAD.at(4);           // 4.4
+    Address address(street, doorNumber, floor, postalCode, location);
+    return address;
 }

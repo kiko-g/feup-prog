@@ -2,17 +2,12 @@
 
 Date::Date(){}
 
-Date::Date(string date)
-{
-  
-  // REQUIRES IMPLEMENTATION
-
-}
-
 
 Date::Date(unsigned short day, unsigned short month, unsigned year)
 {
-  // REQUIRES IMPLEMENTATION
+  this->setDay(day);
+  this->setMonth(month);
+  this->setYear(year);
 }
 
 /*********************************
@@ -21,20 +16,18 @@ Date::Date(unsigned short day, unsigned short month, unsigned year)
 
 unsigned short Date::getDay() const
 {
-
-  // REQUIRES IMPLEMENTATION
-
+  return this->day;
 }
 
   
 unsigned short Date::getMonth() const
 {
-  // REQUIRES IMPLEMENTATION
+  return this->month;
 }
     
 unsigned Date::getYear() const
 {
-  // REQUIRES IMPLEMENTATION
+  return this->year;
 }
 
 /*********************************
@@ -43,18 +36,26 @@ unsigned Date::getYear() const
 
 void Date::setDay(unsigned short day)
 {
-  // REQUIRES IMPLEMENTATION
+  if(day>31){
+    cout << "Invalid Day" << endl;
+  }
+  else this->day = day;
 }
 
 void Date::setMonth(unsigned short month)
 {
-  // REQUIRES IMPLEMENTATION
+    if(month>12){
+    cout << "Invalid Month" << endl;
+  }
+  else this->month = month;
 }
 
 void Date::setYear(unsigned year)
 {
-
-  // REQUIRES IMPLEMENTATION
+  if(year > 2100 || year < 2000){
+    cout << "Invalid Year (from 2000 to 2100)" << endl;
+  }
+  else this->year = year;
 
 }
 

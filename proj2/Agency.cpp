@@ -1,4 +1,6 @@
 #include "Agency.h"
+#include "defs.h"
+
 
 Agency::Agency(string agency_file_str)
 {
@@ -27,10 +29,20 @@ Agency::Agency(string agency_file_str)
 
     fin.close();
     reset_pathToFile();
+    vector<string> agencyContent;
+    vector<string> clientContent;
+    vector<string> packContent;
     
-    this->setName(content[0]);
+    agencyContent = read_agency(agency_file_str);
+    clientContent = read_clients(agencyContent[4]);
+    packContent = read_packs(agencyContent[5]);
+
+    vector<Client> clients = decompose_clients(clientContent, agencyContent[4]);
+    vector<Packet> packets = decompose_packs(packContent, agencyContent[5]);
+
+    this->setName(agencyContent[0]);
     int VATnr;
-    stoint(content[1], VATnr);
+    stoint(agencyContent[1], VATnr);
     this->setVATnumber(VATnr);
 
     string street; // street name
@@ -39,99 +51,99 @@ Agency::Agency(string agency_file_str)
     string postalCode; // postal code
     string location; // site
 
-    funcao_a_implementar(const[2], street, doorNumber, floor, postalCode, location); //FUNÇÃO QUE DIVIDE AS CENAS
+    Address address = string_to_address(agencyContent[2]);
     
-    Address adress(street, doorNumber, floor, postalCode, location);
-    
-    this->setAddress(adress);
-    this->setURL(content[3]);
+    this->setAddress(address);
+    this->setURL(agencyContent[3]);
 
-    //FALTA
-    // CRIADOR DE VETOR CLIENTES + MAX CLIENTS ID
-    // CRIADOR DE VETOR PACKETS + MAX PACKETS ID
-
-    this->setClients(vetor de clients);
-    this->setPackets(vetor de packets);
+    this->setClients(clients);
+    this->setPackets(packets);
 
     this->clientsInfoHasChanged = false;
     this->packetsInfoHasChanged = false;
-    this->maxClientsId = max_clients_id;
-    this->maxPacketsId = max_packets_id;
+
+    //this->maxClientsId = max_clients_id;
+    //this->maxPacketsId = max_packets_id;
 }
 
   // metodos GET
 string Agency::getName() const
 {
-  //  IMPLEMENTATION REQUIRED   
+  return this->name;    
 }
 
 unsigned Agency::getVATnumber() const
 {
-  //  IMPLEMENTATION REQUIRED 
+  return this->VATnumber; 
 }
 
 Address Agency::getAddress() const
 {
 
-  //  IMPLEMENTATION REQUIRED 
+  return this->address;  
 }
 
 string Agency::getURL() const
 {
 
-  //  IMPLEMENTATION REQUIRED 
+  return this->URL;  
 }
 
 vector<Client> Agency::getClients() const
 {
-
-  //  IMPLEMENTATION REQUIRED 
+  return this->clients;  
 }
 
 vector<Packet> Agency::getPackets() const
 {
-
-  //  IMPLEMENTATION REQUIRED 
+  return this->packets; 
 }
 
   
   // SET Methods
 
-void Agency::setName(string name)
-{
-    this->name = name;  
+void Agency::setName(string name){
+  this->name = name;  
 }
 
-void Agency::setVATnumber(unsigned VATnumber)
-{
-  //  IMPLEMENTATION REQUIRED 
+void Agency::setVATnumber(unsigned VATnumber){
+  
+  if(VATnumber > 999999999 || VATnumber < 100000000){
+    cout << "Invalid Agency VAT Number";
+    exit(-1); 
+  }
+  else{
+    this->VATnumber = VATnumber;
+  }
 }
 
-void Agency::setAddress(Address address)
-{
-  //  IMPLEMENTATION REQUIRED 
-}
-void Agency::setURL(string url)
-{
-  //  IMPLEMENTATION REQUIRED 
+void Agency::setAddress(Address address){
+
+  this->address = address; 
 }
 
-void Agency::setClients(vector<Client> & clients)
-{
-    //IMPLEMENTATION REQUIRED 
+void Agency::setURL(string url){
+
+  this->name = name; 
+
+}
+
+void Agency::setClients(vector<Client> & clients){
+
+  this->clients = clients; 
+
 }
 
 void Agency::setPackets(vector<Packet> & packets)
 {
-    //IMPLEMENTATION REQUIRED 
+  this->packets = packets;
 }
-
 /*********************************
  * Mostrar Loja
  ********************************/  
 
 // mostra o conteudo de uma agencia
-ostream& operator<<(ostream& out, const Agency & agency){
-
-  // A IMPLEMENTATION REQUIRED 
+ostream& operator<<(ostream& out, const Agency & agency)
+{
+    //A IMPLEMENTATION REQUIRED 
 }

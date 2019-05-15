@@ -5,6 +5,15 @@
 #include <vector>
 #include <fstream>
 #include <limits>
+
+#include "read.cpp"
+
+#include "Agency.h"
+#include "Client.h"
+#include "Date.h"
+#include "Packet.h"
+#include "Address.h"
+
 using namespace std;
 
 #ifdef _WIN32
@@ -19,69 +28,34 @@ const string AGENCY_FILE_NAME = "agency.txt";
 string CLIENTS_FILE_NAME;
 string PacketS_FILE_NAME;
 
-// "ADDRESS.H" BELOW
-class Address
-{
-private:
-    string street;             // street name
-    unsigned short doorNumber; // door number
-    string floor;              // floor number ("-" is not applicable)
-    string postalCode;         // postal code
-    string location;           // site
-
-public:
-    Address();
-    Address(string street, unsigned short doorNumber, string floor, string postalCode, string location);
-
-    // metodos GET
-    string getStreet() const;
-    unsigned short getDoorNumber() const;
-    string getFloor() const;
-    string getPostalCode() const;
-    string getLocation() const;
-
-    // metodos SET
-    void setStreet(string street);
-    void setDoorNumber(unsigned short doorNumber);
-    void setFloor(string floor);
-    void setPostalCode(string postalCode);
-    void setLocation(string location);
-
-    // outros */
-
-    friend ostream &operator<<(ostream &out, const Address &address);
-};
-
-#ifdef _WIN32
-#define clearScreen() system("cls");
-#else
-#define clearScreen() system("clear");
-#endif
-
 // INSIDE READ.CPP ----> READING AND ORGANIZING
-vector<string> readAgency();
-vector<string> readClients(string clients_file_str);
-vector<string> readPackets(string Packets_file_str);
+vector<string> read_agency(string agency_file_str);
+vector<string> read_clients(string clients_file_str);
+vector<string> read_packs(string packs_file_str);
+vector<Client> decompose_clients(vector<string> rawCL, string filename);
+vector<Packet> decompose_packs(vector<string> rawPK, string filename);
+Address string_to_address(string address_str);
+
 
 // CLIENT MANAGEMENT
-void addClient(vector<Client> &CL);
-void editClient(vector<Client> &CL);
-void removeClient(vector<Client> &CL);
-void changeClientName(vector<Client> &CL);
-void changeClientNIF(vector<Client> &CL);
-void changeClientFamagr(vector<Client> &CL);
-void changeClientAddress(vector<Client> &CL);
-void changeClientPackets(vector<Client> &CL);
+void add_client(vector<Client> &CL);
+void edit_client(vector<Client> &CL);
+void remove_client(vector<Client> &CL);
+void change_client_name(vector<Client> &CL);
+void change_client_NIF(vector<Client> &CL);
+void change_client_famagr(vector<Client> &CL);
+void change_client_address(vector<Client> &CL);
+void change_client_packs(vector<Client> &CL);
 
 // Packet MANAGEMENT
-void addPacket(vector<Packet> &PK);
-void editPacket(vector<Packet> &PK);
-void removePacket(vector<Packet> &PK);
-void purchasePacket(vector<Client> &CL, vector<Packet> &PK);
+void add_pack(vector<Packet> &PK);
+void edit_pack(vector<Packet> &PK);
+void remove_pack(vector<Packet> &PK);
+void purchase_pack(vector<Client> &CL, vector<Packet> &PK);
 
 // WRITING TO FILES
-void writeClients(vector<Client> CL, string filename);
-void writePackets(vector<Packet> PK, string filename);
+void write_clients(vector<Client> CL, string filename);
+void write_packs(vector<Packet> PK, string filename);
 
 //SEARCH or BROWSE
 //CLIENTS
@@ -91,9 +65,9 @@ void printClient(vector<Client> CL, int i);
 void printAllClients(vector<Client> CL);
 
 //SEARCH or BROWSE
-//PacketS
-int search_Packet_ID(vector<Packet> PK);
-void print_all_Packets(vector<Packet> PK);
+//PACKS
+int search_pack_ID(vector<Packet> PK);
+void print_all_packs(vector<Packet> PK);
 
 //INTERFACES
 void init_navigation(vector<Client> CL, vector<Packet> PK);
