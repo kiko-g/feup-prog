@@ -17,7 +17,7 @@ string pathToFile = "textfiles/";
 string limit = "::::::::::";
 const string AGENCY_FILE_NAME = "agency.txt";
 string CLIENTS_FILE_NAME;
-string PACKS_FILE_NAME;
+string PacketS_FILE_NAME;
 
 // "ADDRESS.H" BELOW
 class Address
@@ -60,56 +60,53 @@ public:
 
 // INSIDE READ.CPP ----> READING AND ORGANIZING
 vector<string> readAgency();
-vector<string> read_clients(string clients_file_str);
-vector<string> read_packs(string packs_file_str);
-Agency decompose_agency(vector<string> rawAG);
-vector<Client> decompose_clients(vector<string> rawCL, string filename);
-vector<Pack> decompose_packs(vector<string> rawPK, string filename);
+vector<string> readClients(string clients_file_str);
+vector<string> readPackets(string Packets_file_str);
 
 // CLIENT MANAGEMENT
-void add_client(vector<Client> &CL);
-void edit_client(vector<Client> &CL);
-void remove_client(vector<Client> &CL);
-void change_client_name(vector<Client> &CL);
-void change_client_NIF(vector<Client> &CL);
-void change_client_famagr(vector<Client> &CL);
-void change_client_address(vector<Client> &CL);
-void change_client_packs(vector<Client> &CL);
+void addClient(vector<Client> &CL);
+void editClient(vector<Client> &CL);
+void removeClient(vector<Client> &CL);
+void changeClientName(vector<Client> &CL);
+void changeClientNIF(vector<Client> &CL);
+void changeClientFamagr(vector<Client> &CL);
+void changeClientAddress(vector<Client> &CL);
+void changeClientPackets(vector<Client> &CL);
 
-// PACK MANAGEMENT
-void add_pack(vector<Pack> &PK);
-void edit_pack(vector<Pack> &PK);
-void remove_pack(vector<Pack> &PK);
-void purchase_pack(vector<Client> &CL, vector<Pack> &PK);
+// Packet MANAGEMENT
+void addPacket(vector<Packet> &PK);
+void editPacket(vector<Packet> &PK);
+void removePacket(vector<Packet> &PK);
+void purchasePacket(vector<Client> &CL, vector<Packet> &PK);
 
 // WRITING TO FILES
-void write_clients(vector<Client> CL, string filename);
-void write_packs(vector<Pack> PK, string filename);
+void writeClients(vector<Client> CL, string filename);
+void writePackets(vector<Packet> PK, string filename);
 
 //SEARCH or BROWSE
 //CLIENTS
-vector<int> search_client_name(vector<Client> CL);
-int search_client_NIF(vector<Client> CL);
-void print_client(vector<Client> CL, int i);
-void print_all_clients(vector<Client> CL);
+vector<int> searchClientName(vector<Client> CL);
+int searchClientNIF(vector<Client> CL);
+void printClient(vector<Client> CL, int i);
+void printAllClients(vector<Client> CL);
 
 //SEARCH or BROWSE
-//PACKS
-int search_pack_ID(vector<Pack> PK);
-void print_all_packs(vector<Pack> PK);
+//PacketS
+int search_Packet_ID(vector<Packet> PK);
+void print_all_Packets(vector<Packet> PK);
 
 //INTERFACES
-void init_navigation(vector<Client> CL, vector<Pack> PK);
-void main_interface(vector<Client> CL, vector<Pack> PK);
-void clients_interface(vector<Client> &CL, vector<Pack> &PK);
-void packs_interface(vector<Client> &CL, vector<Pack> &PK);
-void browsing_interface(vector<Client> CL, vector<Pack> PK);
+void init_navigation(vector<Client> CL, vector<Packet> PK);
+void main_interface(vector<Client> CL, vector<Packet> PK);
+void clients_interface(vector<Client> &CL, vector<Packet> &PK);
+void Packets_interface(vector<Client> &CL, vector<Packet> &PK);
+void browsing_interface(vector<Client> CL, vector<Packet> PK);
 // ========
-void browse_clients_interface(vector<Client> CL, vector<Pack> PK);
-void browse_packs_interface(vector<Client> CL, vector<Pack> PK);
+void browseClients_interface(vector<Client> CL, vector<Packet> PK);
+void browse_Packets_interface(vector<Client> CL, vector<Packet> PK);
 
 //CALC
-void determine_packs_money(vector<Pack> PK);
+void determine_Packets_money(vector<Packet> PK);
 
 // INPUT DEALING FUNCTIONS
 int stoint(const string &str, int &value);
@@ -118,7 +115,7 @@ void readline(string &str);
 bool cin_test();
 
 // Other Functions
-vector<string> strtok_cpp(string h, string n);
+vector<string> strtokCpp(string h, string n);
 void reset_pathToFile();
 int numberOf(string fileName);
 int numberOfR(string fileName); //useless for now at least

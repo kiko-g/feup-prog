@@ -9,27 +9,17 @@ Agency::Agency(string agency_file_str)
     pathToFile = pathToFile + agency_file_str;
     fin.open(pathToFile);
 
-    int count_fails = 0;
     if (fin.fail())
     {
-        if (count_fails == 4)
-        {
-            "\n\nCheck filename in the folders...\nExiting now.";
-            exit(1);
-        }
-        count_fails++;
-        cerr << "File not found. Type a different file name below\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Type the name of the file (agency): ";
-        cin >> agency_file_str;
+        cout << "\n\nCHECK AGENCY FILENAME IN THE FOLDERS AND"
+             << "COMPARE IT TO THE DEFINITION IN defs.h\nExiting now.";
+        exit(1);
     }
 
     while (!fin.eof())
     {
         getline(fin, line);
-        if (line == "")
-            continue;
+        if (line == "") continue;
         content.push_back(line);
     }
 
@@ -107,34 +97,33 @@ vector<Packet> Agency::getPackets() const
   
   // SET Methods
 
-void Agency::setName(string name){
-
-  this->name = name;  
+void Agency::setName(string name)
+{
+    this->name = name;  
 }
 
-void Agency::setVATnumber(unsigned VATnumber){
-
+void Agency::setVATnumber(unsigned VATnumber)
+{
   //  IMPLEMENTATION REQUIRED 
 }
 
-void Agency::setAddress(Address address){
-
+void Agency::setAddress(Address address)
+{
   //  IMPLEMENTATION REQUIRED 
 }
-  void Agency::setURL(string url){
-
+void Agency::setURL(string url)
+{
   //  IMPLEMENTATION REQUIRED 
-
 }
-  void Agency::setClients(vector<Client> & clients){
 
-  //  IMPLEMENTATION REQUIRED 
+void Agency::setClients(vector<Client> & clients)
+{
+    //IMPLEMENTATION REQUIRED 
+}
 
-  }
-  void Agency::setPackets(vector<Packet> & packets){
-
-  //  IMPLEMENTATION REQUIRED 
-
+void Agency::setPackets(vector<Packet> & packets)
+{
+    //IMPLEMENTATION REQUIRED 
 }
 
 /*********************************

@@ -1,9 +1,8 @@
 #include "Menus.h"
 #include "defs.h"
-#include "Other.h"
 
-unsigned mainMenu(Agency agency){
-
+unsigned mainMenu(Agency agency)
+{
     int input;
     while(1)
     {
@@ -19,15 +18,15 @@ unsigned mainMenu(Agency agency){
         switch(input)
         {
          case 1:
-            browsing_interface(agency);
+            browsingInterface(agency);
             break;
 
          case 2:
-            clients_interface(agency);
+            clientsInterface(agency);
             break;
 
          case 3:
-            packs_interface(agency);
+            packsInterface(agency);
             break;
 
          case 4:
@@ -41,7 +40,7 @@ unsigned mainMenu(Agency agency){
 
 
 // DEALING WITH OPTION 1
-void browsing_interface(Agency agency)
+void browsingInterface(Agency agency)
 {
     int input;
     while (1)
@@ -51,16 +50,16 @@ void browsing_interface(Agency agency)
         cout << "| 1 - Clients\n";
         cout << "| 2 - Packs\n\n";
         cout << "| 3 - BACK\n";
-        input = validate_interface_input(1, 3);
+        input = validateInterfaceInput(1, 3);
 
         switch (input)
         {
         case 1:
-            browse_clients_interface(agency);
+            browseClientsInterface(agency);
             break;
 
         case 2:
-            browse_packs_interface(agency);
+            browsePacksInterface(agency);
             break;
 
         case 3:
@@ -69,7 +68,7 @@ void browsing_interface(Agency agency)
     }
 }
 
-void browse_clients_interface(Agency agency)
+void browseClientsInterface(Agency agency)
 {
     int input;
     int condition = -1;
@@ -84,27 +83,27 @@ void browse_clients_interface(Agency agency)
         cout << "| 3 - View All Clients\n\n";
         cout << "| 4 - BACK\n";
 
-        input = validate_interface_input(1, 4);
+        input = validateInterfaceInput(1, 4);
         switch (input)
         {
         case 1:
             cout << "\n== SEARCH NAME ==\n";
             int decwhich;
-            vpos = search_client_name(CL);
+            vpos = searchClientName(CL);
 
             for (int j = 0; j < vpos.size(); j++)
             {
                 cout << CL.at(vpos.at(j)).name << "\n";
             }
             cout << "\nSelect which one you wish to view, ";
-            decwhich = validate_interface_input(1, vpos.size());
-            print_client(CL, decwhich - 1);
+            decwhich = validateInterfaceInput(1, vpos.size());
+            printClient(CL, decwhich - 1);
             cout << "\nType '0' (zero) to see just the recent MENU: ";
             cin >> condition; while(!cin_test) cin >> condition;
             break;
 
         case 2:
-            print_client(CL, search_client_NIF(CL));
+            printClient(CL, searchClientNIF(CL));
             cout << "\nType '0' (zero) to see just the recent MENU: ";
             cin >> condition; while(!cin_test) cin >> condition;
             break;

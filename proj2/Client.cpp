@@ -1,15 +1,15 @@
 #include "Client.h"
 
-Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address){
-  
+Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address)
+{  
   this->setName(name);
   this->setVATnumber(VATnumber);
   this->setFamilySize(familySize);
   this->setAddress(address);
 }
 
-Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased){
-  
+Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased)
+{  
   this->setName(name);
   this->setVATnumber(VATnumber);
   this->setFamilySize(familySize);
@@ -18,30 +18,30 @@ Client::Client(string name, unsigned VATnumber, unsigned short familySize, Addre
   this->setTotalPurchased(totalPurchased);
 }
 
-  // GET methods
+//GET methods
 
-string Client::getName() const{
-  
+string Client::getName() const
+{  
   return this->name; 
 }
   
-unsigned Client::getVATnumber() const{
-  
+unsigned Client::getVATnumber() const
+{ 
   return this->VATnumber;
 }
 
-unsigned short Client::getFamilySize() const{
-  
+unsigned short Client::getFamilySize() const
+{  
   return this->familySize;
 }
 
-Address Client::getAddress() const{
-  
+Address Client::getAddress() const
+{  
   return this->address;
 }
 
-vector<Packet> Client::getPacketList() const{
-  
+vector<Packet> Client::getPacketList() const
+{  
   return this->packets;
 }
 
