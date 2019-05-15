@@ -11,8 +11,9 @@
 #include "Date.h"
 #include "Packet.h"
 #include "Address.h"
-
 using namespace std;
+
+//DEFINITIONS AND MAIN LIB FOR HELPFUL FUNCTIONS 
 
 #ifdef _WIN32
 #define clearScreen() system("cls");

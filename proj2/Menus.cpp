@@ -1,10 +1,7 @@
 #include "Menus.h"
 #include "defs.h"
-<<<<<<< HEAD
-=======
 /*
 unsigned mainMenu(Agency agency){
->>>>>>> 6de247dca1988c2a3f195e70c3f283e10d7b3f96
 
 unsigned mainMenu(Agency agency)
 {
