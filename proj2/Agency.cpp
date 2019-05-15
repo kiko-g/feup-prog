@@ -4,6 +4,31 @@
 
 Agency::Agency(string agency_file_str)
 {
+    vector<string> content;
+    string agency_file_str, line;
+    ifstream fin;
+
+    pathToFile = pathToFile + agency_file_str;
+    fin.open(pathToFile);
+
+    if (fin.fail())
+    {
+        cout << "\n\nCHECK AGENCY FILENAME IN THE FOLDERS AND"
+             << "COMPARE IT TO THE DEFINITION IN defs.h\nExiting now.";
+        exit(1);
+    }
+
+    while (!fin.eof())
+    {
+        getline(fin, line);
+        if (line == "") continue;
+        content.push_back(line);
+    }
+
+    cout << "Content successfully read from '" << agency_file_str << "'\n";
+
+    fin.close();
+    reset_pathToFile();
     vector<string> agencyContent;
     vector<string> clientContent;
     vector<string> packContent;
@@ -109,10 +134,9 @@ void Agency::setClients(vector<Client> & clients){
 
 }
 
-void Agency::setPackets(vector<Packet> & packets){
-
+void Agency::setPackets(vector<Packet> & packets)
+{
   this->packets = packets;
-
 }
 
 void Agency::addClients(Client client){
@@ -129,7 +153,7 @@ void Agency::addPackets(Packet packet){
  ********************************/  
 
 // mostra o conteudo de uma agencia
-ostream& operator<<(ostream& out, const Agency & agency){
-
-  // A IMPLEMENTATION REQUIRED 
+ostream& operator<<(ostream& out, const Agency & agency)
+{
+    //A IMPLEMENTATION REQUIRED 
 }

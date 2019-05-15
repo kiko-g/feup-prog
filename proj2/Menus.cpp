@@ -2,7 +2,10 @@
 #include "defs.h"
 
 unsigned mainMenu(Agency agency){
+>>>>>>> 6de247dca1988c2a3f195e70c3f283e10d7b3f96
 
+unsigned mainMenu(Agency agency)
+{
     int input;
     while(1)
     {
@@ -18,15 +21,15 @@ unsigned mainMenu(Agency agency){
         switch(input)
         {
          case 1:
-            browsing_interface(agency);
+            browsingInterface(agency);
             break;
 
          case 2:
-            clients_interface(agency);
+            clientsInterface(agency);
             break;
 
          case 3:
-            packs_interface(agency);
+            packsInterface(agency);
             break;
 
          case 4:
@@ -40,7 +43,7 @@ unsigned mainMenu(Agency agency){
 
 
 // DEALING WITH OPTION 1
-void browsing_interface(Agency agency)
+void browsingInterface(Agency agency)
 {
     int input;
     while (1)
@@ -50,16 +53,16 @@ void browsing_interface(Agency agency)
         cout << "| 1 - Clients\n";
         cout << "| 2 - Packs\n\n";
         cout << "| 3 - BACK\n";
-        input = validate_interface_input(1, 3);
+        input = validateInterfaceInput(1, 3);
 
         switch (input)
         {
         case 1:
-            browse_clients_interface(agency);
+            browseClientsInterface(agency);
             break;
 
         case 2:
-            browse_packs_interface(agency);
+            browsePacksInterface(agency);
             break;
 
         case 3:
@@ -68,7 +71,7 @@ void browsing_interface(Agency agency)
     }
 }
 
-void browse_clients_interface(Agency agency)
+void browseClientsInterface(Agency agency)
 {
     int input;
     int condition = -1;
@@ -83,7 +86,7 @@ void browse_clients_interface(Agency agency)
         cout << "| 3 - View All Clients\n\n";
         cout << "| 4 - BACK\n";
 
-        input = validate_interface_input(1, 4);
+        input = validateInterfaceInput(1, 4);
         switch (input)
         {
         case 1:
