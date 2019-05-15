@@ -5,6 +5,15 @@
 #include <vector>
 #include <fstream>
 #include <limits>
+
+#include "read.cpp"
+
+#include "Agency.h"
+#include "Client.h"
+#include "Date.h"
+#include "Packet.h"
+#include "Address.h"
+
 using namespace std;
 
 #ifdef _WIN32
@@ -19,52 +28,11 @@ const string AGENCY_FILE_NAME = "agency.txt";
 string CLIENTS_FILE_NAME;
 string PACKS_FILE_NAME;
 
-// "ADDRESS.H" BELOW
-class Address
-{
-private:
-    string street;             // street name
-    unsigned short doorNumber; // door number
-    string floor;              // floor number ("-" is not applicable)
-    string postalCode;         // postal code
-    string location;           // site
-
-public:
-    Address();
-    Address(string street, unsigned short doorNumber, string floor, string postalCode, string location);
-
-    // metodos GET
-    string getStreet() const;
-    unsigned short getDoorNumber() const;
-    string getFloor() const;
-    string getPostalCode() const;
-    string getLocation() const;
-
-    // metodos SET
-    void setStreet(string street);
-    void setDoorNumber(unsigned short doorNumber);
-    void setFloor(string floor);
-    void setPostalCode(string postalCode);
-    void setLocation(string location);
-
-    // outros */
-
-    friend ostream &operator<<(ostream &out, const Address &address);
-};
-
-#ifdef _WIN32
-#define clearScreen() system("cls");
-#else
-#define clearScreen() system("clear");
-#endif
-
 // INSIDE READ.CPP ----> READING AND ORGANIZING
-vector<string> readAgency();
+vector<string> read_agency(string agency_file_str);
 vector<string> read_clients(string clients_file_str);
 vector<string> read_packs(string packs_file_str);
-Agency decompose_agency(vector<string> rawAG);
-vector<Client> decompose_clients(vector<string> rawCL, string filename);
-vector<Pack> decompose_packs(vector<string> rawPK, string filename);
+Address string_to_address(string address_str);
 
 // CLIENT MANAGEMENT
 void add_client(vector<Client> &CL);
