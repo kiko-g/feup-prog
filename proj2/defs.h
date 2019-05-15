@@ -24,7 +24,7 @@ string pathToFile = "textfiles/";
 string limit = "::::::::::";
 const string AGENCY_FILE_NAME = "agency.txt";
 string CLIENTS_FILE_NAME;
-string PACKS_FILE_NAME;
+string PacketS_FILE_NAME;
 
 // INSIDE READ.CPP ----> READING AND ORGANIZING
 vector<string> read_agency(string agency_file_str);
@@ -57,10 +57,10 @@ void write_packs(vector<Packet> PK, string filename);
 
 //SEARCH or BROWSE
 //CLIENTS
-vector<int> search_client_name(vector<Client> CL);
-int search_client_NIF(vector<Client> CL);
-void print_client(vector<Client> CL, int i);
-void print_all_clients(vector<Client> CL);
+vector<int> searchClientName(vector<Client> CL);
+int searchClientNIF(vector<Client> CL);
+void printClient(vector<Client> CL, int i);
+void printAllClients(vector<Client> CL);
 
 //SEARCH or BROWSE
 //PACKS
@@ -71,11 +71,11 @@ void print_all_packs(vector<Packet> PK);
 void init_navigation(vector<Client> CL, vector<Packet> PK);
 void main_interface(vector<Client> CL, vector<Packet> PK);
 void clients_interface(vector<Client> &CL, vector<Packet> &PK);
-void packs_interface(vector<Client> &CL, vector<Packet> &PK);
+void Packets_interface(vector<Client> &CL, vector<Packet> &PK);
 void browsing_interface(vector<Client> CL, vector<Packet> PK);
 // ========
-void browse_clients_interface(vector<Client> CL, vector<Packet> PK);
-void browse_packs_interface(vector<Client> CL, vector<Packet> PK);
+void browseClients_interface(vector<Client> CL, vector<Packet> PK);
+void browse_Packets_interface(vector<Client> CL, vector<Packet> PK);
 
 //CALC
 void determine_packs_money(vector<Packet> PK);
@@ -87,7 +87,7 @@ void readline(string &str);
 bool cin_test();
 
 // Other Functions
-vector<string> strtok_cpp(string h, string n);
+vector<string> strtokCpp(string h, string n);
 void reset_pathToFile();
 int numberOf(string fileName);
 int numberOfR(string fileName); //useless for now at least
