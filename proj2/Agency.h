@@ -46,6 +46,8 @@ class Agency{
   void setURL(string url);
   void setClients(vector<Client> & clients);
   void setPackets(vector<Packet> & packets);
+  void addClients(Client client);
+  void addPackets(Packet packet);
 
   // other methods */
   

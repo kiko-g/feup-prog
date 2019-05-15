@@ -112,6 +112,16 @@ void Agency::setPackets(vector<Packet> & packets)
 {
   this->packets = packets;
 }
+
+void Agency::addClients(Client client){
+  this->clients.push_back(client);
+  this->clientsInfoHasChanged = true;
+}
+void Agency::addPackets(Packet packet){
+   this->packets.push_back(packet);
+   this->packetsInfoHasChanged = true;
+}
+
 /*********************************
  * Mostrar Loja
  ********************************/  

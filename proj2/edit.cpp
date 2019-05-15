@@ -1,31 +1,45 @@
-#include "myLib.h"
+#include "defs.h"
+
+using namespace std;
+
 
 // ===== CLIENT =====
 // ADD CLIENT
-void add_client(vector<Client> &CL)
+void add_client(Agency agency)
 {
-    Client c;
+
     bool valid = false;
     cout << "Adding Client" << "\n\n";
+    
+    string name; // name of the client
+    unsigned VATnumber; // VAT number of client
+    unsigned short familySize;  // number of family members
+    
+    string street; // street name
+    unsigned short doorNumber; // door number
+    string floor; // floor number ("-" is not applicable)
+    string postalCode; // postal code
+    string location; // site
 
+    vector<Packet> packets; // vector to store client's packets bought
+    unsigned  totalPurchased; // total value spent by the client
     while(!valid)
     {
-        cout << "Name: "; readline(c.name);
-        cout << "NIF: "; cin >> c.NIF; while(!cin_test()) cin >> c.NIF;
-        cout << "Number of members in household: "; cin >> c.nFamAgr;
-        cout << "Street name: "; readline(c.address.street);
-        cout << "Door number: "; cin >> c.address.doorNumber; while(!cin_test()) cin >> c.address.doorNumber;
-        cout << "Floor info: "; cin >> c.address.floor; while(!cin_test()) cin >> c.address.floor;
-        cout << "CP1: "; cin >> c.address.CP1; while(!cin_test()) cin >> c.address.CP1;
-        cout << "CP2: "; cin >> c.address.CP2; while(!cin_test()) cin >> c.address.CP2;
-        stoint(strtok_cpp(c.address.CP, "-").at(0), c.address.CP1);
-        stoint(strtok_cpp(c.address.CP, "-").at(1), c.address.CP2);
-        cout << "Location: "; readline(c.address.location);
+        cout << "Name: "; readline(name);
+        cout << "NIF: "; cin >> VATnumber; while(!cin_test()) cin >> VATnumber;
+        cout << "Number of members in household: "; cin >> familySize;
+        cout << "Street name: "; readline(street);
+        cout << "Door number: "; cin >> doorNumber; while(!cin_test()) cin >> doorNumber;
+        cout << "Floor info: "; cin >> floor; while(!cin_test()) cin >> floor;
+        cout << "Postal Code: "; readline(postalCode);
+        cout << "Location: "; readline(location);
+
+        Address address(street, doorNumber, floor, postalCode, location);
 
         int j=0, packn, cond;
         string divider = " ; ";
         ostringstream packstring;
-
+    /* 
         cout << "\n=== CLIENT   PACKS ===";   
         cout << "\nTotal number of packs: ";    
         cin >> cond;                            
@@ -42,13 +56,16 @@ void add_client(vector<Client> &CL)
         valid = true;
         CL.push_back(c);
     }
-    write_clients(CL, clients_file);
+    */
+   //NEED TO ADD CLIENT PACK INFO
+    Client c(name, VATnumber, familySize, address);
+    agency.addClients(c);
     cout << "Client successfully added.\n"; 
 }
 
 
 //EDIT CLIENT
-void change_client_name(vector<Client> &CL)
+void change_client_name(Agency agency)
 {
     // DEC_WHICH ---> DECISE WHICH OF THE FOUND CLIENTS (IN vpos)
     int pos, dec_which;
@@ -69,7 +86,7 @@ void change_client_name(vector<Client> &CL)
     CL.at(vpos.at(dec_which - 1)).name = new_name;
 }
 
-void change_client_NIF(vector<Client> &CL)
+void change_client_NIF(Agency agency)
 {
     int pos, dec_which;
     vector<int> vpos;
@@ -99,7 +116,7 @@ void change_client_NIF(vector<Client> &CL)
     CL.at(vpos.at(dec_which - 1)).NIF = new_NIF;
 }
 
-void change_client_famagr(vector<Client> &CL)
+void change_client_famagr(Agency agency)
 {
     int pos, dec_which;
     vector<int> vpos;
@@ -119,7 +136,7 @@ void change_client_famagr(vector<Client> &CL)
     CL.at(vpos.at(dec_which - 1)).nFamAgr = new_NFA;
 }
 
-void change_client_address(vector<Client> &CL)
+void change_client_address(Agency agency)
 {
     int pos, dec_which;
     vector<int> vpos;
@@ -158,7 +175,7 @@ void change_client_address(vector<Client> &CL)
     CL.at(vpos.at(dec_which - 1)).address.location = new_address.location;
 }
 
-void change_client_packs(vector<Client> &CL)
+void change_client_packs(Agency agency)
 {
     int pos, dec_which;
     vector<int> vpos;
@@ -178,7 +195,7 @@ void change_client_packs(vector<Client> &CL)
 }
 
 
-void edit_client(vector<Client> &CL)
+void edit_client(Agency agency)
 {
 	int input, which;
 	bool valid = false;
@@ -221,7 +238,7 @@ void edit_client(vector<Client> &CL)
 
 
 // REMOVE CLIENT
-void remove_client(vector<Client> &CL)
+void remove_client(Agency agency)
 {
 	int input, which, pos;
     vector<int> vpos;
@@ -269,7 +286,7 @@ void remove_client(vector<Client> &CL)
 
 // ===== PACKS ======
 
-void add_pack(vector<Pack> &PK)
+void add_pack(Agency agency)
 {
     Pack p;
     cout << "Adding Pack" << "\n\n";
@@ -294,7 +311,7 @@ void add_pack(vector<Pack> &PK)
 }
 
 
-void edit_pack(vector<Pack> &PK)
+void edit_pack(Agency agency)
 {
 	int input, which;
 	bool valid = false;
@@ -324,7 +341,7 @@ void edit_pack(vector<Pack> &PK)
     write_packs(PK, packs_file);
 }
 
-void remove_pack(vector<Pack> &PK)
+void remove_pack(Agency agency)
 {
 	int input, pos;
 	bool valid = false;
@@ -351,7 +368,7 @@ void remove_pack(vector<Pack> &PK)
 }
 
 
-void purchase_pack(vector<Client> &CL, vector<Pack> &PK)
+void purchase_pack(Agency agency)
 {
 	int P_ID, input, pos, again;
     vector<int> vpos;
@@ -407,7 +424,7 @@ void purchase_pack(vector<Client> &CL, vector<Pack> &PK)
     }
 }
 
-void determine_packs_money(vector<Pack> PK)
+void determine_packs_money(Agency agency)
 {
     float total_money=0, total_sold=0;
     for(int i=0; i<PK.size(); i++)
