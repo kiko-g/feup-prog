@@ -12,6 +12,9 @@ Agency::Agency(string agency_file_str)
     clientContent = read_clients(agencyContent[4]);
     packContent = read_packs(agencyContent[5]);
 
+    vector<Client> clients = decompose_clients(clientContent);
+
+
     this->setName(agencyContent[0]);
     int VATnr;
     stoint(agencyContent[1], VATnr);
@@ -23,17 +26,17 @@ Agency::Agency(string agency_file_str)
     string postalCode; // postal code
     string location; // site
 
-    Address adress = string_to_address(agencyContent[2]);
+    Address address = string_to_address(agencyContent[2]);
     
-    this->setAddress(adress);
+    this->setAddress(address);
     this->setURL(agencyContent[3]);
 
     //FALTA
     // CRIADOR DE VETOR CLIENTES + MAX CLIENTS ID
     // CRIADOR DE VETOR PACKETS + MAX PACKETS ID
     
-    this->setClients(vetor de clients);
-    this->setPackets(vetor de packets);
+    this->setClients(clients);
+    this->setPackets(packets);
 
     this->clientsInfoHasChanged = false;
     this->packetsInfoHasChanged = false;

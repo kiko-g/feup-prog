@@ -32,7 +32,9 @@ string PACKS_FILE_NAME;
 vector<string> read_agency(string agency_file_str);
 vector<string> read_clients(string clients_file_str);
 vector<string> read_packs(string packs_file_str);
+vector<Client> decompose_clients(vector<string> rawCL, string filename);
 Address string_to_address(string address_str);
+
 
 // CLIENT MANAGEMENT
 void add_client(vector<Client> &CL);

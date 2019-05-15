@@ -155,16 +155,17 @@ vector<Client> decompose_clients(vector<string> rawCL, string filename)
         // PART 4
         Address address = string_to_adress(rawCL.at(2 + 6*i));
         // PART 5
-        c.packs_str = rawCL.at(4 + 6*i);
-        divPK = strtok_cpp(c.packs_str, " ; ");
-
+        divPK = strtok_cpp(rawCL.at(4 + 6*i), " ; ");
+/*
         int value_pk;
         for(int j = 0; j < divPK.size(); j++)
         {
             stoint(divPK.at(j), value_pk);
             c.packs.push_back(value_pk);
         }
-        Client c(name, VATnumber, familySize, address, packets, totalPurchased);
+        */
+       //NOT IMPLEMENTED PACKETS PURCHASED BY CLIENTS
+        Client c(name, VATnumber, familySize, address);
         CL.push_back(c);
         i++;
     }
