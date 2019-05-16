@@ -55,7 +55,7 @@ int stoint(const string& str, int &value)
     }
 }
 
-int validate_interface_input(int a, int b)
+int validateInterfaceInput(int a, int b)
 {
 	int n;
 	bool valid = false;

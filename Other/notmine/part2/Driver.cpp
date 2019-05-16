@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <iostream>
 
-Driver::Driver(string textLine){
+Driver::Driver(string textLine)
+{
   //RECOLHER O ID
   int firstPos = 0;
 

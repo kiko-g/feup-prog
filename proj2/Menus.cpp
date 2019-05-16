@@ -1,11 +1,6 @@
 #include "Menus.h"
 #include "defs.h"
 
-void clients_interface(Agency agency);
-void packs_interface(Agency agency);
-void browseClientsInterface(Agency agency);
-void browse_packs_interface(Agency agency);
-
 unsigned mainMenu(Agency agency)
 {
     int input;
@@ -18,7 +13,7 @@ unsigned mainMenu(Agency agency)
         cout << "| 3 - "; cout << "Manage PACK data\n\n";
         cout << "| 4 - "; cout << "EXIT\n";
         
-        input = validate_interface_input(1,4);
+        input = validateInterfaceInput(1,4);
 
         switch(input)
         {
@@ -55,7 +50,7 @@ void browsingInterface(Agency agency)
         cout << "| 1 - Clients\n";
         cout << "| 2 - Packs\n\n";
         cout << "| 3 - BACK\n";
-        input = validate_interface_input(1, 3);
+        input = validateInterfaceInput(1, 3);
 
         switch (input)
         {
@@ -88,7 +83,7 @@ void browseClientsInterface(Agency agency)
         cout << "| 3 - View All Clients\n\n";
         cout << "| 4 - BACK\n";
 
-        input = validate_interface_input(1, 4);
+        input = validateInterfaceInput(1, 4);
         switch (input)
         {
         case 1:
@@ -101,7 +96,7 @@ void browseClientsInterface(Agency agency)
          //       cout << CL.at(vpos.at(j)).name << "\n"; <-------------------------------------------
             }
             cout << "\nSelect which one you wish to view, ";
-            decwhich = validate_interface_input(1, vpos.size());
+            decwhich = validateInterfaceInput(1, vpos.size());
             //print_client(CL, decwhich - 1);   <----------------------------------------
             cout << "\nType '0' (zero) to see just the recent MENU: ";
             cin >> condition; while(!cin_test) cin >> condition;
@@ -136,7 +131,7 @@ void browse_packs_interface(Agency agency)
     cout << "| 4 - View All Packs\n";
     cout << "| 5 - BACK\n";
 
-    input = validate_interface_input(1, 3);
+    input = validateInterfaceInput(1, 3);
     switch (input)
     {
     case 1:
@@ -164,7 +159,7 @@ void clients_interface(Agency agency)
         cout << "| 4 - Client pack purchase\n\n";
         cout << "| 5 - BACK\n";
 
-        input = validate_interface_input(1,5);
+        input = validateInterfaceInput(1,5);
 
         switch(input)
         {
@@ -206,7 +201,7 @@ void packs_interface(Agency agency)
         cout << "| 4 - "; cout << "View agency pack profit\n\n";
         cout << "| 5 - "; cout << "BACK\n";
 
-        input = validate_interface_input(1,4);
+        input = validateInterfaceInput(1,4);
 
         switch(input)
         {

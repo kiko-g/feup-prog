@@ -28,52 +28,49 @@ string CLIENTS_FILE_NAME;
 string PacketS_FILE_NAME;
 
 // INSIDE READ.CPP ----> READING AND ORGANIZING
-vector<string> read_agency(string agency_file_str);
-vector<string> read_clients(string clients_file_str);
-vector<string> read_packs(string packs_file_str);
-vector<Client> decompose_clients(vector<string> rawCL, string filename);
-vector<Packet> decompose_packs(vector<string> rawPK, string filename);
+vector<string> readAgency(string agency_file_str);
+vector<string> readClients(string clients_file_str);
+vector<string> readPacks(string packs_file_str);
+vector<Client> decomposeClients(vector<string> rawCL, string filename);
+vector<Packet> decomposePacks(vector<string> rawPK, string filename);
 Address string_to_address(string address_str);
 
-/*
+
 // CLIENT MANAGEMENT
-void add_client(vector<Client> &CL);
-void edit_client(vector<Client> &CL);
-void remove_client(vector<Client> &CL);
-void change_client_name(vector<Client> &CL);
-void change_client_NIF(vector<Client> &CL);
-void change_client_famagr(vector<Client> &CL);
-void change_client_address(vector<Client> &CL);
-void change_client_packs(vector<Client> &CL);
+void addClient(vector<Client> &CL);
+void editClient(vector<Client> &CL);
+void removeClient(vector<Client> &CL);
+void changeClientName(vector<Client> &CL);
+void changeClientNIF(vector<Client> &CL);
+void changeClient_famagr(vector<Client> &CL);
+void changeClient_address(vector<Client> &CL);
+void changeClientPacks(vector<Client> &CL);
 
 // Packet MANAGEMENT
-void add_pack(vector<Packet> &PK);
-void edit_pack(vector<Packet> &PK);
-void remove_pack(vector<Packet> &PK);
-void purchase_pack(vector<Client> &CL, vector<Packet> &PK);
+void addPack(vector<Packet> &PK);
+void editPack(vector<Packet> &PK);
+void removePack(vector<Packet> &PK);
+void purchasePack(vector<Client> &CL, vector<Packet> &PK);
 
 // WRITING TO FILES
-void write_clients(vector<Client> CL, string filename);
-void write_packs(vector<Packet> PK, string filename);
+void writeClients(vector<Client> CL, string filename);
+void writePacks(vector<Packet> PK, string filename);
 
-//SEARCH or BROWSE
-//CLIENTS
+// INSIDE SEARCH or BROWSE
 vector<int> searchClientName(vector<Client> CL);
 int searchClientNIF(vector<Client> CL);
 void printClient(vector<Client> CL, int i);
 void printAllClients(vector<Client> CL);
 
-//SEARCH or BROWSE
-//PACKS
-int search_pack_ID(vector<Packet> PK);
-void print_all_packs(vector<Packet> PK);
+int searchPack_ID(vector<Packet> PK);
+void printAllPacks(vector<Packet> PK);
 
 //CALC
-void determine_packs_money(vector<Packet> PK);
-*/
+void determinePacksMoney(vector<Packet> PK);
+
 // INPUT DEALING FUNCTIONS
 int stoint(const string &str, int &value);
-int validate_interface_input(int a, int b);
+int validateInterfaceInput(int a, int b);
 void readline(string &str);
 bool cin_test();
 

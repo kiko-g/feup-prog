@@ -1,11 +1,11 @@
 #include "Address.h"
 
 Address::Address(){}
-Address::Address(string street, unsigned short doorNumber, string floor, string postalCode, string location)
+Address::Address(string street, unsigned short doorNumber, string Floor, string postalCode, string location)
 {
   this->setStreet(street);
   this->setDoorNumber(doorNumber);
-  this->setFloor(floor);
+  this->setFloor(Floor);
   this->setPostalCode(postalCode);
   this->setLocation(location);
 }
@@ -24,7 +24,7 @@ unsigned short Address::getDoorNumber() const
 
 string Address::getFloor() const
 {
-  return this->floor;
+  return this->Floor;
 }
 
 string Address::getPostalCode() const
@@ -49,7 +49,7 @@ void Address::setDoorNumber(unsigned short doorNumber)
   // REQUIRES IMPLEMENTATION
 }
 
-void Address::setFloor(string floor)
+void Address::setFloor(string Floor)
 {
   // REQUIRES IMPLEMENTATION
 }

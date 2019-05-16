@@ -37,6 +37,8 @@ class Client
   void setPacketList(vector<unsigned int> & packets);
   unsigned setTotalPurchased(unsigned totalPurchased);
   
+  // EDIT CLIENT methods  
+
   // other methods
   friend ostream& operator<<(ostream& out, const Client & client);
 };

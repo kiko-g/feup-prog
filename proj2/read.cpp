@@ -25,7 +25,7 @@ int numberOf(string fileName)
 // ======================================
 // ======================================
 
-vector<string> read_agency(string agency_file_str)
+vector<string> readAgency(string agency_file_str)
 {
     vector<string> content;
     string line;
@@ -58,7 +58,7 @@ vector<string> read_agency(string agency_file_str)
 // ======================================
 // ======================================
 
-vector<string> read_clients(string clients_file_str)
+vector<string> readClients(string clients_file_str)
 {
     vector<string> content;
     ifstream fin;
@@ -90,7 +90,7 @@ vector<string> read_clients(string clients_file_str)
 // ======================================
 // ======================================
 
-vector<string> read_packs(string packs_file_str)
+vector<string> readPacks(string packs_file_str)
 {
     vector<string> content;
     string line;
@@ -122,7 +122,7 @@ vector<string> read_packs(string packs_file_str)
 // ======================================
 // ======================================
 
-vector<Client> decompose_clients(vector<string> rawCL, string filename)
+vector<Client> decomposeClients(vector<string> rawCL, string filename)
 {
     vector<Client> CL;
     int i=0, client_number = numberOf(filename);
@@ -164,7 +164,7 @@ vector<Client> decompose_clients(vector<string> rawCL, string filename)
 // ======================================
 // ======================================
 
-vector<Packet> decompose_packs(vector<string> rawPK, string filename)
+vector<Packet> decomposePacks(vector<string> rawPK, string filename)
 {
     int i=0, pack_number = numberOf(filename);
     vector<Packet> PK;
@@ -180,26 +180,33 @@ vector<Packet> decompose_packs(vector<string> rawPK, string filename)
     // 8*i helps us advance to the correct client info
     while(i < pack_number)
     {
-
-        id = stoi(rawPK.at(1 + 8*i));                 //PART 1
-        divSITES = strtok_cpp(rawPK.at(3 + 8*i), "-");              //PART 2
+        int id;
+        stoint(rawPK.at(1 + 8*i), id);                     //PART 1
+        divSITES = strtok_cpp(rawPK.at(3 + 8*i), " - ");   //PART 2
         sites.push_back(divSITES.at(0));
-        divSITES = strtok_cpp(divSITES.at(1), ";");              //PART 2
+        divSITES = strtok_cpp(divSITES.at(1), ", ");       //PART 2
 
         for (size_t i = 0; i < divSITES.size(); i++)
         {
             sites.push_back(divSITES.at(i));
         }
         
-        divDATE = strtok_cpp(rawPK.at(3 + 8*i), "/");   //PART 3
-        Date begin(stoi(divDATE.at(2)),stoi(divDATE.at(1)),stoi(divDATE.at(0)));
-   
-        divDATE = strtok_cpp(rawPK.at(4 + 8*i), "/");   // PART 4
-        Date end(stoi(divDATE.at(2)),stoi(divDATE.at(1)),stoi(divDATE.at(0)));
+        int YY, MM, DD;
+        divDATE = strtok_cpp(rawPK.at(3 + 8*i), "/");       //PART 3
+        stoint(divDATE.at(0), YY);
+        stoint(divDATE.at(1), MM);
+        stoint(divDATE.at(2), DD);
+        Date begin(DD, MM, YY);
+
+        divDATE = strtok_cpp(rawPK.at(4 + 8*i), "/");       // PART 4
+        stoint(divDATE.at(0), YY);
+        stoint(divDATE.at(1), MM);
+        stoint(divDATE.at(2), DD);
+        Date end(DD, MM, YY);
 
         pricePerPerson = stoi(rawPK.at(5 + 8*i));           // PART 5
-        maxPersons = stoi(rawPK.at(6 + 8*i));     // PART 6
-        nrSold = stoi(rawPK.at(7 + 8*i));          // PART 7
+        maxPersons = stoi(rawPK.at(6 + 8*i));               // PART 6
+        nrSold = stoi(rawPK.at(7 + 8*i));                   // PART 7
 
         Packet p(id, sites, begin, end, pricePerPerson, maxPersons, nrSold);
         PK.push_back(p);
@@ -208,13 +215,12 @@ vector<Packet> decompose_packs(vector<string> rawPK, string filename)
     return PK;
 }
 
-Address string_to_adress(string address_str){
-    
-    vector<string> divAD;  
-
+Address string_to_adress(string address_str)
+{    
+    vector<string> divAD; //vector of string, divAD = divide Address 
     string street;
     int doorNumber;
-    string floor;
+    string Floor;
     string postalCode;
     string location;
 
@@ -222,9 +228,9 @@ Address string_to_adress(string address_str){
 
     street = divAD.at(0);             // 4.0
     stoint(divAD.at(1), doorNumber);  // 4.1
-    floor = divAD.at(2);              // 4.2
+    Floor = divAD.at(2);              // 4.2
     postalCode = divAD.at(3);                 // 4.3
     location = divAD.at(4);           // 4.4
-    Address address(street, doorNumber, floor, postalCode, location);
+    Address address(street, doorNumber, Floor, postalCode, location);
     return address;
 }

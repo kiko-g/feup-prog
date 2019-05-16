@@ -10,13 +10,13 @@ class Address
  private:
   string street; // street name
   unsigned short doorNumber; // door number
-  string floor; // floor number ("-" is not applicable)
+  string Floor; // Floor number ("-" is not applicable)
   string postalCode; // postal code
   string location; // site
 
  public:
   Address();
-  Address(string street, unsigned short doorNumber, string floor, string postalCode, string location);
+  Address(string street, unsigned short doorNumber, string Floor, string postalCode, string location);
 
   // metodos GET
   string getStreet() const;
@@ -28,7 +28,7 @@ class Address
   // metodos SET
   void setStreet(string street);
   void setDoorNumber(unsigned short doorNumber);
-  void setFloor(string floor);
+  void setFloor(string Floor);
   void setPostalCode(string postalCode);
   void setLocation(string  location);
 

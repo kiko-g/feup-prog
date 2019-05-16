@@ -1,19 +1,16 @@
 #pragma once
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
-
-
 #include "defs.h"
 #include "Address.h"
 #include "Client.h"
 #include "Packet.h"
-
 using namespace std;
 
-class Agency{
+class Agency
+{
  private:
   string name; // name of the  agency
   unsigned int VATnumber; // VAT number of the agency

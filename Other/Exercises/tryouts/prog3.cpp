@@ -10,9 +10,9 @@ using namespace std;
 int main()
 {
     start(3);
-    int x, y;
-    char c;
-    cin >> x >> c >> y;
-    cout << x << c << y;
+    int id;
+    string id_str = "12345";
+    stoint(id_str, id);
+    cout << id;
     end(3);
 }

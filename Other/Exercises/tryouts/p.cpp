@@ -6,6 +6,56 @@
 #include "p.h"
 using namespace std;
 
+vector<string> strtok_cpp(string h, string n)
+{
+    // h is haystack, n is needle
+    vector<string> ret;
+    size_t startPos = 0, endPos = 0;
+    while (endPos<h.length())
+    {
+        endPos=h.find(n,startPos);
+        if(endPos==h.npos)
+        {
+            ret.push_back(h.substr(startPos));
+            break;
+        } 
+        else ret.push_back(h.substr(startPos,endPos-startPos));
+        startPos=endPos + n.length();
+    }
+    return ret;
+}
+
+int stoint(const string &str, int &value)
+{
+    int base = 10;
+    size_t* pos = 0;
+    // wrapping stoi because it may throw an exception
+
+    try
+    {
+        value = stoi(str, pos, base);
+        return 0;
+    }
+
+    catch (const invalid_argument& ia)
+    {
+        //cerr << "Invalid argument: " << ia.what() << endl;
+        return -1;
+    }
+
+    catch (const out_of_range& oor)
+    {
+        //cerr << "Out of Range error: " << oor.what() << endl;
+        return -2;
+    }
+
+    catch (const exception& e)
+    {
+        //cerr << "Undefined error: " << e.what() << endl;
+        return -3;
+    }
+}
+
 void fill_vec_rand(vector<int> &v, int n)
 {
     srand((unsigned)time(NULL));

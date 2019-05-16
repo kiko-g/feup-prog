@@ -7,12 +7,12 @@ Agency::Agency(string agency_file_str)
     vector<string> clientContent;
     vector<string> packContent;
     
-    agencyContent = read_agency(agency_file_str);
-    clientContent = read_clients(agencyContent[4]);
-    packContent = read_packs(agencyContent[5]);
+    agencyContent = readAgency(agency_file_str);
+    clientContent = readClients(agencyContent[4]);
+    packContent = readPacks(agencyContent[5]);
 
-    vector<Client> clients = decompose_clients(clientContent, agencyContent[4]);
-    vector<Packet> packets = decompose_packs(packContent, agencyContent[5]);
+    vector<Client> clients = decomposeClients(clientContent, agencyContent[4]);
+    vector<Packet> packets = decomposePacks(packContent, agencyContent[5]);
 
     this->setName(agencyContent[0]);
     int VATnr;
@@ -21,7 +21,7 @@ Agency::Agency(string agency_file_str)
 
     string street; // street name
     unsigned short doorNumber; // door number
-    string floor; // floor number ("-" is not applicable)
+    string Floor; // Floor number ("-" is not applicable)
     string postalCode; // postal code
     string location; // site
 
@@ -37,13 +37,13 @@ Agency::Agency(string agency_file_str)
     this->packetsInfoHasChanged = false;
 
     //this->maxClientsId = max_clients_id;
-    //this->maxPacketsId = max_packets_id;
+    //this->maxPacketsId = maxPackets_id;
 }
 
   // metodos GET
 string Agency::getName() const
 {
-  return this->name;    
+    return this->name;    
 }
 
 unsigned Agency::getVATnumber() const
@@ -53,59 +53,58 @@ unsigned Agency::getVATnumber() const
 
 Address Agency::getAddress() const
 {
-
-  return this->address;  
+    return this->address;  
 }
 
 string Agency::getURL() const
 {
-
-  return this->URL;  
+    return this->URL;  
 }
 
 vector<Client> Agency::getClients() const
 {
-  return this->clients;  
+    return this->clients;  
 }
 
 vector<Packet> Agency::getPackets() const
 {
-  return this->packets; 
+    return this->packets; 
 }
 
   
   // SET Methods
 
-void Agency::setName(string name){
-  this->name = name;  
+void Agency::setName(string name)
+{
+    this->name = name;  
 }
 
 void Agency::setVATnumber(unsigned VATnumber){
   
-  if(VATnumber > 999999999 || VATnumber < 100000000){
+  if(VATnumber > 999999999 || VATnumber < 100000000)
+  {
     cout << "Invalid Agency VAT Number";
-    exit(-1); 
+    exit(1); 
   }
-  else{
+  else
+  {
     this->VATnumber = VATnumber;
   }
 }
 
-void Agency::setAddress(Address address){
-
-  this->address = address; 
+void Agency::setAddress(Address address)
+{
+    this->address = address; 
 }
 
-void Agency::setURL(string url){
-
-  this->name = name; 
-
+void Agency::setURL(string url)
+{
+    this->name = name; 
 }
 
-void Agency::setClients(vector<Client> & clients){
-
-  this->clients = clients; 
-
+void Agency::setClients(vector<Client> & clients)
+{
+    this->clients = clients; 
 }
 
 void Agency::setPackets(vector<Packet> & packets)
