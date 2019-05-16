@@ -1,6 +1,11 @@
 #include "Menus.h"
 #include "defs.h"
 
+void clients_interface(Agency agency);
+void packs_interface(Agency agency);
+void browseClientsInterface(Agency agency);
+void browse_packs_interface(Agency agency);
+
 unsigned mainMenu(Agency agency)
 {
     int input;
@@ -22,11 +27,11 @@ unsigned mainMenu(Agency agency)
             break;
 
          case 2:
-            clientsInterface(agency);
+            clients_interface(agency);
             break;
 
          case 3:
-            packsInterface(agency);
+            packs_interface(agency);
             break;
 
          case 4:
@@ -50,7 +55,7 @@ void browsingInterface(Agency agency)
         cout << "| 1 - Clients\n";
         cout << "| 2 - Packs\n\n";
         cout << "| 3 - BACK\n";
-        input = validateInterfaceInput(1, 3);
+        input = validate_interface_input(1, 3);
 
         switch (input)
         {
@@ -59,7 +64,7 @@ void browsingInterface(Agency agency)
             break;
 
         case 2:
-            browsePacksInterface(agency);
+            browse_packs_interface(agency);
             break;
 
         case 3:
@@ -83,7 +88,7 @@ void browseClientsInterface(Agency agency)
         cout << "| 3 - View All Clients\n\n";
         cout << "| 4 - BACK\n";
 
-        input = validateInterfaceInput(1, 4);
+        input = validate_interface_input(1, 4);
         switch (input)
         {
         case 1:

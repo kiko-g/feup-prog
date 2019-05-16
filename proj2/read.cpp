@@ -28,7 +28,7 @@ int numberOf(string fileName)
 vector<string> read_agency(string agency_file_str)
 {
     vector<string> content;
-    string agency_file_str, line;
+    string line;
     ifstream fin;
 
     pathToFile = pathToFile + agency_file_str;

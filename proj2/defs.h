@@ -68,16 +68,6 @@ void printAllClients(vector<Client> CL);
 int search_pack_ID(vector<Packet> PK);
 void print_all_packs(vector<Packet> PK);
 
-//INTERFACES
-void init_navigation(vector<Client> CL, vector<Packet> PK);
-void main_interface(vector<Client> CL, vector<Packet> PK);
-void clients_interface(vector<Client> &CL, vector<Packet> &PK);
-void Packets_interface(vector<Client> &CL, vector<Packet> &PK);
-void browsing_interface(vector<Client> CL, vector<Packet> PK);
-// ========
-void browseClients_interface(vector<Client> CL, vector<Packet> PK);
-void browse_Packets_interface(vector<Client> CL, vector<Packet> PK);
-
 //CALC
 void determine_packs_money(vector<Packet> PK);
 */
@@ -88,26 +78,7 @@ void readline(string &str);
 bool cin_test();
 
 // Other Functions
-vector<string> strtokCpp(string h, string n);
+vector<string> strtok_cpp(string h, string n);
 void reset_pathToFile();
 int numberOf(string fileName);
 int numberOfR(string fileName); //useless for now at least
-
-// STYLE BASED FUNCTIONS
-
-/* 
-void start(int color);
-void end(int color);
-    void setcolor(int color); (see below)
-COLOR REFERS TO:
-1_DARK BLUE | 2_GREEN | 3_BLUE | 4_RED
-5_PURPLE | 6_YELLOW | 7_WHITE
-
-#ifdef _WIN32
-	#include <windows.h>
-    #define setcolor(color) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-#else
-	#define setcolor(color) void
-#endif
-
-*/
