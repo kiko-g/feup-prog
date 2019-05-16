@@ -132,7 +132,7 @@ vector<Client> decompose_clients(vector<string> rawCL, string filename)
     int VATnumber; // VAT number of client
     int familySize;  // number of family members
     Address address; // client's address
-    vector<Packet> packets; // vector to store client's packets bought
+    vector<unsigned int> packets; // vector to store client's packets bought
     int totalPurchased; // total value spent by the client
 
     // 6*i helps us advance to the correct client info
@@ -146,16 +146,15 @@ vector<Client> decompose_clients(vector<string> rawCL, string filename)
         Address address = string_to_address(rawCL.at(2 + 6*i));
         // PART 5
         divPK = strtok_cpp(rawCL.at(4 + 6*i), " ; ");
-/*
+
         int value_pk;
         for(int j = 0; j < divPK.size(); j++)
         {
             stoint(divPK.at(j), value_pk);
-            c.packs.push_back(value_pk);
+            packets.push_back(value_pk);
         }
-        */
-       //NOT IMPLEMENTED PACKETS PURCHASED BY CLIENTS
-        Client c(name, VATnumber, familySize, address);
+        
+        Client c(name, VATnumber, familySize, address, packets, 0);
         CL.push_back(c);
         i++;
     }

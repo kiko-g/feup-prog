@@ -21,7 +21,7 @@ void add_client(Agency agency)
     string postalCode; // postal code
     string location; // site
 
-    vector<Packet> packets; // vector to store client's packets bought
+    vector<unsigned int> packets; // vector to store client's packets bought
     unsigned  totalPurchased; // total value spent by the client
     while(!valid)
     {
@@ -34,12 +34,10 @@ void add_client(Agency agency)
         cout << "Postal Code: "; readline(postalCode);
         cout << "Location: "; readline(location);
 
-        Address address(street, doorNumber, floor, postalCode, location);
-
         int j=0, packn, cond;
         string divider = " ; ";
         ostringstream packstring;
-    /* 
+     
         cout << "\n=== CLIENT   PACKS ===";   
         cout << "\nTotal number of packs: ";    
         cin >> cond;                            
@@ -49,21 +47,19 @@ void add_client(Agency agency)
             if(j!=0) packstring << divider;
             j++;
             cout << "Pack " << j << ": "; cin >> packn; 
-            c.packs.push_back(packn);
+            packets.push_back(packn);
             if(!cin.eof()) packstring << packn;
         }
-        c.packs_str = packstring.str();
         valid = true;
-        CL.push_back(c);
     }
-    */
-   //NEED TO ADD CLIENT PACK INFO
-    Client c(name, VATnumber, familySize, address);
+    
+    Address address(street, doorNumber, floor, postalCode, location);
+    Client c(name, VATnumber, familySize, address, packets, 0);
     agency.addClients(c);
     cout << "Client successfully added.\n"; 
 }
 
-
+/*
 //EDIT CLIENT
 void change_client_name(Agency agency)
 {
@@ -193,7 +189,7 @@ void change_client_packs(Agency agency)
     dec_which = validate_interface_input(1, vpos.size());
     CL.at(vpos.at(dec_which - 1)).name = new_name;
 }
-
+*/
 
 void edit_client(Agency agency)
 {

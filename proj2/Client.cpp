@@ -8,7 +8,7 @@ Client::Client(string name, unsigned VATnumber, unsigned short familySize, Addre
   this->setAddress(address);
 }
 
-Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased)
+Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<unsigned int> & packets, unsigned totalPurchased)
 {  
   this->setName(name);
   this->setVATnumber(VATnumber);
@@ -39,7 +39,7 @@ Address Client::getAddress() const
   return this->address;
 }
 
-vector<Packet> Client::getPacketList() const
+vector<unsigned int> Client::getPacketList() const
 {  
   return this->packets;
 }
@@ -81,7 +81,7 @@ void Client::setAddress(Address address){
  
   this->address = address;  
 }
-void Client::setPacketList(vector<Packet> & packets){
+void Client::setPacketList(vector<unsigned int> & packets){
 
   this->packets = packets;  
 }
