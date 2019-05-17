@@ -121,6 +121,15 @@ void Agency::addPackets(Packet packet){
    this->packetsInfoHasChanged = true;
 }
 
+void Agency::rmClients(int clientPos){
+  this->clients.erase(this->clients.begin()+clientPos);
+  this->clientsInfoHasChanged = true;
+}
+void Agency::rmPackets(int packetPos){
+   this->packets.erase(this->packets.begin()+packetPos);
+   this->packetsInfoHasChanged = true;
+}
+
 /*********************************
  * Mostrar Loja
  ********************************/  

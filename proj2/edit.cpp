@@ -189,7 +189,6 @@ void changeClientPacks(Agency agency)
     dec_which = validateInterfaceInput(1, vpos.size());
     CL.at(vpos.at(dec_which - 1)).name = new_name;
 }
-*/
 
 void editClient(Agency agency)
 {
@@ -232,7 +231,7 @@ void editClient(Agency agency)
     }
 }
 
-
+*/
 // REMOVE CLIENT
 void removeClient(Agency agency)
 {

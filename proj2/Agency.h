@@ -45,7 +45,8 @@ class Agency
   void setPackets(vector<Packet> & packets);
   void addClients(Client client);
   void addPackets(Packet packet);
-
+  void rmClients(int clientPos);
+  void rmPackets(int packetPos);
   // other methods */
   
   friend ostream& operator<<(ostream& out, const Agency & agency);
