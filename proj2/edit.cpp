@@ -53,107 +53,81 @@ void addClient(Agency &agency)
     totalPurchased = agency.determineMoneySpentByClient(packs);
 
     Address address(street, doorNumber, Floor, postalCode, location);
-    Client c(name, VATnumber, familySize, address, packs, packstring.str(), totalPurchased);
+    Client c(name, VATnumber, familySize, address, packs, totalPurchased);
     agency.addClients(c);
     cout << "Client successfully added.\n"; 
 }
 
-
 //EDIT CLIENT
 void changeClientName(Agency &agency)
 {
+    // DEC_WHICH ---> DECIDE WHICH OF THE FOUND CLIENTS (IN vpos aka c_list)
+    int pos;
     string new_name; 
+    vector<int> vpos;
     cout << "\nNew name: "; readline(new_name);
-    agency.changeClientName(new_name);
+    cout << "\n\n==== SEARCH CLIENT NAME ====\n";
+    //decide_search(); ---> soon
+    vpos = searchClientName(agency);
+    agency.changeClientName(vpos, new_name);
 }
 
 void changeClientNIF(Agency &agency)
 {
-    int pos, dec_which;
-    vector<int> vpos;
+    int pos, new_NIF = 0;
     string new_NIFstr;
-    int new_NIF = 0;
+    vector<int> vpos;
 
-    cout << "\nNew NIF: "; readline(new_NIFstr);
-    cout << "\n\n==== SEARCH ====\n";
-
+    cout << "\n\n==== SEARCHING WITH NAME ====\n";
     vpos = searchClientName(agency);
-    for (int j = 0; j < vpos.size(); j++)
-    {
-       cout << CL.at(vpos.at(j)).name << " | NIF: "
-            << CL.at(vpos.at(j)).NIF << "\n";
-    }
+    cout << "\nNew NIF: "; readline(new_NIFstr);
 
-    cout << "\nSelect which client's NIF you wish to change\n";
-    dec_which = validateInterfaceInput(1, vpos.size());
     //STOINT IS DECLARED IN HELPFUL.CPP AND ALTERS THE VALUE OF new_NIF
-    while(stoint(new_NIFstr, new_NIF)!=0)
+    while (stoint(new_NIFstr, new_NIF) != 0)
     {
-        cout << "New NIF input is invalid.\nTry again, this only numbers\nNew NIF: ";
+        cout << "New NIF input is invalid.\nTry again, this time only numbers\nNew NIF: ";
         readline(new_NIFstr);
         break;
     }
-
-    CL.at(vpos.at(dec_which - 1)).NIF = new_NIF;
+    agency.changeClientNIF(vpos, new_NIF);
 }
 
-void changeClient_famagr(Agency &agency)
+void changeClientFamagr(Agency &agency)
 {
-    int pos, dec_which;
+    int pos, new_NFA;
     vector<int> vpos;
-    int new_NFA;
+    cout << "\n\n==== SEARCH WITH NAME ====\n";
+    vpos = searchClientName(agency);
     cout << "\nNew fam agr number: "; cin >> new_NFA; while(!cin_test()) cin >> new_NFA;
-    cout << "\n\n==== SEARCH ====\n";
-
-    vpos = searchClientName(CL);
-    for (int j=0; j < vpos.size(); j++)
-    {
-        cout << CL.at(vpos.at(j)).name << " | N FAM AGR: "
-             << CL.at(vpos.at(j)).nFamAgr << "\n";
-    }
-
-    cout << "\nSelect which client's Family Agregate Number you wish to change\n";
-    dec_which = validateInterfaceInput(1, vpos.size());
-    CL.at(vpos.at(dec_which - 1)).nFamAgr = new_NFA;
+    agency.changeClientFAM(vpos, new_NFA);
 }
 
 void changeClientAddress(Agency &agency)
 {
     int pos, dec_which;
     vector<int> vpos;
-    string div = " | ";
-    Address new_address; 
-
-    cout << "\nType new address below\n\n";
-    cout << left << setw(20) << "STREET: "; readline(new_address.street);
-    cout << left << setw(20) << "\nDOOR NUMBER: "; cin >> new_address.doorNumber; while(!cin_test()) cin >> new_address.doorNumber;
-    cout << left << setw(20) << "\nFloor: "; readline(new_address.Floor);
-    cout << left << setw(20) << "\nPOSTAL CODE N1: "; cin >> new_address.CP1; while(!cin_test()) cin >> new_address.CP1;
-    cout << left << setw(20) << "\nPOSTAL CODE N2: "; cin >> new_address.CP2; while(!cin_test()) cin >> new_address.CP2;
-    ostringstream helpful_str;
-    helpful_str << new_address.CP1 << "-" << new_address.CP2;
-    new_address.CP = helpful_str.str();
-    cout << left << setw(20) << "\nLOCATION: "; readline(new_address.location);
+    //string div = " | ";
+    
+    string street, Floor, location, CP;
+    unsigned short CP1, CP2, doorNumber;
 
     cout << "\n\n==== SEARCH ====\n";
-    vpos = searchClientName(CL);
-    for (int j=0; j < vpos.size(); j++)
-    {
-       cout << CL.at(vpos.at(j)).name << " | ADDRESS: "
-            << CL.at(vpos.at(j)).address.street     << div
-            << CL.at(vpos.at(j)).address.doorNumber << div
-            << CL.at(vpos.at(j)).address.Floor      << div
-            << CL.at(vpos.at(j)).address.CP         << div
-            << CL.at(vpos.at(j)).address.location   << "\n";
-    }
+    vpos = searchClientName(agency);
 
-    cout << "\nSelect which client's ADDRESS you wish to change\n";
-    dec_which = validateInterfaceInput(1, vpos.size());
-    CL.at(vpos.at(dec_which - 1)).address.street = new_address.street;
-    CL.at(vpos.at(dec_which - 1)).address.doorNumber = new_address.doorNumber;
-    CL.at(vpos.at(dec_which - 1)).address.Floor = new_address.Floor;
-    CL.at(vpos.at(dec_which - 1)).address.CP = new_address.CP;
-    CL.at(vpos.at(dec_which - 1)).address.location = new_address.location;
+    //ADDRESS COMPONENTS ---> These will be read from input
+    cout << "\nType new address below\n\n";
+    cout << left << setw(20) << "STREET: "; readline(street); 
+    cout << left << setw(20) << "\nDOOR NUMBER: "; cin >> doorNumber; while(!cin_test()) cin >> doorNumber; 
+    cout << left << setw(20) << "\nFloor: "; readline(Floor); 
+    cout << left << setw(20) << "\nPOSTAL CODE N1: "; cin >> CP1; while(!cin_test()) cin >> CP1;
+    cout << left << setw(20) << "\nPOSTAL CODE N2: "; cin >> CP2; while(!cin_test()) cin >> CP2;
+
+    ostringstream helpful_str;
+    helpful_str << CP1 << "-" << CP2;
+    cout << left << setw(20) << "\nLOCATION: "; readline(location);
+
+    Address A(street, doorNumber, Floor, helpful_str.str(), location);
+    agency.changeClientAddress(vpos, A);
 }
 
 void changeClientPacks(Agency agency)
@@ -216,7 +190,6 @@ void editClient(Agency agency)
     }
 }
 
-*/
 // REMOVE CLIENT
 void removeClient(Agency agency)
 {
