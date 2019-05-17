@@ -2,35 +2,35 @@ Jorge Miguel Fidalgo
 283539136
 5
 Rua Eng. Monteiro Miranda | 208 | 4Frt | 4100-276 | Porto
-10 ; 36 ; 2 ; 6
+10 ; 9 ; 2 ; 6
 ::::::::::
 Omar Asenath Mbizi
 365087297
 5
 Rua Comendador Alves Costa | 415 | - | 2912-273 | Aveiro
-17 ; 29 ; 8
+11 ; 6 ; 8
 ::::::::::
 Luis Paulo Souto
 365087297
 3
 Avenida Conde Julio Afonso | 305 | - | 1932-271 | Coimbra
-17 ; 29 ; 8
+4 ; 2 ; 8
 ::::::::::
 Luis Miguel Pereirea Afonso
 365087297
 3
 Avenida Costa Gomes | 105 | - | 1829-245 | Evora
-17 ; 29 ; 8
+5 ; 11 ; 8
 ::::::::::
 Jorge Adilson Tzavellas
 275979920
 5
 Rua Comendador Edmilson Nunes | 208 | 4Frt | 4100-276 | Porto
-10 ; 36 ; 2
+10 ; 9 ; 1
 ::::::::::
 Jorge Carlos Pires Carvalho
 185925916
 5
 Rua Comendador Edmilson Nunes | 206 | 2Dto | 4100-276 | Porto
-10 ; 36 ; 5
+9 ; 3 ; 5
 ::::::::::

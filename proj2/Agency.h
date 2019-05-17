@@ -46,12 +46,15 @@ class Agency
   void addClients(Client client);
   void addPacks(Pack pack);
   void rmClients(int clientPos);
-  void rmPacks(int packetPos);
-  // other methods */
+  void rmPacks(int packPos);
+  void changeClientName(string new_name);
   
-  vector<int> searchClientName(string name);
   // SEARCH METHODS
   int searchClientNIF(int NIF);
+  vector<int> searchClientName(string name);
+
+  //OTHER
+  int Agency::determineMoneySpentByClient(vector <unsigned int> packs_bought);
 
   friend ostream& operator<<(ostream& out, const Agency & agency);
 

@@ -31,27 +31,27 @@ Address string_to_address(string address_str);
 
 
 // CLIENT MANAGEMENT
-void addClient(vector<Client> &CL);
-void editClient(vector<Client> &CL);
-void removeClient(vector<Client> &CL);
-void changeClientName(vector<Client> &CL);
-void changeClientNIF(vector<Client> &CL);
-void changeClient_famagr(vector<Client> &CL);
-void changeClient_address(vector<Client> &CL);
-void changeClientPacks(vector<Client> &CL);
+void addClient(Agency &agency);
+void editClient(Agency &agency);
+void removeClient(Agency &agency);
+void changeClientName(Agency &agency);
+void changeClientNIF(Agency &agency);
+void changeClient_famagr(Agency &agency);
+void changeClient_address(Agency &agency);
+void changeClientPacks(Agency &agency);
 
 // Pack MANAGEMENT
 void addPack(vector<Pack> &PK);
 void editPack(vector<Pack> &PK);
 void removePack(vector<Pack> &PK);
-void purchasePack(vector<Client> &CL, vector<Pack> &PK);
+void purchasePack(Agency &agency, vector<Pack> &PK);
 
 // WRITING TO FILES
 void writeClients(vector<Client> CL, string filename);
 void writePacks(vector<Pack> PK, string filename);
 
 // INSIDE SEARCH or BROWSE
-vector<int> searchClientName(vector<Client> CL);
+vector<int> searchClientName(Agency agency);
 int searchClientNIF(vector<Client> CL);
 void printClient(vector<Client> CL, int i);
 void printAllClients(vector<Client> CL);
