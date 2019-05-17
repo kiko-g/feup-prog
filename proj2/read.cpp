@@ -120,8 +120,8 @@ vector<Client> decomposeClients(vector<string> rawCL, string filename)
     while (i < numberOf(filename))
     {
         
-        name = (rawCL.at(0 + 6*i));                 // PART 1
-        stoint(rawCL.at(1 + 6*i), VATnumber);            // PART 2
+        name = (rawCL.at(0 + 6*i));                   // PART 1
+        stoint(rawCL.at(1 + 6*i), VATnumber);         // PART 2
         stoint(rawCL.at(2 + 6*i), familySize);        // PART 3
         // PART 4
         Address address = string_to_address(rawCL.at(2 + 6*i));

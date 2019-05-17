@@ -67,7 +67,23 @@ Wales - Cardiff, Newport, Swansea
 Scotland - Edinburgh, Glasgow, Aberdeen
 2019/6/20
 2019/6/28
-100
-40
-40
+150
+29
+29
+::::::::::
+-10
+Tunisia - Al Qayrawan, Tunes, Sfax
+2019/3/18
+2019/3/30
+380
+55
+52
+::::::::::
+11
+Taiwan - Banqiao, Taichung, Kaohsiung
+2019/6/20
+2019/6/28
+320
+18
+16
 ::::::::::

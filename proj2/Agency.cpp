@@ -26,8 +26,8 @@ Agency::Agency(string agency_file_str)
     string location; // site
 
     Address address = string_to_address(agencyContent[2]);
-    
     this->setAddress(address);
+    
     this->setURL(agencyContent[3]);
 
     this->setClients(clients);
@@ -48,12 +48,12 @@ string Agency::getName() const
 
 unsigned Agency::getVATnumber() const
 {
-  return this->VATnumber; 
+    return this->VATnumber;
 }
 
 Address Agency::getAddress() const
 {
-    return this->address;  
+    return this->address;
 }
 
 string Agency::getURL() const
@@ -72,8 +72,7 @@ vector<Pack> Agency::getPacks() const
 }
 
   
-  // SET Methods
-
+// SET Methods
 void Agency::setName(string name)
 {
     this->name = name;  
@@ -112,24 +111,29 @@ void Agency::setPacks(vector<Pack> & packs)
   this->packs = packs;
 }
 
+
+// OTHER METHODS
 void Agency::addClients(Client client)
 {
     this->clients.push_back(client);
     this->clientsInfoHasChanged = true;
 }
+
 void Agency::addPacks(Pack Pack)
 {
    this->packs.push_back(Pack);
    this->packsInfoHasChanged = true;
 }
 
-void Agency::rmClients(int clientPos){
-  this->clients.erase(this->clients.begin()+clientPos);
-  this->clientsInfoHasChanged = true;
+void Agency::rmClients(int clientPos)
+{
+    this->clients.erase(this->clients.begin()+clientPos);
+    this->clientsInfoHasChanged = true;
 }
-void Agency::rmPackets(int packetPos){
-   this->packets.erase(this->packets.begin()+packetPos);
-   this->packetsInfoHasChanged = true;
+void Agency::rmPacks(int packPos)
+{
+    this->packs.erase(this->packs.begin()+packPos);
+    this->packsInfoHasChanged = true;
 }
 
 // ==== SEARCH ====
@@ -173,7 +177,32 @@ int Agency::searchClientNIF(int NIF)
     return found;    
 }
 
+// ==== EDIT AND CHANGE ====
+void Agency::changeClientName(string new_name)
+{
+    // DEC_WHICH ---> DECISE WHICH OF THE FOUND CLIENTS (IN vpos)
+    int pos, dec_which;
+    vector<int> vpos;
+    cout << "\n\n==== SEARCH CLIENT NAME ====\n";
+    //decide_search(); ---> soon
+    vpos = searchClientName();
+    for (int j = 0; j < vpos.size(); j++)
+    {
+        cout << clients.at(vpos.at(j)).name << "\n";
+    }
+    cout << "\nSelect which client's name you wish to change\n";
+    dec_which = validateInterfaceInput(1, vpos.size());
+    //
+    clients.at(vpos.at(dec_which - 1)).name = new_name;
 
+}
+
+
+//OTHER
+int Agency::determineMoneySpentByClient(vector<unsigned int> packs_bought)
+{
+    packs_bought.at(0);
+}
 
 /*********************************
  * Mostrar Loja
