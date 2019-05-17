@@ -134,6 +134,13 @@ void Agency::rmPacks(int packPos)
     this->packs.erase(this->packs.begin()+packPos);
     this->packsInfoHasChanged = true;
 }
+void Agency::printAllClients(){
+    for (size_t i = 0; i < this->clients.size(); i++)
+    {
+        cout << this->clients.at(i);
+    }
+    
+}
 
 
 /*********************************

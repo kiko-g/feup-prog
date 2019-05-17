@@ -39,7 +39,7 @@ unsigned Client::getTotalPurchased() const
   
 
 //===== metodos SET =====
-void Client::setName(string nome)
+void Client::setName(string name)
 { this->name = name; }
 
 void Client::setVATnumber(unsigned VATnumber)
@@ -95,8 +95,9 @@ ostream& operator<<(ostream& out, const Client & client)
        << client.address << endl;
     for (size_t i = 0; i < client.packs.size(); i++)
     {
-        if(i != 0) cout << " ; ";
-        client.packs.at(i);
+        cout << client.packs.at(i);
+        if(i != client.packs.size()-1) cout << " ; ";
+        
     }
     cout << endl
     << LIMIT_STRING <<endl;
