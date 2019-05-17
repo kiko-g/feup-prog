@@ -19,7 +19,7 @@ class Agency
   vector<Client> clients; // vector to store the existing clients
   vector<Pack> packs; // vector to store the existing Packs
   
-  bool clientsInfoHasChanged; // flag that is set to "true" if at least one client has been changed/added/deleted
+  bool clientsInfoHasChanged; //\ flag that is set to "true" if at least one client has been changed/added/deleted
   bool packsInfoHasChanged; // flag that is set to "true" if at least one Pack has been changed/added/deleted
   unsigned int maxClientsId; // maximum value among all clients identifiers
   unsigned int maxPacksId; // maximum value among all Packs identifiers
@@ -48,9 +48,11 @@ class Agency
   void addPacks(Pack pack);
   void rmClients(int clientPos);
   void rmPacks(int packPos);
+  // ============
   void changeClientName(vector<int> c_list, string new_name);
   void changeClientNIF(vector<int> c_list, int NIF);
   void changeClientFAM(vector<int> c_list, int familyPeopleNr);
+  void changeClientAddress(vector<int> c_list, Address A);
 
   // SEARCH METHODS
   vector<int> searchClientName(string name);

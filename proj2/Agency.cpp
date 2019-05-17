@@ -216,7 +216,13 @@ void Agency::changeClientFAM(vector<int> c_list, int familyPeopleNr)
     clients.at(c_list.at(dec_which - 1)).setFamilySize(familyPeopleNr);
 }
 
-    
+void Agency::changeClientAddress(vector<int> c_list, Address A)
+{
+    int dec_which;
+    cout << "\nSelect which client's ADDRESS you wish to change\n";
+    dec_which = validateInterfaceInput(1, c_list.size());
+    clients.at(c_list.at(dec_which - 1)).setAddress(A);
+}    
 
 
 

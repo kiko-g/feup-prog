@@ -62,8 +62,8 @@ void addClient(Agency &agency)
 void changeClientName(Agency &agency)
 {
     // DEC_WHICH ---> DECIDE WHICH OF THE FOUND CLIENTS (IN vpos aka c_list)
-    string new_name; 
     int pos;
+    string new_name; 
     vector<int> vpos;
     cout << "\nNew name: "; readline(new_name);
     cout << "\n\n==== SEARCH CLIENT NAME ====\n";
@@ -75,8 +75,8 @@ void changeClientName(Agency &agency)
 void changeClientNIF(Agency &agency)
 {
     int pos, new_NIF = 0;
-    vector<int> vpos;
     string new_NIFstr;
+    vector<int> vpos;
 
     cout << "\n\n==== SEARCHING WITH NAME ====\n";
     vpos = searchClientName(agency);
@@ -94,9 +94,8 @@ void changeClientNIF(Agency &agency)
 
 void changeClientFamagr(Agency &agency)
 {
-    int pos, dec_which;
+    int pos, new_NFA;
     vector<int> vpos;
-    int new_NFA;
     cout << "\n\n==== SEARCH WITH NAME ====\n";
     vpos = searchClientName(agency);
     cout << "\nNew fam agr number: "; cin >> new_NFA; while(!cin_test()) cin >> new_NFA;
@@ -107,44 +106,28 @@ void changeClientAddress(Agency &agency)
 {
     int pos, dec_which;
     vector<int> vpos;
-    string div = " | ";
-    Address new_address;
+    //string div = " | ";
     
-    //ADDRESS COMPONENTS ---> These will be read from input
-    string street, Floor, location;
+    string street, Floor, location, CP;
     unsigned short CP1, CP2, doorNumber;
-
-    cout << "\nType new address below\n\n";
-    cout << left << setw(20) << "STREET: "; readline(street); new_address.setStreet(street);
-    cout << left << setw(20) << "\nDOOR NUMBER: "; cin >> doorNumber; while(!cin_test()) cin >> doorNumber; new_address.setDoorNumber(doorNumber);
-    cout << left << setw(20) << "\nFloor: "; readline(Floor); new_address.setFloor(Floor);
-    cout << left << setw(20) << "\nPOSTAL CODE N1: "; cin >> CP1; while(!cin_test()) cin >> CP1;
-    cout << left << setw(20) << "\nPOSTAL CODE N2: "; cin >> CP2; while(!cin_test()) cin >> CP2;
-    ostringstream helpful_str;
-    helpful_str << CP1 << "-" << CP2;
-    new_address.setPostalCode(helpful_str.str());
-    cout << left << setw(20) << "\nLOCATION: "; readline(location); new_address.setLocation(location);
 
     cout << "\n\n==== SEARCH ====\n";
     vpos = searchClientName(agency);
-    for (int j=0; j < vpos.size(); j++)
-    {
-       cout << CL.at(vpos.at(j)).name << " | ADDRESS: "
-            << CL.at(vpos.at(j)).address.street     << div
-            << CL.at(vpos.at(j)).address.doorNumber << div
-            << CL.at(vpos.at(j)).address.Floor      << div
-            << CL.at(vpos.at(j)).address.CP         << div
-            << CL.at(vpos.at(j)).address.location   << "\n";
-    }
 
-    cout << "\nSelect which client's ADDRESS you wish to change\n";
-    dec_which = validateInterfaceInput(1, vpos.size());
-    CL.at(vpos.at(dec_which - 1)).address.street = new_address.street;
-    CL.at(vpos.at(dec_which - 1)).address.doorNumber = new_address.doorNumber;
-    CL.at(vpos.at(dec_which - 1)).address.Floor = new_address.Floor;
-    CL.at(vpos.at(dec_which - 1)).address.CP = new_address.CP;
-    CL.at(vpos.at(dec_which - 1)).address.location = new_address.location;
-    
+    //ADDRESS COMPONENTS ---> These will be read from input
+    cout << "\nType new address below\n\n";
+    cout << left << setw(20) << "STREET: "; readline(street); 
+    cout << left << setw(20) << "\nDOOR NUMBER: "; cin >> doorNumber; while(!cin_test()) cin >> doorNumber; 
+    cout << left << setw(20) << "\nFloor: "; readline(Floor); 
+    cout << left << setw(20) << "\nPOSTAL CODE N1: "; cin >> CP1; while(!cin_test()) cin >> CP1;
+    cout << left << setw(20) << "\nPOSTAL CODE N2: "; cin >> CP2; while(!cin_test()) cin >> CP2;
+
+    ostringstream helpful_str;
+    helpful_str << CP1 << "-" << CP2;
+    cout << left << setw(20) << "\nLOCATION: "; readline(location);
+
+    Address A(street, doorNumber, Floor, helpful_str.str(), location);
+    agency.changeClientAddress(vpos, A);
 }
 
 void changeClientPacks(Agency agency)
@@ -207,7 +190,6 @@ void editClient(Agency agency)
     }
 }
 
-*/
 // REMOVE CLIENT
 void removeClient(Agency agency)
 {
