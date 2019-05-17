@@ -1,20 +1,21 @@
 #include "Agency.h"
 #include "Menus.h"
-// #include "utils.h"
 using namespace std;
-
+// #include "utils.h"
+// Text files are in a folder called 'textfiles' inside the project folder!
+// This is project is developped around that assumption
 
 int main()
 {
     Agency agency(AGENCY_FILE_NAME); // create the agency
-
     mainMenu(agency); // initial menu inicial with the major options of the application
-
     return 0;
 }
 
-/*
 
+
+
+/*
 int main()
 {
     //RAW STORAGE
@@ -36,5 +37,5 @@ int main()
 
     init_navigation(clients_pure, packs_pure);
 }
-Text files are in a folder called 'textfiles' inside the 'myproj' folder
+
 */

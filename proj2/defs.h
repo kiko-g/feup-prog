@@ -5,15 +5,13 @@
 #include <vector>
 #include <fstream>
 #include <limits>
-
 #include "Agency.h"
 #include "Client.h"
 #include "Date.h"
-#include "Packet.h"
+#include "Pack.h"
 #include "Address.h"
 using namespace std;
-
-//DEFINITIONS AND MAIN LIB FOR HELPFUL FUNCTIONS 
+//DEFINITIONS AND MAIN LIB FOR HELPFUL FUNCTIONS
 
 #ifdef _WIN32
 #define clearScreen() system("cls");
@@ -25,14 +23,14 @@ string pathToFile = "textfiles/";
 string limit = "::::::::::";
 const string AGENCY_FILE_NAME = "agency.txt";
 string CLIENTS_FILE_NAME;
-string PacketS_FILE_NAME;
+string PACKSS_FILE_NAME;
 
 // INSIDE READ.CPP ----> READING AND ORGANIZING
 vector<string> readAgency(string agency_file_str);
 vector<string> readClients(string clients_file_str);
 vector<string> readPacks(string packs_file_str);
 vector<Client> decomposeClients(vector<string> rawCL, string filename);
-vector<Packet> decomposePacks(vector<string> rawPK, string filename);
+vector<Pack> decomposePacks(vector<string> rawPK, string filename);
 Address string_to_address(string address_str);
 
 
@@ -46,15 +44,15 @@ void changeClient_famagr(vector<Client> &CL);
 void changeClient_address(vector<Client> &CL);
 void changeClientPacks(vector<Client> &CL);
 
-// Packet MANAGEMENT
-void addPack(vector<Packet> &PK);
-void editPack(vector<Packet> &PK);
-void removePack(vector<Packet> &PK);
-void purchasePack(vector<Client> &CL, vector<Packet> &PK);
+// Pack MANAGEMENT
+void addPack(vector<Pack> &PK);
+void editPack(vector<Pack> &PK);
+void removePack(vector<Pack> &PK);
+void purchasePack(vector<Client> &CL, vector<Pack> &PK);
 
 // WRITING TO FILES
 void writeClients(vector<Client> CL, string filename);
-void writePacks(vector<Packet> PK, string filename);
+void writePacks(vector<Pack> PK, string filename);
 
 // INSIDE SEARCH or BROWSE
 vector<int> searchClientName(vector<Client> CL);
@@ -62,11 +60,11 @@ int searchClientNIF(vector<Client> CL);
 void printClient(vector<Client> CL, int i);
 void printAllClients(vector<Client> CL);
 
-int searchPack_ID(vector<Packet> PK);
-void printAllPacks(vector<Packet> PK);
+int searchPack_ID(vector<Pack> PK);
+void printAllPacks(vector<Pack> PK);
 
 //CALC
-void determinePacksMoney(vector<Packet> PK);
+void determinePacksMoney(vector<Pack> PK);
 
 // INPUT DEALING FUNCTIONS
 int stoint(const string &str, int &value);

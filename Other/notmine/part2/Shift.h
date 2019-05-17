@@ -5,7 +5,8 @@
 using namespace std;
 
 
-class Shift{
+class Shift
+{
  private:
   unsigned int busLineId;
   unsigned int driverId;  

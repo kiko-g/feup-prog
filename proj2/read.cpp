@@ -1,26 +1,7 @@
 //Read and organize the contents of the text files
 #include "defs.h"
-
 using namespace std;
 
-int numberOf(string fileName)
-{
-    reset_pathToFile();
-    pathToFile = pathToFile + fileName;
-    string line;
-    // N represents the of and occurance in a file (number of clients, for instance)
-    int N = 0;
-    ifstream fin;
-    fin.open(pathToFile);
-    while (!fin.eof())
-    {
-        getline(fin, line);
-        if (line == limit) N++;
-        if (line == "") continue;
-    }
-
-    return N;
-}
 
 // ======================================
 // ======================================
@@ -125,18 +106,18 @@ vector<string> readPacks(string packs_file_str)
 vector<Client> decomposeClients(vector<string> rawCL, string filename)
 {
     vector<Client> CL;
-    int i=0, client_number = numberOf(filename);
+    int i=0;
     vector<string> divPK;       // DIVIDING PACKS STRING INTO A VECTOR OF PACK NUMBERS OF STRING TYPE
 
     string name; // name of the client
     int VATnumber; // VAT number of client
     int familySize;  // number of family members
     Address address; // client's address
-    vector<unsigned int> packets; // vector to store client's packets bought
+    vector<unsigned int> packs; // vector to store client's packs bought
     int totalPurchased; // total value spent by the client
 
     // 6*i helps us advance to the correct client info
-    while(i < client_number)
+    while (i < numberOf(filename))
     {
         
         name = (rawCL.at(0 + 6*i));                 // PART 1
@@ -151,10 +132,10 @@ vector<Client> decomposeClients(vector<string> rawCL, string filename)
         for(int j = 0; j < divPK.size(); j++)
         {
             stoint(divPK.at(j), value_pk);
-            packets.push_back(value_pk);
+            packs.push_back(value_pk);
         }
         
-        Client c(name, VATnumber, familySize, address, packets, 0);
+        Client c(name, VATnumber, familySize, address, packs, 0);
         CL.push_back(c);
         i++;
     }
@@ -164,21 +145,21 @@ vector<Client> decomposeClients(vector<string> rawCL, string filename)
 // ======================================
 // ======================================
 
-vector<Packet> decomposePacks(vector<string> rawPK, string filename)
+vector<Pack> decomposePacks(vector<string> rawPK, string filename)
 {
-    int i=0, pack_number = numberOf(filename);
-    vector<Packet> PK;
+    int i=0;
+    vector<Pack> PK;
     vector<string> divSITES; 
     vector<string> divDATE;       // DIVIDING PACKS STRING INTO A VECTOR OF PACK NUMBERS OF STRING TYPE
 
-    unsigned id; // packet unique identifier
+    unsigned id; // pack unique identifier
     vector<string> sites; // touristic sites to visit
     double pricePerPerson; // price per person
     unsigned maxPersons;
     unsigned nrSold;
 
     // 8*i helps us advance to the correct client info
-    while(i < pack_number)
+    while (i < numberOf(filename))
     {
         int id;
         stoint(rawPK.at(1 + 8*i), id);                     //PART 1
@@ -208,7 +189,7 @@ vector<Packet> decomposePacks(vector<string> rawPK, string filename)
         maxPersons = stoi(rawPK.at(6 + 8*i));               // PART 6
         nrSold = stoi(rawPK.at(7 + 8*i));                   // PART 7
 
-        Packet p(id, sites, begin, end, pricePerPerson, maxPersons, nrSold);
+        Pack p(id, sites, begin, end, pricePerPerson, maxPersons, nrSold);
         PK.push_back(p);
         i++;
     }
@@ -229,8 +210,30 @@ Address string_to_adress(string address_str)
     street = divAD.at(0);             // 4.0
     stoint(divAD.at(1), doorNumber);  // 4.1
     Floor = divAD.at(2);              // 4.2
-    postalCode = divAD.at(3);                 // 4.3
+    postalCode = divAD.at(3);         // 4.3
     location = divAD.at(4);           // 4.4
     Address address(street, doorNumber, Floor, postalCode, location);
     return address;
+}
+
+
+// INDICATES AN AMOUNT OF SOMETHING (FOR INSTANCE NUMBER OF CLIENTS)
+// USES THE LIMIT STRING "::::::::::"
+int numberOf(string fileName)
+{
+    reset_pathToFile();
+    pathToFile = pathToFile + fileName;
+    string line;
+    // N represents the of and occurance in a file (number of clients, for instance)
+    int N = 0;
+    ifstream fin;
+    fin.open(pathToFile);
+    while (!fin.eof())
+    {
+        getline(fin, line);
+        if (line == limit) N++;
+        if (line == "") continue;
+    }
+
+    return N;
 }

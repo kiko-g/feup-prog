@@ -7,7 +7,6 @@ using namespace std;
 // ADD CLIENT
 void addClient(Agency agency)
 {
-
     bool valid = false;
     cout << "Adding Client" << "\n\n";
     
@@ -21,7 +20,7 @@ void addClient(Agency agency)
     string postalCode; // postal code
     string location; // site
 
-    vector<unsigned int> packets; // vector to store client's packets bought
+    vector<unsigned int> packs; // vector to store client's packs bought
     unsigned  totalPurchased; // total value spent by the client
     while(!valid)
     {
@@ -47,14 +46,14 @@ void addClient(Agency agency)
             if(j!=0) packstring << divider;
             j++;
             cout << "Pack " << j << ": "; cin >> packn; 
-            packets.push_back(packn);
+            packs.push_back(packn);
             if(!cin.eof()) packstring << packn;
         }
         valid = true;
     }
     
     Address address(street, doorNumber, Floor, postalCode, location);
-    Client c(name, VATnumber, familySize, address, packets, 0);
+    Client c(name, VATnumber, familySize, address, packs, 0);
     agency.addClients(c);
     cout << "Client successfully added.\n"; 
 }
@@ -70,7 +69,7 @@ void changeClientName(Agency agency)
     cout << "\nNew name: "; readline(new_name);
     cout << "\n\n==== SEARCH ====\n";
     //decide_search(); ---> soon 
-    vpos = searchClientName(CL); 
+    vpos = searchClientName(agency->clients);
     //
     for (int j = 0; j < vpos.size(); j++)
     {

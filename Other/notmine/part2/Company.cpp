@@ -128,7 +128,7 @@ Company::Company(string name, string linesFile, string driversFile) {
 }
 
 ////////////////////////////////
-// metodos get
+//        metodos get
 ///////////////////////////////
 string Company::getName() const {
 	return name;
@@ -336,7 +336,6 @@ int Company::searchDriverIdentifier(unsigned int id) const
 			found = i;
 			break;
 		}
-
 	return found;
 }
 
