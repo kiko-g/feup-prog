@@ -7,18 +7,18 @@
 
 using namespace std;
 
-class Packet
+class Pack
 {
  private:
-  unsigned id; // packet unique identifier
+  unsigned id; // pack unique identifier
   vector<string> sites; // touristic sites to visit
   Date begin;  // begin date
   Date end;  // end date
   double pricePerPerson; // price per person
-  unsigned maxPersons; // number of persons still available in the packet (updated whenever the packet is sold to a new client)
+  unsigned maxPersons; // number of persons still available in the pack (updated whenever the pack is sold to a new client)
   unsigned nrSold;
  public:
-  Packet(unsigned int id, vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned maxPersons,unsigned nrSold);
+  Pack(unsigned int id, vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned maxPersons,unsigned nrSold);
 
   // GET methods
   unsigned getId() const;
@@ -40,5 +40,5 @@ class Packet
 
   // other methods
 
-  friend ostream& operator<<(ostream& out, const Packet & packet);
+  friend ostream& operator<<(ostream& out, const Pack & pack);
 };

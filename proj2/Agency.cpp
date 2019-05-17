@@ -12,7 +12,7 @@ Agency::Agency(string agency_file_str)
     packContent = readPacks(agencyContent[5]);
 
     vector<Client> clients = decomposeClients(clientContent, agencyContent[4]);
-    vector<Packet> packets = decomposePacks(packContent, agencyContent[5]);
+    vector<Pack> packs = decomposePacks(packContent, agencyContent[5]);
 
     this->setName(agencyContent[0]);
     int VATnr;
@@ -21,7 +21,7 @@ Agency::Agency(string agency_file_str)
 
     string street; // street name
     unsigned short doorNumber; // door number
-    string Floor; // Floor number ("-" is not applicable)
+    string Floor; // Floor number ("-" means not applicable)
     string postalCode; // postal code
     string location; // site
 
@@ -31,16 +31,16 @@ Agency::Agency(string agency_file_str)
     this->setURL(agencyContent[3]);
 
     this->setClients(clients);
-    this->setPackets(packets);
+    this->setPacks(packs);
 
     this->clientsInfoHasChanged = false;
-    this->packetsInfoHasChanged = false;
+    this->packsInfoHasChanged = false;
 
     //this->maxClientsId = max_clients_id;
-    //this->maxPacketsId = maxPackets_id;
+    //this->maxPacksId = maxPacks_id;
 }
 
-  // metodos GET
+// metodos GET
 string Agency::getName() const
 {
     return this->name;    
@@ -66,9 +66,9 @@ vector<Client> Agency::getClients() const
     return this->clients;  
 }
 
-vector<Packet> Agency::getPackets() const
+vector<Pack> Agency::getPacks() const
 {
-    return this->packets; 
+    return this->packs; 
 }
 
   
@@ -79,22 +79,22 @@ void Agency::setName(string name)
     this->name = name;  
 }
 
-void Agency::setVATnumber(unsigned VATnumber){
-  
-  if(VATnumber > 999999999 || VATnumber < 100000000)
-  {
-    cout << "Invalid Agency VAT Number";
-    exit(1); 
-  }
-  else
-  {
-    this->VATnumber = VATnumber;
-  }
+void Agency::setVATnumber(unsigned VATnumber)
+{  
+    if(VATnumber > 999999999 || VATnumber < 100000000)
+    {
+        cout << "Invalid Agency VAT Number";
+        exit(1); 
+    }
+    else
+    {
+        this->VATnumber = VATnumber;
+    }
 }
 
 void Agency::setAddress(Address address)
 {
-    this->address = address; 
+    this->address = address;
 }
 
 void Agency::setURL(string url)
@@ -107,26 +107,71 @@ void Agency::setClients(vector<Client> & clients)
     this->clients = clients; 
 }
 
-void Agency::setPackets(vector<Packet> & packets)
+void Agency::setPacks(vector<Pack> & packs)
 {
-  this->packets = packets;
+  this->packs = packs;
 }
 
-void Agency::addClients(Client client){
-  this->clients.push_back(client);
-  this->clientsInfoHasChanged = true;
+void Agency::addClients(Client client)
+{
+    this->clients.push_back(client);
+    this->clientsInfoHasChanged = true;
 }
-void Agency::addPackets(Packet packet){
-   this->packets.push_back(packet);
-   this->packetsInfoHasChanged = true;
+void Agency::addPacks(Pack Pack)
+{
+   this->packs.push_back(Pack);
+   this->packsInfoHasChanged = true;
 }
+
+// ==== SEARCH ====
+vector<int> Agency::searchClientName(string inputname)
+{
+    vector<int> found;
+    found.push_back(-1);
+    while (found.at(0) == -1)
+    {
+        for (int j = 0; j < clients.size(); j++)
+        {
+            if (clients.at(j).getName().find(inputname) != string::npos)
+            {
+                if (found.at(0) == -1) found.at(0) = j;
+                else found.push_back(j);
+            }
+        }
+
+        if (found.at(0) == -1)
+            cout << "There isn't a client with that name.\nTry again.";
+    }
+    return found;
+}
+
+int Agency::searchClientNIF(int NIF)
+{
+    int NIF;
+    int found = -1;
+    while(found == -1)
+    {
+        for(int i=0; i < clients.size(); i++)
+        {
+           if(NIF == clients.at(i).getVATnumber()) 
+           {
+              found = i;
+              break;
+           }
+        }
+        if(found == -1) cout << "There isn't a client with that VAT number. Try again";
+    }
+    return found;    
+}
+
+
 
 /*********************************
  * Mostrar Loja
  ********************************/  
 
 // mostra o conteudo de uma agencia
-ostream& operator<<(ostream& out, const Agency & agency)
+ostream& operator<<(ostream &out, const Agency &agency)
 {
     //A IMPLEMENTATION REQUIRED 
 }

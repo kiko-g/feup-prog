@@ -1,12 +1,11 @@
 #pragma once
-
 #include <vector>
-
 #include "Shift.h"
 
 using namespace std;
 
-class Bus{
+class Bus
+{
  private:
   unsigned int orderInLine;
   unsigned int driverId;
@@ -14,7 +13,7 @@ class Bus{
   vector<Shift> schedule;
  public:
   Bus(unsigned int order, unsigned int driver, unsigned int line);
-  Bus(unsigned int order, unsigned int line);
+  Bus(unsigned int order, unsigned int line);   
   // get methods
   unsigned int getBusOrderInLine() const;
   unsigned int getDriverId() const;

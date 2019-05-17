@@ -1,55 +1,24 @@
-#include "myLib.h"
+#include "defs.h"
 
 //Consider there are not equal names
-vector<int> searchClientName(vector<Client> CL)
+vector<int> searchClientName(Agency agency)
 {
     string input_name;
-    vector<int> found; 
-    found.push_back(-1);
-    while(found.at(0) == -1)
-    {
-        cout << "\nInput name: "; readline(input_name);
-        for(int j=0; j < CL.size(); j++)
-        {
-            if(CL.at(j).name.find(input_name) != string::npos)
-            {
-                if(found.at(0) == -1) found.at(0) = j;
-                else found.push_back(j);
-           }
-        }
-
-        if(found.at(0) == -1) cout << "There isn't a client with that name.\nTry again";
-    }
-
-    return found;
+    cout << "\nSearching client name\nInput name: "; readline(input_name);
+    return agency.searchClientName(input_name);
 }
 
-int searchClientNIF(vector<Client> CL)
+int searchClientNIF(Agency agency)
 {
     string NIF_str;
-    int NIF, found = -1;
-    while(found == -1)
+    int NIF;
+    cout << "\nInput NIF: "; readline(NIF_str);
+    while((stoint(NIF_str, NIF) != 0))
     {
-        cout << "\nInput NIF: "; readline(NIF_str);
-        while((stoint(NIF_str, NIF) != 0))
-        {
-            cout << "Try again. Just numbers, please: ";
-            readline(NIF_str);
-        }
-
-        for(int i=0; i < CL.size(); i++)
-        {
-           if(NIF == CL.at(i).NIF) 
-           {
-              found = i;
-              break;
-           }
-        }
-
-        if(found == -1) cout << "There isn't a client with that NIF. Try again";
+        cout << "Try again. Just numbers, please: ";
+        readline(NIF_str);
     }
-
-    return found;
+    agency.searchClientNIF(NIF);
 }
 
 
@@ -84,23 +53,23 @@ int searchPackID(vector<Pack> PK)
 
 void printClient(vector<Client> CL, int i)
 {
-    string div = " | ";
+    string divi = " | ";
     cout << "==== CLIENT " << i << " =====\n";
     cout << left << setw(20) << "Name: " << CL.at(i).name << "\n";
     cout << left << setw(20) << "NIF: " << CL.at(i).NIF << "\n";
     cout << left << setw(20) << "Ppl in FamAgr: " << CL.at(i).nFamAgr << "\n";
     cout << left << setw(20) << "Address: " << CL.at(i).address.street
-         << div  << CL.at(i).address.doorNumber
-         << div  << CL.at(i).address.floor
-         << div  << CL.at(i).address.CP
-         << div  << CL.at(i).address.location << "\n";
+         << divi  << CL.at(i).address.doorNumber
+         << divi  << CL.at(i).address.floor
+         << divi  << CL.at(i).address.CP
+         << divi  << CL.at(i).address.location << "\n";
     cout << left << setw(20) << "Packs bought: " << CL.at(i).packs_str << "\n\n\n";
 }
 
 void printAllClients(vector<Client> CL)
 {
     clearScreen();
-    string div = " | ";
+    string divi = " | ";
     cout << "LISTING CLIENTS\n\n";
     for(int i=0; i<CL.size(); i++)
     {
@@ -109,10 +78,10 @@ void printAllClients(vector<Client> CL)
         cout << left << setw(20) << "NIF: " << CL.at(i).NIF << "\n";
         cout << left << setw(20) << "Ppl in FamAgr: " << CL.at(i).nFamAgr << "\n";
         cout << left << setw(20) << "Address: " << CL.at(i).address.street
-             << div  << CL.at(i).address.doorNumber
-             << div  << CL.at(i).address.floor
-             << div  << CL.at(i).address.CP
-             << div  << CL.at(i).address.location << "\n";
+             << divi  << CL.at(i).address.doorNumber
+             << divi  << CL.at(i).address.floor
+             << divi  << CL.at(i).address.CP
+             << divi  << CL.at(i).address.location << "\n";
         cout << left << setw(20) << "Packs bought: " << CL.at(i).packs_str << "\n\n\n";
     }
 }
@@ -120,7 +89,7 @@ void printAllClients(vector<Client> CL)
 void printAllPacks(vector<Pack> PK)
 {
     clearScreen();
-    string div = " | ";
+    string divi = " | ";
     cout << "LISTING PACKS\n\n";
     for (int i = 0; i < PK.size(); i++)
     {

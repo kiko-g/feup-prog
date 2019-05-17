@@ -60,7 +60,7 @@ void mainUserInterface(Company &company)
 }
 
 /*
-Sub-interface dedicada a gestão de condutores. Apresenta as funcionalidades disponiveis, recebe a escolha
+Sub-interface dedicada a gestï¿½o de condutores. Apresenta as funcionalidades disponiveis, recebe a escolha
 do utilizador e inicializa a funcao pedida
 */
 void driversInterface(Company &company)
@@ -69,7 +69,6 @@ void driversInterface(Company &company)
 
 	while (anotherOp)
 	{
-
 		int userChoice;
 
 		cout << "Gestao de condutores" << endl;
@@ -117,7 +116,7 @@ void infoInterface(Company &company)
 
 		int userChoice;
 
-		cout << "Visualizaçao de informacao" << endl;
+		cout << "Visualizaï¿½ao de informacao" << endl;
 		cout << "Funcionalidades disponiveis" << endl << endl;
 		cout << "1 - Horario de uma paragem" << endl;
 		cout << "2 - Horario de uma linha " << endl;

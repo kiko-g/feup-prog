@@ -5,7 +5,8 @@
 
 bool shiftSortHelper(const Shift &x, const Shift &y);
 
-Bus::Bus(unsigned int order, unsigned int driver, unsigned int line) {
+Bus::Bus(unsigned int order, unsigned int driver, unsigned int line)
+{
 
 	lineId = line;
 	driverId = driver;
@@ -77,7 +78,6 @@ Adiciona um turno ao autocarro e garante que o vetor fica ordenado.
 void Bus::addShift(Shift s)
 {
 	schedule.push_back(s);
-
 	sort(schedule.begin(), schedule.end(), shiftSortHelper);
 }
 
