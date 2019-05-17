@@ -1,6 +1,7 @@
 #include "Agency.h"
 #include "defs.h"
 
+
 Agency::Agency(string agency_file_str)
 {
     vector<string> agencyContent;
@@ -35,8 +36,8 @@ Agency::Agency(string agency_file_str)
     this->clientsInfoHasChanged = false;
     this->packsInfoHasChanged = false;
 
-    //this->maxClientsId = max_clients_id;
-    //this->maxPacksId = maxPacks_id;
+    this->maxClientsId = 0;//max_clients_id;
+    this->maxPacksId = 0; //maxPacks_id;
 }
 
 // metodos GET
@@ -118,7 +119,7 @@ void Agency::addClients(Client client)
     this->clientsInfoHasChanged = true;
 }
 
-void Agency::addPacks(Pack Pack)
+void Agency::addPacks(Pack pack)
 {
    this->packs.push_back(pack);
    this->packsInfoHasChanged = true;
@@ -183,8 +184,20 @@ int Agency::searchClientNIF(int NIF)
 //==========================
 void Agency::changeClientName(vector<int> c_list, string new_name)
 {
+    // DEC_WHICH ---> DECISE WHICH OF THE FOUND CLIENTS (IN vpos)
+    int pos, dec_which;
+    vector<int> vpos;
+    cout << "\n\n==== SEARCH CLIENT NAME ====\n";
+    //decide_search(); ---> soon
+    vpos = searchClientName();
+    for (int j = 0; j < vpos.size(); j++)
+    {
+        cout << clients.at(vpos.at(j)).getName() << "\n";
+    }
     cout << "\nSelect which client's name you wish to change\n";
-    int dec_which = validateInterfaceInput(1, c_list.size());
+    dec_which = validateInterfaceInput(1, vpos.size());
+    //
+    clients.at(vpos.at(dec_which - 1)).getName() = new_name;
 
     for (int j = 0; j < c_list.size(); j++)
         cout << clients.at(c_list.at(j)).getName() << "\n";
