@@ -136,7 +136,9 @@ void Agency::rmPacks(int packPos)
     this->packsInfoHasChanged = true;
 }
 
+//=================
 // ==== SEARCH ====
+//=================
 vector<int> Agency::searchClientName(string inputname)
 {
     vector<int> found;
@@ -172,30 +174,52 @@ int Agency::searchClientNIF(int NIF)
               break;
            }
         }
-        if(found == -1) cout << "There isn't a client with that VAT number. Try again";
+        if(found == -1) cout << "There isn't a client with that VAT/NIF number. Try again";
     }
-    return found;    
+    return found;
 }
 
+//==========================
 // ==== EDIT AND CHANGE ====
-void Agency::changeClientName(string new_name)
+//==========================
+void Agency::changeClientName(vector<int> c_list, string new_name)
 {
-    // DEC_WHICH ---> DECISE WHICH OF THE FOUND CLIENTS (IN vpos)
-    int pos, dec_which;
-    vector<int> vpos;
-    cout << "\n\n==== SEARCH CLIENT NAME ====\n";
-    //decide_search(); ---> soon
-    vpos = searchClientName();
-    for (int j = 0; j < vpos.size(); j++)
-    {
-        cout << clients.at(vpos.at(j)).name << "\n";
-    }
     cout << "\nSelect which client's name you wish to change\n";
-    dec_which = validateInterfaceInput(1, vpos.size());
-    //
-    clients.at(vpos.at(dec_which - 1)).name = new_name;
+    int dec_which = validateInterfaceInput(1, c_list.size());
 
+    for (int j = 0; j < c_list.size(); j++)
+        cout << clients.at(c_list.at(j)).getName() << "\n";
+    
+    clients.at(c_list.at(dec_which - 1)).setName(new_name);
 }
+
+void Agency::changeClientNIF(vector<int> c_list, int NIF)
+{
+    int dec_which;
+    cout << "\nSelect which client's NIF you wish to change\n";
+    dec_which = validateInterfaceInput(1, c_list.size());
+    for (int j = 0; j < c_list.size(); j++)
+       cout << clients.at(c_list.at(j)).getName() << " | NIF: "
+            << clients.at(c_list.at(j)).getVATnumber() << "\n";
+
+    clients.at(c_list.at(dec_which - 1)).setVATnumber(NIF);
+}
+
+void Agency::changeClientFAM(vector<int> c_list, int familyPeopleNr)
+{
+    int dec_which;
+    for (int j=0; j < c_list.size(); j++)
+      cout << clients.at(c_list.at(j)).getName() << " | N FAM AGR: " << clients.at(c_list.at(j)).getFamilySize() << "\n";
+
+    cout << "\nSelect which client's Family Agregate Number you wish to change\n";
+    dec_which = validateInterfaceInput(1, c_list.size());
+    clients.at(c_list.at(dec_which - 1)).setFamilySize(familyPeopleNr);
+}
+
+    
+
+
+
 
 
 //OTHER

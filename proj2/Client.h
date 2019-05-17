@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
 #include "Pack.h"
 #include "Address.h"
 using namespace std;
@@ -11,16 +10,15 @@ class Client
 {
  private:
   string name; // name of the client
-  unsigned VATnumber; // VAT number of client
+  unsigned VATnumber; // VAT number of client aka NIF
   unsigned short familySize;  // number of family members
   Address address; // client's address
-  string packs_str; //string containing packs separated with " ; "
   vector<unsigned int> packs; // vector to store client's packs bought
   unsigned  totalPurchased; // total value spent by the client
 
  public:
   Client(string name, unsigned VATnumber, unsigned short familySize, Address address);  // for a new client
-  Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<unsigned int> & packs, string packs_str, unsigned totalPurchased);  // client read from file
+  Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<unsigned int> & packs, unsigned totalPurchased);  // client read from file
 
     // GET methods
     string getName() const;

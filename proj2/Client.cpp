@@ -39,7 +39,7 @@ unsigned Client::getTotalPurchased() const
   
 
 //===== metodos SET =====
-void Client::setName(string nome)
+void Client::setName(string name)
 { this->name = name; }
 
 void Client::setVATnumber(unsigned VATnumber)
