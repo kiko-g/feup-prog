@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "defs.h"
 #include "Address.h"
 #include "Client.h"
 #include "Pack.h"
@@ -45,9 +44,9 @@ class Agency
   
   // EDIT METHODS
   void addClients(Client client);
-  void addPackets(Packet packet);
+  void addPacks(Pack pack);
   void rmClients(int clientPos);
-  void rmPackets(int packetPos);
+  void rmPacks(int packetPos);
   // other methods */
   
   vector<int> searchClientName(string name);

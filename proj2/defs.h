@@ -6,10 +6,6 @@
 #include <fstream>
 #include <limits>
 #include "Agency.h"
-#include "Client.h"
-#include "Date.h"
-#include "Pack.h"
-#include "Address.h"
 using namespace std;
 //DEFINITIONS AND MAIN LIB FOR HELPFUL FUNCTIONS
 
@@ -23,7 +19,7 @@ string pathToFile = "textfiles/";
 string limit = "::::::::::";
 const string AGENCY_FILE_NAME = "agency.txt";
 string CLIENTS_FILE_NAME;
-string PACKSS_FILE_NAME;
+string PACKS_FILE_NAME;
 
 // INSIDE READ.CPP ----> READING AND ORGANIZING
 vector<string> readAgency(string agency_file_str);

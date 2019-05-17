@@ -21,7 +21,7 @@ int searchClientNIF(Agency agency)
     agency.searchClientNIF(NIF);
 }
 
-
+/*
 //use with if( f() != -1 )
 int searchPackID(vector<Pack> PK)
 {
@@ -103,3 +103,4 @@ void printAllPacks(vector<Pack> PK)
         cout << left << setw(25) << "Sold Seats: "          << PK.at(i).price_pp << "\n\n\n";
     }
 }
+*/

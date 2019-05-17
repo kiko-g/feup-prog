@@ -6,7 +6,6 @@ Agency::Agency(string agency_file_str)
     vector<string> agencyContent;
     vector<string> clientContent;
     vector<string> packContent;
-    
     agencyContent = readAgency(agency_file_str);
     clientContent = readClients(agencyContent[4]);
     packContent = readPacks(agencyContent[5]);
@@ -117,9 +116,9 @@ void Agency::addClients(Client client)
     this->clients.push_back(client);
     this->clientsInfoHasChanged = true;
 }
-void Agency::addPacks(Pack Pack)
+void Agency::addPacks(Pack pack)
 {
-   this->packs.push_back(Pack);
+   this->packs.push_back(pack);
    this->packsInfoHasChanged = true;
 }
 
@@ -127,9 +126,9 @@ void Agency::rmClients(int clientPos){
   this->clients.erase(this->clients.begin()+clientPos);
   this->clientsInfoHasChanged = true;
 }
-void Agency::rmPackets(int packetPos){
-   this->packets.erase(this->packets.begin()+packetPos);
-   this->packetsInfoHasChanged = true;
+void Agency::rmPacks(int packPos){
+   this->packs.erase(this->packs.begin()+packPos);
+   this->packsInfoHasChanged = true;
 }
 
 // ==== SEARCH ====
