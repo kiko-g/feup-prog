@@ -70,8 +70,19 @@ vector<Pack> Agency::getPacks() const
     return this->packs; 
 }
 
-  
-// SET Methods
+bool Agency::getClientsIHC() const
+{
+    return this->clientsInfoHasChanged;
+}
+
+bool Agency::getPacksIHC() const
+{
+    return this->packsInfoHasChanged;
+}
+
+
+
+// SET METHODS
 void Agency::setName(string name)
 {
     this->name = name;  
@@ -111,6 +122,31 @@ void Agency::setPacks(vector<Pack> & packs)
 }
 
 
+//SAVING FILES METHODS
+void Agency::saveClientsInfo(string filename)
+{
+    ofstream fout;
+    fout.open(PATH_TO_DATA + filename);
+
+    for (int i=0; i < clients.size(); i++)
+    fout << clients.at(i);
+
+    fout.close();
+}
+
+void Agency::savePacksInfo(string filename)
+{
+    ofstream fout;
+    fout.open(PATH_TO_DATA + filename);
+    // ID OF THE LAST PACK TO BE ADDED ON THE TOP OF THE FILE 
+    fout << packs.at(packs.size()-1).getId() << "\n"; 
+
+    for (int i=0; i < packs.size(); i++)
+        fout << packs.at(i);
+
+    fout.close();
+}
+
 // OTHER METHODS
 void Agency::addClients(Client client)
 {
@@ -129,24 +165,24 @@ void Agency::rmClients(int clientPos)
     this->clients.erase(this->clients.begin()+clientPos);
     this->clientsInfoHasChanged = true;
 }
+
 void Agency::rmPacks(int packPos)
 {
     this->packs.erase(this->packs.begin()+packPos);
     this->packsInfoHasChanged = true;
 }
-void Agency::printAllClients(){
+
+void Agency::printAllClients()
+{
     for (size_t i = 0; i < this->clients.size(); i++)
-    {
-        cout << this->clients.at(i);
-    }
-    
+        cout << this->clients.at(i);  
 }
-void Agency::printAllPacks(){
+void Agency::printAllPacks()
+{
     for (size_t i = 0; i < this->packs.size(); i++)
     {
         cout << this->packs.at(i);
     }
-    
 }
 
 
@@ -155,11 +191,12 @@ void Agency::printAllPacks(){
  ********************************/  
 
 // mostra o conteudo de uma agencia
-ostream& operator<<(ostream& out, const Agency & agency){
+ostream& operator<<(ostream& out, const Agency & agency)
+{
+    out << agency.name << endl
+        << agency.VATnumber << endl
+        << agency.URL << endl
+        << agency.address << endl;
 
-  cout << agency.name << endl
-       << agency.VATnumber << endl
-       << agency.URL << endl
-       << agency.address << endl;
-
+    return out;
 }

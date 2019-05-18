@@ -3,7 +3,6 @@
 #include <fstream>
 #include <vector>
 #include "defs.h"
-
 #include "classes/Address.h"
 
 using namespace std;

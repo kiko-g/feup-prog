@@ -160,7 +160,8 @@ vector<Pack> decomposePacks(vector<string> rawPK, string filename)
         stoint(rawPK.at(0 + offset), id);                     //PART 1
         divSITES = strtok_cpp(rawPK.at(1 + offset), " - ");   //PART 2
         sites.push_back(divSITES.at(0));
-        if(divSITES.size()>1){
+        if(divSITES.size()>1)
+        {
             divSITES = strtok_cpp(divSITES.at(1), ", ");       //PART 2
             for (size_t i = 0; i < divSITES.size(); i++)
             {

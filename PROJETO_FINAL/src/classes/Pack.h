@@ -42,6 +42,5 @@ class Pack
   void setNrSold(unsigned nrSold);
 
   // other methods
-
   friend ostream& operator<<(ostream& out, const Pack & pack);
 };

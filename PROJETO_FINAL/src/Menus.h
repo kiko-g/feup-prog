@@ -4,11 +4,11 @@
 #include "defs.h"
 
 #ifdef _WIN64
-#define clearScreenTemp() system("clear");
-#elif _WIN32
-#define clearScreenTemp() system("clear");
-#else
 #define clearScreenTemp() system("cls");
+#elif _WIN32
+#define clearScreenTemp() system("cls");
+#else
+#define clearScreenTemp() system("clear");
 #endif
 
 unsigned mainMenu(Agency agency);

@@ -1,10 +1,9 @@
-/*#include "defs.h"
+#include "defs.h"
 #include "writeFiles.h"
-
-void write_clients(vector<Client> list, string filename)
+/*
+void write_clients(Agency agency, string filename)
 {
     ofstream fout;
-
     fout.open(PATH_TO_DATA+filename);
 
     for (int i = 0; i < list.size(); i++)
@@ -45,5 +44,4 @@ void write_packs(vector<Pack> list, string filename)
         fout << limit;
     }
     fout.close();
-}
-*/
+}*/

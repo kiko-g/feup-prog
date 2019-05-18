@@ -90,16 +90,16 @@ void Client::setTotalPurchased(unsigned totalPurchased)
 // ===== OTHER METHODS =====
 ostream& operator<<(ostream& out, const Client & client)
 {
-      cout << client.name << endl
-       << client.VATnumber << endl
-       << client.familySize << endl
-       << client.address << endl;
+    out << client.name       << endl   
+        << client.VATnumber  << endl
+        << client.familySize << endl
+        << client.address    << endl;
     for (size_t i = 0; i < client.packs.size(); i++)
     {
-        cout << client.packs.at(i);
-        if(i != client.packs.size()-1) cout << " ; ";
+        out << client.packs.at(i);
+        if(i != client.packs.size()-1) out << " ; ";
         
     }
-    cout << endl
-    << LIMIT_STRING <<endl;
+    out << endl << LIMIT_STRING << endl;
+    return out;
 }

@@ -40,14 +40,16 @@ class Agency
   string getURL() const;
   vector<Client> getClients() const;
   vector<Pack> getPacks() const;
+  bool getClientsIHC() const; //IHC = Info Has Changed
+  bool getPacksIHC() const;   //IHC = Info Has Changed
 
-    // SET methods
+  // SET methods
   void setName(string name);
   void setVATnumber(unsigned VATnumber);
   void setAddress(Address address);
   void setURL(string url);
-  void setClients(vector<Client> & clients);
-  void setPacks(vector<Pack> & packs);
+  void setClients(vector<Client> &clients);
+  void setPacks(vector<Pack> &packs);
   
   // EDIT METHODS
   void addClients(Client client);
@@ -56,6 +58,11 @@ class Agency
   void rmPacks(int packPos);
   void printAllClients();
   void printAllPacks();
+
+  // SAVING FILES METHODS
+  void saveClientsInfo(string filename);
+  void savePacksInfo(string filename);
+
   // other methods */
   
   friend ostream& operator<<(ostream& out, const Agency & agency);
