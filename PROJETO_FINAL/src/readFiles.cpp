@@ -107,22 +107,22 @@ vector<Client> decomposeClients(vector<string> rawCL, string filename)
     string name; // name of the client
     int VATnumber; // VAT number of client
     int familySize;  // number of family members
-    Address address; // client's address
-    vector<unsigned int> packs; // vector to store client's packs bought
+    Address address; // client's adayress
     int totalPurchased; // total value spent by the client
 
     // 6*i helps us advance to the correct client info
     int nrClients = numberOf(filename);
     while (i < nrClients)
     {
-        
-        name = (rawCL.at(0 + 6*i));                   // PART 1
-        stoint(rawCL.at(1 + 6*i), VATnumber);         // PART 2
-        stoint(rawCL.at(2 + 6*i), familySize);        // PART 3
+        int offset = 6*i;
+        vector<unsigned int> packs;
+        name = (rawCL.at(0 + offset));                   // PART 1
+        stoint(rawCL.at(1 + offset), VATnumber);         // PART 2
+        stoint(rawCL.at(2 + offset), familySize);        // PART 3
         // PART 4
-        Address address = string_to_address(rawCL.at(3 + 6*i));
+        Address address = string_to_address(rawCL.at(3 + offset));
         // PART 5
-        divPK = strtok_cpp(rawCL.at(4 + 6*i), " ; ");
+        divPK = strtok_cpp(rawCL.at(4 + offset), " ; ");
 
         int value_pk;
         for(int j = 0; j < divPK.size(); j++)
@@ -130,7 +130,6 @@ vector<Client> decomposeClients(vector<string> rawCL, string filename)
             stoint(divPK.at(j), value_pk);
             packs.push_back(value_pk);
         }
-        
         Client c(name, VATnumber, familySize, address, packs, 0);
         CL.push_back(c);
         i++;
@@ -147,12 +146,9 @@ vector<Pack> decomposePacks(vector<string> rawPK, string filename)
     vector<Pack> PK;
     vector<string> divSITES; 
     vector<string> divDATE;       // DIVIDING PACKS STRING INTO A VECTOR OF PACK NUMBERS OF STRING TYPE
-
-    unsigned id; // pack unique identifier
-    vector<string> sites; // touristic sites to visit
-    double pricePerPerson; // price per person
-    unsigned maxPersons;
-    unsigned nrSold;
+    int pricePerPerson; // price per person
+    int maxPersons;
+    int nrSold;
 
     // 8*i+1 helps us advance to the correct client info
     int nrPacks = numberOf(filename);
@@ -160,6 +156,7 @@ vector<Pack> decomposePacks(vector<string> rawPK, string filename)
     {
         int offset = 8*i+1;
         int id;
+        vector<string> sites;
         stoint(rawPK.at(0 + offset), id);                     //PART 1
         divSITES = strtok_cpp(rawPK.at(1 + offset), " - ");   //PART 2
         sites.push_back(divSITES.at(0));
@@ -171,22 +168,22 @@ vector<Pack> decomposePacks(vector<string> rawPK, string filename)
             }
         }   
         
-        int YY, MM, DD;
+        int year, month, day;
         divDATE = strtok_cpp(rawPK.at(2 + offset), "/");       //PART 3
-        stoint(divDATE.at(0), YY);
-        stoint(divDATE.at(1), MM);
-        stoint(divDATE.at(2), DD);
-        Date begin(DD, MM, YY);
+        stoint(divDATE.at(0), year);
+        stoint(divDATE.at(1), month);
+        stoint(divDATE.at(2), day);
+        Date begin(day, month, year);
 
         divDATE = strtok_cpp(rawPK.at(3 + offset), "/");       // PART 4
-        stoint(divDATE.at(0), YY);
-        stoint(divDATE.at(1), MM);
-        stoint(divDATE.at(2), DD);
-        Date end(DD, MM, YY);
+        stoint(divDATE.at(0), year);
+        stoint(divDATE.at(1), month);
+        stoint(divDATE.at(2), day);
+        Date end(day, month, year);
 
-        pricePerPerson = stoi(rawPK.at(4 + offset));           // PART 5
-        maxPersons = stoi(rawPK.at(5 + offset));               // PART 6
-        nrSold = stoi(rawPK.at(6 + offset));                   // PART 7
+        stoint(rawPK.at(4 + offset), pricePerPerson);           // PART 5
+        stoint(rawPK.at(5 + offset), maxPersons);               // PART 6
+        stoint(rawPK.at(6 + offset), nrSold);                   // PART 7
 
         Pack p(id, sites, begin, end, pricePerPerson, maxPersons, nrSold);
         PK.push_back(p);
