@@ -59,6 +59,6 @@ class Agency
   //OTHER
   int Agency::determineMoneySpentByClient(vector <unsigned int> packs_bought);
 
-  friend ostream& operator<<(ostream& out, const Agency & agency);
+  friend ostream& operator<<(ostream& out, const Agency &agency);
 
 };

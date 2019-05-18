@@ -205,6 +205,9 @@ void Agency::changeClientName(vector<int> c_list, string new_name)
     clients.at(c_list.at(dec_which - 1)).setName(new_name);
 }
 
+
+
+
 void Agency::changeClientNIF(vector<int> c_list, int NIF)
 {
     int dec_which;
@@ -216,6 +219,9 @@ void Agency::changeClientNIF(vector<int> c_list, int NIF)
 
     clients.at(c_list.at(dec_which - 1)).setVATnumber(NIF);
 }
+
+
+
 
 void Agency::changeClientFAM(vector<int> c_list, int familyPeopleNr)
 {
