@@ -1,4 +1,4 @@
-#include "defs.h"
+/*#include "defs.h"
 #include "writeFiles.h"
 
 void write_clients(vector<Client> list, string filename)
@@ -46,3 +46,4 @@ void write_packs(vector<Pack> list, string filename)
     }
     fout.close();
 }
+*/

@@ -73,17 +73,18 @@ void Client::setAddress(Address address)
 void Client::setPackList(vector<unsigned int> & packs)
 { this->packs = packs; } 
 
-unsigned Client::setTotalPurchased(unsigned totalPurchased)
+void Client::setTotalPurchased(unsigned totalPurchased)
 {  
     if(totalPurchased < 0)
     {
         cout << "Invalid client purchases";
-        exit(1); 
+        //return 0;
+        exit(1);
     }
     else
     {
         this->totalPurchased = totalPurchased;
-    } 
+    }
 }
 
 // ===== OTHER METHODS =====

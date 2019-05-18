@@ -1,18 +1,12 @@
 #include "Menus.h"
-
 //Definition of private functions
-void browsingInterface(Agency agency);
-void browseClientsInterface(Agency agency);
-void browsePacksInterface(Agency agency);
-void clearScreenTemp(int n);
-int validateInterfaceInput(int a, int b);
 
 unsigned mainMenu(Agency agency)
 {
 
     while(1)
     {
-        clearScreenTemp(50);
+        clearScreenTemp();
         cout << "============== AGENCY INFO ==============\n";
         cout << agency;
         cout << "=============== MAIN MENU ===============\n";
@@ -38,7 +32,7 @@ unsigned mainMenu(Agency agency)
             break;
 
          case 4:
-            clearScreenTemp(50);
+            clearScreenTemp();
             cout << "\nExited with success.\n\n";
             exit(1);
             break;
@@ -53,7 +47,7 @@ void browsingInterface(Agency agency)
     int input;
     while (1)
     {
-        clearScreenTemp(50);
+        clearScreenTemp();
         cout << "=========== BROWSING MENU ===========\n";
         cout << "| 1 - Clients\n";
         cout << "| 2 - Packs\n";
@@ -81,7 +75,7 @@ void browseClientsInterface(Agency agency)
     int input;
     while (1)
     {
-        clearScreenTemp(50);
+        clearScreenTemp();
         cout << "=== Client search engine options ===\n";
         cout << "| 1 - Name\n";
         cout << "| 2 - NIF\n";
@@ -129,7 +123,7 @@ void browsePacksInterface(Agency agency)
     int input;
     while (1)
     {
-        clearScreenTemp(50);
+        clearScreenTemp();
         cout << "=== Pack search engine options ===\n";
         cout << "| 1 - \n";
         cout << "| 2 - \n";
@@ -196,12 +190,3 @@ int validateInterfaceInput(int a, int b)
 	}
 	return n;
 }
-
-void clearScreenTemp(int n){
-    for (size_t i = 0; i < n; i++)
-    {
-        cout << endl;
-    }
-    
-}
-    

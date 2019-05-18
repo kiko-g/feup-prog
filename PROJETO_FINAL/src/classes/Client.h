@@ -36,7 +36,7 @@ class Client
     void setFamilySize(unsigned short familySize);
     void setAddress(Address address);
     void setPackList(vector<unsigned int> & packs);
-    unsigned setTotalPurchased(unsigned totalPurchased);
+    void setTotalPurchased(unsigned totalPurchased);
 
     // other methods
     friend ostream& operator<<(ostream& out, const Client & client);
