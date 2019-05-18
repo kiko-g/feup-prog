@@ -1,6 +1,6 @@
 #include "Pack.h"
 
-Pack::Pack(unsigned int id, vector<string> sites, Date inicio, Date fim, double precoPessoa, unsigned maxPessoas, unsigned nrSold){
+Pack::Pack(int id, vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned maxPersons, unsigned nrSold){
 
   this->setId(id);
   this->setSites(sites);
@@ -13,7 +13,7 @@ Pack::Pack(unsigned int id, vector<string> sites, Date inicio, Date fim, double 
 
   // metodos GET
 
-unsigned Pack::getId() const
+int Pack::getId() const
 {
   return this->id;
 }
@@ -50,7 +50,7 @@ unsigned Pack::getNrSold() const{
 
   // metodos SET
 
-void Pack::setId(unsigned id){
+void Pack::setId(int id){
   this->id = id;
 }
 
@@ -71,17 +71,17 @@ void Pack::setEndDate(Date end){
 
 void Pack::setPricePerPerson(double pricePerPerson){
 
-  this->pricePerPerson=pricePerPerson;
+  this->pricePerPerson = pricePerPerson;
 }
 
 void Pack::setMaxPersons(unsigned maxPersons){
 
-  this->maxPersons=maxPersons;
+  this->maxPersons = maxPersons;
 }
 
 void Pack::setNrSold(unsigned nrSold){
 
-  this->nrSold=nrSold;
+  this->nrSold = nrSold;
 }
 
 
@@ -91,6 +91,23 @@ void Pack::setNrSold(unsigned nrSold){
 
 // shows a Pack content 
 ostream& operator<<(ostream& out, const Pack & pack){
+        
+        cout << pack.id << endl 
+          << pack.sites.at(0) << " - ";
+    for (size_t i = 1; i < pack.sites.size(); i++)
+    {
+        cout << pack.sites.at(i);
+        if(i != pack.sites.size()-1) cout << ", ";
+         
+    }
+        cout << endl
+          << pack.begin << endl
+          << pack.end <<endl
+          << pack.pricePerPerson <<endl
+          << pack.maxPersons << endl
+          << pack.nrSold;
 
-  // REQUIRES IMPLEMENTATION
+    cout << endl
+    << LIMIT_STRING <<endl;
+
 }

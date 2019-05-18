@@ -55,6 +55,7 @@ class Agency
   void rmClients(int clientPos);
   void rmPacks(int packPos);
   void printAllClients();
+  void printAllPacks();
   // other methods */
   
   friend ostream& operator<<(ostream& out, const Agency & agency);

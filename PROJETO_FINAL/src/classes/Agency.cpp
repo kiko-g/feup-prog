@@ -141,6 +141,13 @@ void Agency::printAllClients(){
     }
     
 }
+void Agency::printAllPacks(){
+    for (size_t i = 0; i < this->packs.size(); i++)
+    {
+        cout << this->packs.at(i);
+    }
+    
+}
 
 
 /*********************************

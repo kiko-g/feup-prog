@@ -13,7 +13,7 @@ using namespace std;
 class Pack
 {
  private:
-  unsigned id; // pack unique identifier
+  int id; // pack unique identifier
   vector<string> sites; // touristic sites to visit
   Date begin;  // begin date
   Date end;  // end date
@@ -21,10 +21,10 @@ class Pack
   unsigned maxPersons; // number of persons still available in the pack (updated whenever the pack is sold to a new client)
   unsigned nrSold;
  public:
-  Pack(unsigned int id, vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned maxPersons,unsigned nrSold);
+  Pack(int id, vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned maxPersons,unsigned nrSold);
 
   // GET methods
-  unsigned getId() const;
+  int getId() const;
   vector<string> getSites() const;
   Date getBeginDate() const;
   Date getEndDate() const;
@@ -33,7 +33,7 @@ class Pack
   unsigned getNrSold() const;
 
   // SET methods
-  void setId(unsigned id);  // to set negatve if "deprecated"
+  void setId(int id);  // to set negatve if "deprecated"
   void setSites(vector<string> sites);
   void setBeginDate(Date begin);
   void setEndDate(Date end);
