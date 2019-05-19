@@ -65,6 +65,22 @@ string findPackLocation() // SIMPLE READ NAME
     return input_name;
 }
 
+string findPackSpecificLocations() // SIMPLE READ NAME
+{
+    int howmany; cout << "\nHow many specific locations will the pack have? --> ";
+    cin >> howmany;
+    string result, input_name;
+
+    if(howmany > 0) result = " - ";
+    else result = "";
+    for(int i=0; i<howmany; i++)
+    {
+        cout << "\nSPECIFIC sites\nName (site " << i << "): ";
+        readline(input_name);
+    }
+    return result
+}
+
 Date findPackDate(string which)
 { 
     Date DATE;

@@ -20,17 +20,17 @@ Luis Miguel Pereirea Afonso
 365087297
 3
 Avenida Costa Gomes | 105 | - | 1829-245 | Evora
-5 ; 11 ; 8
+5 ; 15 ; 8
 ::::::::::
 Jorge Adilson Tzavellas
 275979920
 5
 Rua Comendador Edmilson Nunes | 208 | 4Frt | 4100-276 | Porto
-10 ; 9 ; 1
+10 ; 9 ; 15
 ::::::::::
 Jorge Carlos Pires Carvalho
 185925916
 5
 Rua Comendador Edmilson Nunes | 206 | 2Dto | 4100-276 | Porto
-9 ; 3 ; 5
+9 ; 15 ; 5
 ::::::::::

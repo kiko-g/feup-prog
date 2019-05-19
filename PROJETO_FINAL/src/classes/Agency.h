@@ -40,6 +40,7 @@ class Agency
   vector<Pack> getPacks() const;
   bool getClientsIHC() const; //IHC = Info Has Changed
   bool getPacksIHC() const;   //IHC = Info Has Changed
+  vector<int> allPacksSold();
 
   // SET methods
   void setName(string name);

@@ -79,6 +79,31 @@ bool Agency::getPacksIHC() const
 }
 
 
+vector<int> Agency::allPacksSold()
+{
+    int cont=0;
+    vector<int> result;
+    result.push_back(-1);
+    for(int i=0; i<clients.size(); i++)
+    {
+        vector<unsigned> pkl = clients.at(i).getPackList();
+        for(int j=0; j<pkl.size(); j++)
+        {
+            for(int k=0; k<result.size(); k++)
+            {
+                cont = 0;
+                if(pkl.at(j) == result.at(k)) cont++;
+            }
+            if(result.at(0)==-1) result.at(0) = pkl.at(j)-1;
+            if(cont==0 && result.at(0)!=-1) result.push_back(pkl.at(j)-1);
+        }
+    }
+    cout << "\n\n=== ALL PACKS SOLD UNORDERED ===\n(includes repeated packs)\n\n";
+    return result;
+}
+
+
+
 
 // SET METHODS
 void Agency::setName(string name)

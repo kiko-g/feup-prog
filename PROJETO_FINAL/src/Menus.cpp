@@ -26,7 +26,7 @@ void mainMenu(Agency &agency)
             break;
 
          case 3:
-            //packsInterface(agency);
+            packsInterface(agency);
             break;
 
          case 4:
@@ -135,7 +135,7 @@ void browsePacksInterface(Agency agency)
         cout << "| 7 - BACK\n";
         cout << "| 0 - MAIN MENU\n";
 
-        input = validateInterfaceInput(0, 5);
+        input = validateInterfaceInput(0, 7);
         switch (input)
         {
         case 1:
@@ -159,6 +159,16 @@ void browsePacksInterface(Agency agency)
             break;
 
         case 5:
+            agency.printSomePacks(agency.searchClientName(findClientName()));
+            backToMenu();
+            return;
+
+        case 6:
+            agency.printSomePacks(agency.allPacksSold());
+            backToMenu();
+            return;
+
+        case 7:
             return;
 
         case 0:
@@ -180,8 +190,9 @@ void clientsInterface(Agency &agency)
         cout << "| 3 - Remove client\n";
         cout << "| 4 - Buy pack for a client\n\n";
         cout << "| 5 - BACK\n";
+        cout << "| 0 - MAIN MENU\n";
 
-        input = validateInterfaceInput(1,5);
+        input = validateInterfaceInput(0,5);
 
         switch(input)
         {
@@ -203,6 +214,9 @@ void clientsInterface(Agency &agency)
 
          case 5:
             return;
+
+         case 0:
+             mainMenu(agency);
         }
     }
 }
@@ -251,3 +265,106 @@ void editClients(Agency &agency)
     }
 }
 
+void packsInterface(Agency &agency)
+{
+    int input;
+    while (1)
+    {
+        clearScreen();
+        cout << "=============== PACKS MENU ===============\n";
+        cout << "| 1 - Add pack\n";
+        cout << "| 2 - Edit pack\n";
+        cout << "| 3 - Remove pack\n";
+        cout << "| 4 - Buy pack for a client\n\n";
+        cout << "| 5 - BACK\n";
+        cout << "| 0 - MAIN MENU\n";
+
+        input = validateInterfaceInput(0, 5);
+
+        switch (input)
+        {
+        case 1:
+            agency.addPacks(preAddPack());
+            break;
+
+        case 2:
+            editPacks(agency);
+            break;
+
+        case 3:
+            agency.rmPacks();
+            break;
+
+        case 4:
+            agency.purchasePack();
+            break;
+
+        case 5:
+            return;
+
+        case 0:
+            mainMenu(agency);
+        }
+    }
+}
+
+void editPacks(Agency &agency)
+{
+    vector<int> pk;
+    int which;
+    int input;
+    while (1)
+    {
+        clearScreen();
+        cout << "=============== EDIT PACKS MENU ===============\n";
+        cout << "| 1 - Change pack begin date\n";
+        cout << "| 2 - Change pack end date\n";
+        cout << "| 3 - Change pack destination (full string)\n";
+        cout << "| 4 - Change pack price per person\n";
+        cout << "| 5 - Change pack max seats\n";
+        cout << "| 6 - Change pack sold/reserved seats\n\n";
+        cout << "| 7 - BACK\n";
+        cout << "| 0 - MAIN MENU\n";
+
+        input = validateInterfaceInput(0, 7);
+
+        switch (input)
+        {
+        case 1:
+            pk = agency.searchPackMainLocation(findPackLocation());
+            agency.printSomePacks(pk);
+            which = validateInterfaceInput(1, pk.size());
+            agency.getPacks().at(pk.at(which - 1)).setBeginDate(findPackDate("NEW BEGIN"));
+            break;
+        case 2:
+            pk = agency.searchPackMainLocation(findPackLocation());
+            agency.printSomePacks(pk);
+            which = validateInterfaceInput(1, pk.size());
+            agency.getPacks().at(pk.at(which - 1)).setEndDate(findPackDate("NEW END"));
+            break;
+
+        case 3:
+            pk = agency.searchPackMainLocation(findPackLocation());
+            agency.printSomePacks(pk);
+            which = validateInterfaceInput(1, pk.size());
+            agency.getPacks().at(pk.at(which - 1)).setSites()
+            break;
+
+        case 4:
+            agency.changeClientAddress();
+            break;
+
+        case 5:
+            return;
+
+        case 6:
+            return;
+
+        case 7:
+            return;
+
+        case 0:
+            mainMenu(agency);
+        }
+    }
+}
