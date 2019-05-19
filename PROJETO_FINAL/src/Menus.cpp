@@ -79,6 +79,7 @@ void browsingInterface(Agency agency)
 
 void browseClientsInterface(Agency agency)
 {
+    vector<int> res;
     int verif;
     int input;
     while (1)
@@ -95,7 +96,8 @@ void browseClientsInterface(Agency agency)
         switch (input)
         {
         case 1:
-            agency.printSomeClients(agency.searchClientName(findClientName()));
+            res = agency.searchClientName();
+            agency.printSomeClients(res);
             backToMenu();
             break;
 
@@ -144,7 +146,7 @@ void browsePacksInterface(Agency agency)
             break;
 
         case 2:
-            agency.searchPackMainLocation(findPackLocation());
+            agency.searchPackMainLocation();
             backToMenu();
             break;
 
@@ -159,7 +161,7 @@ void browsePacksInterface(Agency agency)
             break;
 
         case 5:
-            agency.printSomePacks(agency.searchClientName(findClientName()));
+            agency.printSomePacks(agency.searchClientName());
             backToMenu();
             return;
 
@@ -267,6 +269,7 @@ void editClients(Agency &agency)
 
 void packsInterface(Agency &agency)
 {
+    vector<int> pk;
     int input;
     while (1)
     {
@@ -284,7 +287,7 @@ void packsInterface(Agency &agency)
         switch (input)
         {
         case 1:
-            agency.addPacks(preAddPack());
+            //agency.addPacks(preAddPack());
             break;
 
         case 2:
@@ -292,7 +295,9 @@ void packsInterface(Agency &agency)
             break;
 
         case 3:
-            agency.rmPacks();
+            pk = agency.searchPackMainLocation();
+            agency.printSomePacks(pk);
+            agency.rmPacks(pk.at(validateInterfaceInput(1, pk.size())-1));
             break;
 
         case 4:
@@ -311,8 +316,8 @@ void packsInterface(Agency &agency)
 void editPacks(Agency &agency)
 {
     vector<int> pk;
-    int which;
-    int input;
+    vector<string> r;
+    int which, input;
     while (1)
     {
         clearScreen();
@@ -328,26 +333,27 @@ void editPacks(Agency &agency)
 
         input = validateInterfaceInput(0, 7);
 
-        switch (input)
+        switch(input)
         {
         case 1:
-            pk = agency.searchPackMainLocation(findPackLocation());
+            pk = agency.searchPackMainLocation();
             agency.printSomePacks(pk);
             which = validateInterfaceInput(1, pk.size());
             agency.getPacks().at(pk.at(which - 1)).setBeginDate(findPackDate("NEW BEGIN"));
             break;
         case 2:
-            pk = agency.searchPackMainLocation(findPackLocation());
+            pk = agency.searchPackMainLocation();
             agency.printSomePacks(pk);
             which = validateInterfaceInput(1, pk.size());
             agency.getPacks().at(pk.at(which - 1)).setEndDate(findPackDate("NEW END"));
             break;
 
         case 3:
-            pk = agency.searchPackMainLocation(findPackLocation());
+            pk = agency.searchPackMainLocation();
             agency.printSomePacks(pk);
             which = validateInterfaceInput(1, pk.size());
-            agency.getPacks().at(pk.at(which - 1)).setSites()
+            r.push_back(findPackLocation());
+            agency.getPacks().at(pk.at(which - 1)).setSites(r);
             break;
 
         case 4:

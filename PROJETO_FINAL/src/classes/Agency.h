@@ -72,11 +72,11 @@ class Agency
   void purchasePack();
 
   // SEARCH METHODS
-  vector<int> searchClientName(string input_name);
+  vector<int> searchClientName();
   int searchClientNIF(int NIF);
 
   int searchPackID(int ID);
-  vector<int> searchPackMainLocation(string inputname);
+  vector<int> searchPackMainLocation();
   vector<int> searchPacksBetweenDates(Date start, Date end);
 
   //OTHER

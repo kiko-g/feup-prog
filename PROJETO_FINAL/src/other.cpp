@@ -59,7 +59,7 @@ int findPackID() // SIMPLE READ ID
 
 string findPackLocation() // SIMPLE READ NAME
 {
-    string input_name;
+    string input_name="";
     cout << "\nSearching pack MAIN Destination\nInput name: ";
     readline(input_name);
     return input_name;
@@ -77,8 +77,10 @@ string findPackSpecificLocations() // SIMPLE READ NAME
     {
         cout << "\nSPECIFIC sites\nName (site " << i << "): ";
         readline(input_name);
+        result += input_name;
+        if(i!=howmany-1) result+=", ";
     }
-    return result
+    return result;
 }
 
 Date findPackDate(string which)

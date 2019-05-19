@@ -12,6 +12,7 @@ int helpRead();
 //==========
 int findPackID();
 string findPackLocation();
+string findPackSpecificLocations();
 Date findPackDate(string which);
 
 //edit

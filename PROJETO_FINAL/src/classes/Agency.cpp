@@ -194,7 +194,7 @@ void Agency::rmClients()
 {
     // DEC_WHICH ---> DECISE WHICH OF THE FOUND CLIENTS (IN vpos)
     cout << "\n\n==== SEARCH CLIENT NAME ====\n";
-    vector<int> c_list = searchClientName(findClientName());
+    vector<int> c_list = searchClientName();
 
     cout << "\nSelect which client's NIF you wish to change\n";
     for (int j = 0; j < c_list.size(); j++)
@@ -257,41 +257,33 @@ void Agency::printOneClient(int pos)
 //=================
 // ==== SEARCH ====
 
-vector<int> Agency::searchClientName(string inputname)
+vector<int> Agency::searchClientName()
 {
+    bool valid = false;
     vector<int> found;
-    found.clear();
-    found.push_back(-1);
-    while (found.at(0) == -1)
+    string inputname;
+
+    while (!valid)
     {
-        for (int j = 0; j < clients.size(); j++)
+        found.clear();
+        found.push_back(-1);
+        inputname = findClientName();
+        for(int j = 0; j < clients.size(); j++)
         {
-            string h = clients.at(j).getName();
+            const string h = clients.at(j).getName();
             if (h.find(inputname) != string::npos)
             {
-                //cout << h.find(inputname);
                 if (found.at(0) == -1) found.at(0) = j;
                 else found.push_back(j);
             }
         }
 
-        if (found.at(0) == -1)
+        if(found.at(0) == -1)
         {
-            cout << "\nThere isn't a client with that name.\nContinue trying?\n";
-            cout << "1 - YES\n2 - LEAVE\n";
-            int w=validateInterfaceInput(1, 2);
-            switch (w)
-            {
-            case 1:
-                searchClientName(findClientName());
-                break;
-            
-            case 2:
-                found.clear();
-                found.push_back(-1);
-                return found;
-            }
+            cout << "\nThere isn't a client with that name.\nTry again\n";
+            searchClientName();
         }
+        else valid=true;
     }
     return found;
 }
@@ -319,7 +311,6 @@ int Agency::searchClientNIF(int NIF)
             case 1:
                 searchClientNIF(findClientNIF());
                 break;
-
             case 2:
                 return found;
             }
@@ -350,16 +341,23 @@ int Agency::searchPackID(int ID)
     return found;
 }
 
-vector<int> Agency::searchPackMainLocation(string inputname)
+vector<int> Agency::searchPackMainLocation()
 {
+    bool valid = false;
     vector<int> found;
-    found.clear();
-    found.push_back(-1);
-    while (found.at(0) == -1)
+    string inputname;
+
+    while (!valid)
     {
+        found.clear();
+        found.push_back(-1);
+        inputname = findPackLocation();
+        cout << "\nAll 'main' destinations are listed below:\n\n";
         for (int j = 0; j < packs.size(); j++)
         {
-            cout << "\n" << packs.at(j).getSites().at(0) << "\n";
+            cout << packs.at(j).getSites().at(0) << "\t";
+            if(j!=0 && j%4 == 0) cout << endl;
+
             if (packs.at(j).getSites().at(0).find(inputname) != string::npos)
             {
                 if (found.at(0) == -1) found.at(0) = j;
@@ -369,10 +367,11 @@ vector<int> Agency::searchPackMainLocation(string inputname)
 
         if (found.at(0) == -1)
         {
-            cout << "There isn't a pack with that Main Destination.\nTry again.";
-            searchPackMainLocation(findPackLocation());
+            cout << "\n\nThere isn't a pack with that Main Destination.\nTry again.\n";
         }
+        else valid=true;
     }
+    cout << "\n===== FOUND =====\n";
     return found;
 }
 
@@ -420,7 +419,7 @@ vector<int> Agency::searchPacksBetweenDates(Date end, Date start)
 void Agency::changeClientName()
 {
     cout << "\n\n==== SEARCH CLIENT NAME ====\n";
-    vector<int> c_list = searchClientName(findClientName());
+    vector<int> c_list = searchClientName();
 
     cout << "\nSelect which client's NIF you wish to change\n";
     for (int j = 0; j < c_list.size(); j++)
@@ -435,7 +434,7 @@ void Agency::changeClientName()
 void Agency::changeClientNIF()
 {
     cout << "\n\n==== SEARCHING WITH NAME ====\n";
-    vector<int> c_list = searchClientName(findClientName());
+    vector<int> c_list = searchClientName();
     cout << "\nSelect which client's NIF you wish to change\n";
     for (int j = 0; j < c_list.size(); j++)
         cout << clients.at(c_list.at(j)).getName() << " | NIF: "
@@ -450,7 +449,7 @@ void Agency::changeClientNIF()
 void Agency::changeClientFAM()
 {
     cout << "\n\n==== SEARCH WITH NAME ====\n";
-    vector<int> c_list = searchClientName(findClientName());
+    vector<int> c_list = searchClientName();
     for (int j = 0; j < c_list.size(); j++)
        cout << clients.at(c_list.at(j)).getName() << " | N FAM AGR: " 
             << clients.at(c_list.at(j)).getFamilySize() << "\n";
@@ -464,7 +463,7 @@ void Agency::changeClientFAM()
 void Agency::changeClientAddress()
 {
     cout << "\n\n==== SEARCH WITH NAME ====\n";
-    vector<int> c_list = searchClientName(findClientName());
+    vector<int> c_list = searchClientName();
     cout << "\nSelect which client's ADDRESS you wish to change\n";
     int dec_which = validateInterfaceInput(1, c_list.size());
     clients.at(c_list.at(dec_which - 1)).setAddress(preChangeClientAddress());
@@ -472,7 +471,7 @@ void Agency::changeClientAddress()
 
 void Agency::purchasePack()
 {
-    vector<int> c_list=searchClientName(findClientName());
+    vector<int> c_list=searchClientName();
     if(c_list.at(0) != -1)
     {
         cout << "\n\nSELECT WHICH CLIENT WILL BUY A PACK\n";

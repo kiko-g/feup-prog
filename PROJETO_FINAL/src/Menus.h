@@ -16,7 +16,9 @@
 
 void mainMenu(Agency &agency);
 void clientsInterface(Agency &agency);
+void packsInterface(Agency &agency);
 void editClients(Agency &agency);
+void editPacks(Agency &agency);
 
 void browsingInterface(Agency agency);
 void browseClientsInterface(Agency agency);
