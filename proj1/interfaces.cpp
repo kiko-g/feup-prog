@@ -2,10 +2,10 @@
 
 void init_navigation(vector<Client> CL, vector<Pack> PK)
 {
-    char cond;
+    string cond = "";
     fflush(stdin);
-    cout << "\nPRESS ENTER TO CONTINUE ";
-    while (cond != '\n')
+    cout << "\nPRESS ANY KEY AND THEN ENTER TO CONTINUE ";
+    while (cond == "")
     {
         cin.clear();
         cin.ignore(1000, '\n');

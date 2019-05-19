@@ -14,7 +14,6 @@ class Client
   unsigned VATnumber; // VAT number of client
   unsigned short familySize;  // number of family members
   Address address; // client's address
-  string packs_str; //string containing packs separated with " ; "
   vector<unsigned int> packs; // vector to store client's packs bought
   unsigned  totalPurchased; // total value spent by the client
 

@@ -1,5 +1,29 @@
 #include "utils.h"
 
+int validateInterfaceInput(int a, int b)
+{
+    int n;
+    bool valid = false;
+
+    while (!valid)
+    {
+        cout << "Type your option [" << a << "-" << b << "]: ";
+        cin >> n;
+        if (a <= n && b >= n && !cin.fail())
+        {
+            valid = true;
+            cin.ignore(1000, '\n');
+        }
+
+        else
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Try again. Number should be between " << a << " and " << b << "\n\n";
+        }
+    }
+    return n;
+}
 
 int stoint(const string& str, int &value)
 {
@@ -87,4 +111,34 @@ Address string_to_address(string address_str)
     location = divAD.at(4);           // 4.4
     Address address(street, doorNumber, floor, postalCode, location);
     return address;
+}
+
+
+bool cin_test()
+{
+    bool ret = false;
+    if(!cin.fail())
+    {
+        ret = true;
+        return ret;
+    }
+    
+    if(cin.fail())
+    {    
+       cin.clear();
+       cin.ignore(1000, '\n');
+    }
+    return ret;
+}
+    
+
+void readline(string &str)
+{
+    cin.clear();
+    fflush(stdin);
+    getline(cin, str);
+    while(str.size() == 0)
+    {
+        getline(cin, str);
+    }
 }

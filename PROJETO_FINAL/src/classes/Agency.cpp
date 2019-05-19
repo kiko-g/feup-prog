@@ -1,6 +1,4 @@
 #include "Agency.h"
-
-
 Agency::Agency(string agency_file_str)
 {
     vector<string> agencyContent;
@@ -150,7 +148,7 @@ void Agency::savePacksInfo(string filename)
 // OTHER METHODS
 void Agency::addClients(Client client)
 {
-    this->clients.push_back(client);
+    this->clients.push_back(preAddClient());
     this->clientsInfoHasChanged = true;
 }
 
@@ -160,8 +158,19 @@ void Agency::addPacks(Pack pack)
    this->packsInfoHasChanged = true;
 }
 
-void Agency::rmClients(int clientPos)
+void Agency::rmClients()
 {
+    // DEC_WHICH ---> DECISE WHICH OF THE FOUND CLIENTS (IN vpos)
+    cout << "\n\n==== SEARCH CLIENT NAME ====\n";
+    vector<int> c_list = searchClientName(findClientName());
+
+    cout << "\nSelect which client's NIF you wish to change\n";
+    for (int j = 0; j < c_list.size(); j++)
+        cout << clients.at(c_list.at(j)).getName() << "\n";
+
+    int dec_which = validateInterfaceInput(1, c_list.size());
+    int clientPos = c_list.at(dec_which-1);
+
     this->clients.erase(this->clients.begin()+clientPos);
     this->clientsInfoHasChanged = true;
 }
@@ -185,13 +194,140 @@ void Agency::printAllPacks()
     }
 }
 
+//=================
+// ==== SEARCH ====
+//=================
+vector<int> Agency::searchClientName(string inputname)
+{
+    vector<int> found;
+    found.clear();
+    found.push_back(-1);
+    while (found.at(0) == -1)
+    {
+        for (int j = 0; j < clients.size(); j++)
+        {
+            if (clients.at(j).getName().find(inputname) != string::npos)
+            {
+                if (found.at(0) == -1)
+                    found.at(0) = j;
+                else
+                    found.push_back(j);
+            }
+        }
+
+        if (found.at(0) == -1)
+        {
+            cout << "There isn't a client with that name.\nTry again.";
+            searchClientName(findClientName());
+        }
+    }
+    return found;
+}
+
+int Agency::searchClientNIF(int NIF)
+{
+    int found = -1;
+    while (found == -1)
+    {
+        for (int i = 0; i < clients.size(); i++)
+        {
+            if (NIF == clients.at(i).getVATnumber())
+            {
+                found = i;
+                break;
+            }
+        }
+        if (found == -1)
+        {
+            cout << "There isn't a client with that VAT/NIF number. Try again\n";
+            searchClientNIF(findClientNIF());
+        }
+    }
+    return found;
+}
+
+//==========================
+// ==== EDIT AND CHANGE ====
+//==========================
+//WILL USE OTHER FUNCTIONS IN OTHER.CPP
+void Agency::changeClientName()
+{
+    // DEC_WHICH ---> DECISE WHICH OF THE FOUND CLIENTS (IN vpos)
+    cout << "\n\n==== SEARCH CLIENT NAME ====\n";
+    vector<int> c_list = searchClientName(findClientName());
+
+    cout << "\nSelect which client's NIF you wish to change\n";
+    for (int j = 0; j < c_list.size(); j++)
+        cout << clients.at(c_list.at(j)).getName() << "\n";
+        
+    int dec_which = validateInterfaceInput(1, c_list.size());
+    clients.at(c_list.at(dec_which - 1)).setName(preChangeClientName());
+}
+
+
+
+
+void Agency::changeClientNIF()
+{
+    cout << "\n\n==== SEARCHING WITH NAME ====\n";
+    vector<int> c_list = searchClientName(findClientName());
+    cout << "\nSelect which client's NIF you wish to change\n";
+    for (int j = 0; j < c_list.size(); j++)
+        cout << clients.at(c_list.at(j)).getName() << " | NIF: "
+             << clients.at(c_list.at(j)).getVATnumber() << "\n";
+
+    int dec_which;
+    dec_which = validateInterfaceInput(1, c_list.size());
+
+    clients.at(c_list.at(dec_which - 1)).setVATnumber(preChangeClientNIF());
+}
+
+void Agency::changeClientFAM()
+{
+    cout << "\n\n==== SEARCH WITH NAME ====\n";
+    vector<int> c_list = searchClientName(findClientName());
+    for (int j = 0; j < c_list.size(); j++)
+       cout << clients.at(c_list.at(j)).getName() << " | N FAM AGR: " 
+            << clients.at(c_list.at(j)).getFamilySize() << "\n";
+
+    cout << "\nSelect which client's Family Agregate Number (FAN) you wish to change\n";
+    
+    int dec_which = validateInterfaceInput(1, c_list.size());
+    clients.at(c_list.at(dec_which - 1)).setFamilySize(preChangeClientFamagr());
+}
+
+void Agency::changeClientAddress()
+{
+    cout << "\n\n==== SEARCH WITH NAME ====\n";
+    vector<int> c_list = searchClientName(findClientName());
+    cout << "\nSelect which client's ADDRESS you wish to change\n";
+    int dec_which = validateInterfaceInput(1, c_list.size());
+    clients.at(c_list.at(dec_which - 1)).setAddress(preChangeClientAddress());
+}
+
+//OTHER
+int Agency::determineMoneySpentByClient(vector<unsigned int> packs_bought)
+{
+    int result=0;
+    for(int i=0; i<packs_bought.size(); i++)
+    {
+        int h = packs_bought.at(i);
+        for(int j=0; j<packs.size(); j++)
+          if(packs.at(j).getId() == h)
+          {
+            result += packs.at(j).getPricePerPerson();
+            break;
+          }
+    }
+    return result;
+}
 
 /*********************************
  * Mostrar Loja
  ********************************/  
 
 // mostra o conteudo de uma agencia
-ostream& operator<<(ostream& out, const Agency & agency)
+ostream& operator<<(ostream& out, const Agency &agency)
 {
     out << agency.name << endl
         << agency.VATnumber << endl

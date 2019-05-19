@@ -7,7 +7,6 @@ using namespace std;
 // ADD CLIENT
 void addClient(Agency &agency)
 {
-    bool valid = false;
     cout << "Adding Client" << "\n\n";
     
     string name; // name of the client
@@ -58,21 +57,21 @@ void addClient(Agency &agency)
     cout << "Client successfully added.\n"; 
 }
 
+//REMOVE @ PROJ1
+
 //EDIT CLIENT
-void changeClientName(Agency &agency)
+void preChangeClientName(Agency &agency)
 {
-    // DEC_WHICH ---> DECIDE WHICH OF THE FOUND CLIENTS (IN vpos aka c_list)
     int pos;
     string new_name; 
     vector<int> vpos;
     cout << "\nNew name: "; readline(new_name);
     cout << "\n\n==== SEARCH CLIENT NAME ====\n";
-    //decide_search(); ---> soon
     vpos = searchClientName(agency);
     agency.changeClientName(vpos, new_name);
 }
 
-void changeClientNIF(Agency &agency)
+void preChangeClientNIF(Agency &agency)
 {
     int pos, new_NIF = 0;
     string new_NIFstr;
@@ -92,7 +91,7 @@ void changeClientNIF(Agency &agency)
     agency.changeClientNIF(vpos, new_NIF);
 }
 
-void changeClientFamagr(Agency &agency)
+void preChangeClientFamagr(Agency &agency)
 {
     int pos, new_NFA;
     vector<int> vpos;
@@ -102,7 +101,7 @@ void changeClientFamagr(Agency &agency)
     agency.changeClientFAM(vpos, new_NFA);
 }
 
-void changeClientAddress(Agency &agency)
+void preChangeClientAddress(Agency &agency)
 {
     int pos, dec_which;
     vector<int> vpos;
@@ -130,7 +129,7 @@ void changeClientAddress(Agency &agency)
     agency.changeClientAddress(vpos, A);
 }
 
-void changeClientPacks(Agency agency)
+void preChangeClientPacks(Agency agency)
 {
     int pos, dec_which;
     vector<int> vpos;

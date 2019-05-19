@@ -13,7 +13,7 @@ int main()
   cout << "\n\n\n";
   agency.savePacksInfo("packsnew.txt");
   agency.saveClientsInfo("clientsnew.txt");
-  //mainMenu(agency); // initial menu inicial with the major options of the application
+  mainMenu(agency); // initial menu inicial with the major options of the application
   return 0;
 }
 

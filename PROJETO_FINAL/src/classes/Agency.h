@@ -1,18 +1,16 @@
 #pragma once
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
 
-
+//#include "../utils.h"
+#include "../other.h"
 #include "../defs.h"
 #include "../readFiles.h"
 #include "Address.h"
 #include "Client.h"
 #include "Pack.h"
-
-
 using namespace std;
 
 class Agency
@@ -54,17 +52,26 @@ class Agency
   // EDIT METHODS
   void addClients(Client client);
   void addPacks(Pack pack);
-  void rmClients(int clientPos);
+  void rmClients();
   void rmPacks(int packPos);
   void printAllClients();
   void printAllPacks();
+  // ============
+  void changeClientName();
+  void changeClientNIF();
+  void changeClientFAM();
+  void changeClientAddress();
+
+  // SEARCH METHODS
+  vector<int> searchClientName(string input_name);
+  int searchClientNIF(int NIF);
 
   // SAVING FILES METHODS
   void saveClientsInfo(string filename);
   void savePacksInfo(string filename);
 
-  // other methods */
-  
+  //OTHER
+  int determineMoneySpentByClient(vector<unsigned int> packs_bought);
   friend ostream& operator<<(ostream& out, const Agency & agency);
 
 };

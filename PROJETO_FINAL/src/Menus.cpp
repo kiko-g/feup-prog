@@ -1,12 +1,11 @@
 #include "Menus.h"
 //Definition of private functions
 
-unsigned mainMenu(Agency agency)
+void mainMenu(Agency agency)
 {
-
     while(1)
     {
-        clearScreenTemp();
+        clearScreen();
         cout << "============== AGENCY INFO ==============\n";
         cout << agency;
         cout << "=============== MAIN MENU ===============\n";
@@ -32,14 +31,21 @@ unsigned mainMenu(Agency agency)
             break;
 
          case 4:
-            clearScreenTemp();
+            clearScreen();
+            char vld;
+            cout << "\nDo you wish to save all changes made? (Y/N)"; cin >> vld;
+            if(vld == 'Y' || vld == 'y')
+            {
+                cout << "===== Saving all changes made =====\n";
+                if(agency.getClientsIHC()) agency.saveClientsInfo("clientsnew.txt");
+                if(agency.getPacksIHC()) agency.savePacksInfo("packsnew.txt");
+            }
+            
             cout << "\nExited with success.\n\n";
             exit(1);
             break;
-        } 
-
+        }
     }
-    return 0;
 }
 
 void browsingInterface(Agency agency)
@@ -47,7 +53,7 @@ void browsingInterface(Agency agency)
     int input;
     while (1)
     {
-        clearScreenTemp();
+        clearScreen();
         cout << "=========== BROWSING MENU ===========\n";
         cout << "| 1 - Clients\n";
         cout << "| 2 - Packs\n";
@@ -75,7 +81,7 @@ void browseClientsInterface(Agency agency)
     int input;
     while (1)
     {
-        clearScreenTemp();
+        clearScreen();
         cout << "=== Client search engine options ===\n";
         cout << "| 1 - Name\n";
         cout << "| 2 - NIF\n";
@@ -123,7 +129,7 @@ void browsePacksInterface(Agency agency)
     int input;
     while (1)
     {
-        clearScreenTemp();
+        clearScreen();
         cout << "=== Pack search engine options ===\n";
         cout << "| 1 - \n";
         cout << "| 2 - \n";
@@ -166,27 +172,46 @@ void browsePacksInterface(Agency agency)
     }
 }
 
-int validateInterfaceInput(int a, int b)
-{
-	int n;
-	bool valid = false;
 
-	while (!valid)
-	{
-		cout << "Type your option [" << a << "-" << b << "]: ";
-        cin >> n;
-        if (a<=n && b>=n && !cin.fail())
+void clientsInterface(Agency &agency)
+{
+    int input;
+    while(1)
+    {
+        clearScreen();
+        cout << "=============== CLIENTS MENU ===============\n";
+        cout << "| 1 - Add client\n";
+        cout << "| 2 - Edit client\n";
+        cout << "| 3 - Remove client\n";
+        cout << "| 4 - Buy pack for a client\n\n";
+        cout << "| 5 - BACK\n";
+
+        input = validateInterfaceInput(1,5);
+
+        switch(input)
         {
-			valid = true;
-			cin.ignore(1000, '\n');
-		}
-        
-		else 
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Try again. Number should be between " << a << " and " << b << "\n\n"; 
-		}
-	}
-	return n;
+         case 1:
+            agency.addClients(preAddClient());
+            break;
+
+         case 2:
+            editClients(agency); //menus
+            break;
+
+         case 3:
+            agency.rmClients();
+            break;
+
+         case 4:
+            //purchasePack(agency);
+            break;
+
+         case 5:
+            return;
+        }
+    }
 }
+
+
+void editClients(Agency &agency)
+

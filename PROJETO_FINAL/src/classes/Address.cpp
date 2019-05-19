@@ -67,17 +67,17 @@ void Address::setPostalCode(string postalCode)
     this->postalCode = postalCode;
 }
 
-void Address::setLocation(string  location)
+void Address::setLocation(string location)
 {
     this->location = location;
 }
 
 
 /*********************************
- * Mostrar Address
+ *       Mostrar Address
  ********************************/  
 
-// discplyes an address in a nice format
+// displays an address in a nice format
 ostream& operator<<(ostream& out, const Address & address)
 {
     out << address.street       << " | "
