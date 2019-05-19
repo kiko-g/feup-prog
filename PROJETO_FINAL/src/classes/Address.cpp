@@ -46,15 +46,7 @@ void Address::setStreet(string street)
 
 void Address::setDoorNumber(unsigned short doorNumber)
 {
-      if(doorNumber > 10000)
-    {
-        cout << "Invalid doorNumber";
-        exit(1); 
-    }
-    else
-    {
-        this->doorNumber = doorNumber;
-    }
+     this->doorNumber = doorNumber;
 }
 
 void Address::setFloor(string floor)

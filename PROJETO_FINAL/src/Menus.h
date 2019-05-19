@@ -2,17 +2,22 @@
 #include "classes/Agency.h"
 #include "defs.h"
 
-#ifdef _WIN64
-#define clearScreen() system("cls");
-#elif _WIN32
-#define clearScreen() system("cls");
+#ifdef _WIN32   //_WIN32 is defined for applications for Win32 and Win64.
+#define clearScreen() system("cls");    
 #else
 #define clearScreen() system("clear");
 #endif
 
-void mainMenu(Agency agency);
-void browsingInterface(Agency agency);
-void clientsInterface(Agency &agency);
+#ifdef _WIN32   //_WIN32 is defined for applications for Win32 and Win64.
+#define backToMenu() system("pause");   
+#else
+#define backToMenu system("read");      
+#endif
 
+void mainMenu(Agency &agency);
+void clientsInterface(Agency &agency);
+void editClients(Agency &agency);
+
+void browsingInterface(Agency agency);
 void browseClientsInterface(Agency agency);
 void browsePacksInterface(Agency agency);

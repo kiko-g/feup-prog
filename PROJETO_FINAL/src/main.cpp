@@ -10,7 +10,8 @@
 int main()
 {
   Agency agency(AGENCY_FILE_NAME);   // create the agency
-  cout << "\n\n\n";
+  //cout << "\n\n\n" << agency << agency.getPacks().at(0).getBeginDate().getMonth() << "\n\n\n";
+
   agency.savePacksInfo("packsnew.txt");
   agency.saveClientsInfo("clientsnew.txt");
   mainMenu(agency); // initial menu inicial with the major options of the application

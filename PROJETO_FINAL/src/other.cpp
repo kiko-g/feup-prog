@@ -12,7 +12,7 @@ string findClientName() // SIMPLE READ NAME
 {
     string input_name;
     cout << "\nSearching client name\nInput name: ";
-    readline(input_name);
+    readline(input_name); cout << endl;
     return input_name;
 }
 
@@ -30,37 +30,112 @@ int findClientNIF()     // SIMPLE READ NIF
     return NIF;
 }
 
+int helpRead() // SIMPLE READ!!!!
+{
+    string NIF_str;
+    int NIF;
+    readline(NIF_str);
+    while ((stoint(NIF_str, NIF) != 0))
+    {
+        cout << "Try again. Just numbers, please: ";
+        readline(NIF_str);
+    }
+    return NIF;
+}
+
+int findPackID() // SIMPLE READ ID
+{
+    string pID_str;
+    int pID;
+    cout << "\nInput NIF: ";
+    readline(pID_str);
+    while ((stoint(pID_str, pID) != 0))
+    {
+        cout << "Try again. Just numbers, please: ";
+        readline(pID_str);
+    }
+    return pID;
+}
+
+string findPackLocation() // SIMPLE READ NAME
+{
+    string input_name;
+    cout << "\nSearching pack MAIN Destination\nInput name: ";
+    readline(input_name);
+    return input_name;
+}
+
+Date findPackDate(string which)
+{ 
+    Date DATE;
+    int D, M, Y;
+    string dd, mm, yy;
+    //========
+    cout << endl << which << " DATE DAY: ";
+    readline(dd);
+    while ((stoint(dd, D) != 0))
+    {
+        cout << "(reading day) Try again.\nJust numbers, please: ";
+        readline(dd);
+    }
+    DATE.setDay(D);
+    //========
+    cout << which << " DATE MONTH: ";
+    readline(mm);
+    while ((stoint(mm, M) != 0))
+    {
+        cout << "(reading month) Try again.\nJust numbers, please: ";
+        readline(mm);
+    }
+    DATE.setMonth(M);
+    //========
+    cout << which << " DATE YEAR: ";
+    readline(yy);
+    while ((stoint(yy, Y) != 0))
+    {
+        cout << "(reading year) Try again.\nJust numbers, please: ";
+        readline(yy);
+    }
+    DATE.setYear(Y);
+    cout << "\n\n" << which << " DATE WAS READ AS: "
+         << DATE.getDay() << "/" << DATE.getMonth() << "/" << DATE.getYear() << "\n\n";
+    return DATE;
+    
+}
+
+// ======
+
 Client preAddClient()
 {
     bool valid = false;
-    cout << "Adding Client"
-         << "\n\n";
+    cout << "\n=== ADDING CLIENT ===\n\n";
 
-    string name;               // name of the client
-    unsigned VATnumber;        // VAT number of client
-    unsigned short familySize; // number of family members
-
-    string street;             // street name
-    unsigned short doorNumber; // door number
-    string Floor;              // Floor number ("-" is not applicable)
-    string postalCode;         // postal code
-    string location;           // site
-
-    vector<unsigned int> packs; // vector to store client's packs bought
-    unsigned totalPurchased;    // total value spent by the client
+    unsigned VATnumber;             // VAT number of client
+    unsigned short PC1, PC2;        // 4130 then 283 p.e.
+    unsigned short familySize;      // number of family members
+    unsigned short DN;              // door number
+    unsigned totalPurchased;        // total value spent by the client
+    string name;                    // name of the client
+    string street;                  // street name
+    string Floor;                   // Floor number ("-" is not applicable)
+    string postalCode;              // postal code
+    string location;                // site
+    vector<unsigned> packs;
 
     //READ THE CLIENT
     cout << "Name: "; readline(name);
-    cout << "NIF: "; cin >> VATnumber; while (!cin_test()) cin >> VATnumber;
-    cout << "Number of members in household: ";  cin >> familySize; while (!cin_test()) cin >> familySize;
+    cout << "NIF: "; helpRead();
+    cout << "Number of members in household: ";  helpRead();
     cout << "Street name: "; readline(street);
-    cout << "Door number: "; cin >> doorNumber; while (!cin_test()) cin >> doorNumber;
-    cout << "Floor info: "; cin >> Floor; while (!cin_test()) cin >> Floor;
-    cout << "Postal Code: "; readline(postalCode);
+    cout << "Door number: "; helpRead();
+    cout << "Floor info: "; readline(Floor);
+    cout << "Postal Code 1: "; helpRead();
+    cout << "Postal Code 2: "; helpRead();
     cout << "Location: "; readline(location);
 
     int j = 0, packn, cond;
-    //string divider = " ; ";
+    ostringstream PC;
+    PC << PC1 << "-" << PC2;
 
     cout << "\n=== CLIENT PACKS ===";
     cout << "\nTotal number of packs: ";
@@ -75,8 +150,12 @@ Client preAddClient()
     }
 
     totalPurchased = 0;
+    // total purchased will be set later
+    // inside the "addClients" method in Agency class
 
-    Address address(street, doorNumber, Floor, postalCode, location);
+    //to_string(PC1)+"-"+to_string(PC2)
+
+    Address address(street, DN, Floor, PC.str(), location);
     Client c(name, VATnumber, familySize, address, packs, totalPurchased);
     cout << "Client successfully added.\n";
     return c;
@@ -145,4 +224,16 @@ Address preChangeClientAddress()
     return A;
 }
 
+//return 1 if start date is lower   (should be)
+//return 0 if start date is greater (bad input dates...)
+// 1 means b > a 
+// 0 means b < a ----> ABSURD
 
+int determineGreaterDate(Date b, Date a)
+{
+    if(a.getYear() < b.getYear()) return 1;
+    if(a.getYear() == b.getYear() && a.getMonth() < b.getMonth()) return 1;
+    if(a.getYear()==b.getYear() && a.getMonth()==b.getMonth() && a.getDay()<=b.getDay()) return 1;
+
+    else return 0;
+}

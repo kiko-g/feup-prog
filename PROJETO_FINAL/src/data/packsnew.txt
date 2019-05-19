@@ -1,5 +1,37 @@
-11
+16
 1
+Madeira - Santa Cruz
+2019/7/26
+2019/8/9
+300
+30
+10
+::::::::::
+2
+Wales - Swansea
+2019/5/30
+2019/6/11
+200
+30
+15
+::::::::::
+3
+Tunisia - Al Qayrawan, Sfax
+2018/3/15
+2018/4/3
+220
+40
+32
+::::::::::
+4
+Douro - Pinhao, Vila Real
+2019/9/19
+2019/9/24
+70
+45
+16
+::::::::::
+5
 Madeira - Funchal, Porto Santo
 2019/8/1
 2019/8/5
@@ -7,7 +39,7 @@ Madeira - Funchal, Porto Santo
 30
 10
 ::::::::::
--2
+-6
 Veneza
 2019/3/2
 2019/3/5
@@ -15,7 +47,7 @@ Veneza
 24
 24
 ::::::::::
-3
+7
 Liverpool
 2019/11/30
 2019/12/5
@@ -23,7 +55,7 @@ Liverpool
 58
 22
 ::::::::::
--4
+-8
 Strasbourg
 2018/10/15
 2018/10/18
@@ -31,15 +63,15 @@ Strasbourg
 30
 17
 ::::::::::
-5
-Douro vinhateiro ‐ Porto, Regua, Pinhao, Vila Real
+9
+Douro - Porto, Regua
 2019/9/21
 2019/9/22
 100
 62
 12
 ::::::::::
-6
+10
 Vigo
 2019/5/1
 2019/5/10
@@ -47,7 +79,7 @@ Vigo
 50
 32
 ::::::::::
-7
+11
 Milano
 2020/8/3
 2019/8/12
@@ -55,15 +87,15 @@ Milano
 62
 35
 ::::::::::
-8
-Wales - Cardiff, Newport, Swansea
+12
+Wales - Cardiff, Newport
 2019/6/2
 2019/6/9
 210
 40
 20
 ::::::::::
-9
+13
 Scotland - Edinburgh, Glasgow, Aberdeen
 2019/6/20
 2019/6/28
@@ -71,19 +103,27 @@ Scotland - Edinburgh, Glasgow, Aberdeen
 29
 29
 ::::::::::
--10
-Tunisia - Al Qayrawan, Tunes, Sfax
-2019/3/18
-2019/3/30
+-14
+Tunisia - Tunes
+2018/3/18
+2018/3/30
 380
 55
 52
 ::::::::::
-11
-Taiwan - Banqiao, Taichung, Kaohsiung
+15
+Taiwan - Banqiao
 2019/6/20
-2019/6/28
+2019/6/25
 320
 18
 16
+::::::::::
+16
+Taiwan - Taichung, Kaohsiung
+2020/7/20
+2020/7/28
+280
+20
+15
 ::::::::::

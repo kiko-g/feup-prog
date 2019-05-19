@@ -6,11 +6,19 @@
 //reading outside of the Agency
 Client preAddClient();
 string preRemoveClient();
-int findClientNIF();        
 string findClientName();
+int findClientNIF();
+int helpRead();
+//==========
+int findPackID();
+string findPackLocation();
+Date findPackDate(string which);
 
 //edit
 string preChangeClientName();
 int preChangeClientNIF();
 int preChangeClientFamagr();
 Address preChangeClientAddress();
+
+//other
+int determineGreaterDate(Date end, Date start);
