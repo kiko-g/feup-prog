@@ -9,12 +9,12 @@
 
 int main()
 {
-  Agency agency(AGENCY_FILE_NAME);   // create the agency
-  //cout << "\n\n\n" << agency << agency.getPacks().at(0).getBeginDate().getMonth() << "\n\n\n";
-
-  agency.savePacksInfo("packsnew.txt");
-  agency.saveClientsInfo("clientsnew.txt");
-  mainMenu(agency); // initial menu inicial with the major options of the application
+    Agency agency(AGENCY_FILE_NAME);   // create the agency
+    vector<Client> c_list = agency.getClients();
+    for(int i=0; i<c_list.size(); i++)
+    c_list.at(i).setTotalPurchased(agency.determineMoneySpentByClient(c_list.at(i).getPackList()));
+    agency.saveClientsInfo("clientsnew.txt");
+    mainMenu(agency); // initial menu inicial with the major options of the application
   return 0;
 }
 

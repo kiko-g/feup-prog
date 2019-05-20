@@ -1,6 +1,8 @@
 #include "Menus.h"
+
 void mainMenu(Agency &agency)
 {
+    backToMenu();
     while(1)
     {
         clearScreen();
@@ -9,9 +11,9 @@ void mainMenu(Agency &agency)
         cout << "=============== MAIN MENU ===============\n";
         cout << "| 1 - "; cout << "Browse / Search\n";
         cout << "| 2 - "; cout << "Manage CLIENT data\n";
-        cout << "| 3 - "; cout << "Manage PACK data (not yet)\n\n";
-        cout << "| 4 - "; cout << "EXIT WITHOUT SAVING\n";
-        cout << "| 5 - "; cout << "EXIT AND SAVE ALL CHANGES\n";
+        cout << "| 3 - "; cout << "Manage PACK data\n\n";
+        cout << "| 4 - "; cout << "EXIT AND SAVE ALL CHANGES\n";
+        cout << "| 5 - "; cout << "EXIT WITHOUT SAVING\n";
         
         int input = validateInterfaceInput(1,5);
 
@@ -57,9 +59,10 @@ void browsingInterface(Agency agency)
         clearScreen();
         cout << "=========== BROWSING MENU ===========\n";
         cout << "| 1 - Clients\n";
-        cout << "| 2 - Packs\n\n";
-        cout << "| 3 - BACK\n";
-        input = validateInterfaceInput(1, 3);
+        cout << "| 2 - Packs\n";
+        cout << "| 3 - Status View amount of packs sold and profit\n\n";
+        cout << "| 4 - BACK\n";
+        input = validateInterfaceInput(0, 3);
 
         switch (input)
         {
@@ -72,6 +75,10 @@ void browsingInterface(Agency agency)
             break;
 
         case 3:
+            agency.packSaleStatus();
+            return;
+
+        case 0:
             return;
         }
     }
@@ -123,9 +130,12 @@ void browseClientsInterface(Agency agency)
 
 void browsePacksInterface(Agency agency)
 {
-    int input;
+    vector<int> h, g, f;
+    vector<Client> h2;
+    int input, which;
     while (1)
     {
+        h.clear(); g.clear(); h2.clear();
         clearScreen();
         cout << "=== PACK BROWSING ENGINE OPTIONS ===\n";
         cout << "| 1 - Search Pack ID\n";
@@ -141,12 +151,14 @@ void browsePacksInterface(Agency agency)
         switch (input)
         {
         case 1:
-            agency.searchPackID(findPackID());
+            agency.printOnePack(agency.searchPackID(findPackID()));
             backToMenu();
             break;
 
         case 2:
-            agency.searchPackMainLocation();
+            h = agency.searchPackMainLocation();
+            agency.printSomePacks(h);
+            
             backToMenu();
             break;
 
@@ -161,7 +173,14 @@ void browsePacksInterface(Agency agency)
             break;
 
         case 5:
-            agency.printSomePacks(agency.searchClientName());
+            h=agency.searchClientName();
+            agency.printSomeClients(h);
+            which = validateInterfaceInput(1, h.size());
+            //f gets pack IDs
+            f=agency.getClients().at(h.at(which-1)).getPackList();
+            //g transforms IDs into positions
+            g=agency.getPacksPos(f);
+            agency.printSomePacks(g);
             backToMenu();
             return;
 
@@ -199,7 +218,7 @@ void clientsInterface(Agency &agency)
         switch(input)
         {
          case 1:
-            agency.addClients(preAddClient());
+            agency.addClients();
             break;
 
          case 2:
@@ -287,7 +306,8 @@ void packsInterface(Agency &agency)
         switch (input)
         {
         case 1:
-            //agency.addPacks(preAddPack());
+            agency.addPacks();
+            backToMenu();
             break;
 
         case 2:
@@ -298,10 +318,12 @@ void packsInterface(Agency &agency)
             pk = agency.searchPackMainLocation();
             agency.printSomePacks(pk);
             agency.rmPacks(pk.at(validateInterfaceInput(1, pk.size())-1));
+            backToMenu();
             break;
 
         case 4:
             agency.purchasePack();
+            backToMenu();
             break;
 
         case 5:
@@ -340,12 +362,14 @@ void editPacks(Agency &agency)
             agency.printSomePacks(pk);
             which = validateInterfaceInput(1, pk.size());
             agency.getPacks().at(pk.at(which - 1)).setBeginDate(findPackDate("NEW BEGIN"));
+            backToMenu();
             break;
         case 2:
             pk = agency.searchPackMainLocation();
             agency.printSomePacks(pk);
             which = validateInterfaceInput(1, pk.size());
             agency.getPacks().at(pk.at(which - 1)).setEndDate(findPackDate("NEW END"));
+            backToMenu();
             break;
 
         case 3:
@@ -354,10 +378,12 @@ void editPacks(Agency &agency)
             which = validateInterfaceInput(1, pk.size());
             r.push_back(findPackLocation());
             agency.getPacks().at(pk.at(which - 1)).setSites(r);
+            backToMenu();
             break;
 
         case 4:
             agency.changeClientAddress();
+            backToMenu();
             break;
 
         case 5:

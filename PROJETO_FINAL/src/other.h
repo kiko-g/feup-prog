@@ -5,6 +5,7 @@
 
 //reading outside of the Agency
 Client preAddClient();
+Pack preAddPack();
 string preRemoveClient();
 string findClientName();
 int findClientNIF();

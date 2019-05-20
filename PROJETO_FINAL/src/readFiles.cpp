@@ -114,8 +114,8 @@ vector<Client> decomposeClients(vector<string> rawCL, string filename)
     int nrClients = numberOf(filename);
     while (i < nrClients)
     {
-        int offset = 6*i;
-        vector<unsigned int> packs;
+        int offset = 7*i;
+        vector<int> packs;
         name = (rawCL.at(0 + offset));                   // PART 1
         stoint(rawCL.at(1 + offset), VATnumber);         // PART 2
         stoint(rawCL.at(2 + offset), familySize);        // PART 3
@@ -130,7 +130,8 @@ vector<Client> decomposeClients(vector<string> rawCL, string filename)
             stoint(divPK.at(j), value_pk);
             packs.push_back(value_pk);
         }
-        Client c(name, VATnumber, familySize, address, packs, 0);
+        stoint(rawCL.at(5 + offset), totalPurchased);
+        Client c(name, VATnumber, familySize, address, packs, totalPurchased);
         CL.push_back(c);
         i++;
     }

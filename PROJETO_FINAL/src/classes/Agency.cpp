@@ -29,10 +29,12 @@ Agency::Agency(string agency_file_str)
 
     this->setClients(clients);
     this->setPacks(packs);
-
+    for (int k = 0; k < clients.size(); k++)
+        this->clients.at(k).setTotalPurchased(determineMoneySpentByClient(clients.at(k).getPackList()));
+        
     this->clientsInfoHasChanged = false;
     this->packsInfoHasChanged = false;
-
+    
     this->maxClientsId = determineMaxClientID(); //max_clients_id;
     this->maxPacksId = determineMaxPacksID();   //maxPacks_id;
 }
@@ -68,6 +70,7 @@ vector<Pack> Agency::getPacks() const
     return this->packs; 
 }
 
+
 bool Agency::getClientsIHC() const
 {
     return this->clientsInfoHasChanged;
@@ -86,7 +89,7 @@ vector<int> Agency::allPacksSold()
     result.push_back(-1);
     for(int i=0; i<clients.size(); i++)
     {
-        vector<unsigned> pkl = clients.at(i).getPackList();
+        vector<int> pkl = clients.at(i).getPackList();
         for(int j=0; j<pkl.size(); j++)
         {
             for(int k=0; k<result.size(); k++)
@@ -94,8 +97,8 @@ vector<int> Agency::allPacksSold()
                 cont = 0;
                 if(pkl.at(j) == result.at(k)) cont++;
             }
-            if(result.at(0)==-1) result.at(0) = pkl.at(j)-1;
-            if(cont==0 && result.at(0)!=-1) result.push_back(pkl.at(j)-1);
+            if(result.at(0)==-1) result.at(0) = pkl.at(j);
+            if(cont==0 && result.at(0)!=-1) result.push_back(pkl.at(j));
         }
     }
     cout << "\n\n=== ALL PACKS SOLD UNORDERED ===\n(includes repeated packs)\n\n";
@@ -134,7 +137,7 @@ void Agency::setURL(string url)
     this->URL = url; 
 }
 
-void Agency::setClients(vector<Client> & clients)
+void Agency::setClients(vector<Client> &clients)
 {
     this->clients = clients; 
 }
@@ -176,7 +179,7 @@ void Agency::savePacksInfo(string filename)
 
 //=============
 // EDIT METHODS
-void Agency::addClients(Client client)
+void Agency::addClients()
 {
     Client c = preAddClient();
     c.setTotalPurchased(determineMoneySpentByClient(c.getPackList()));
@@ -184,10 +187,11 @@ void Agency::addClients(Client client)
     this->clientsInfoHasChanged = true;
 }
 
-void Agency::addPacks(Pack pack)
+void Agency::addPacks()
 {
-   this->packs.push_back(pack);
-   this->packsInfoHasChanged = true;
+    Pack pack = preAddPack();
+    this->packs.push_back(pack);
+    this->packsInfoHasChanged = true;
 }
 
 void Agency::rmClients()
@@ -233,9 +237,9 @@ void Agency::printAllPacks()
 //print only those (indices != packID)
 void Agency::printSomePacks(vector<int> somepacks)
 {
-    for (size_t i = 0; i < somepacks.size(); i++)
+    for (int j=0; j < somepacks.size(); j++)
     {
-        cout << this->packs.at(somepacks.at(i)) << endl;
+        cout << this->packs.at(somepacks.at(j)) << endl;
     }
 }
 
@@ -252,6 +256,27 @@ void Agency::printSomeClients(vector<int> someclients)
 void Agency::printOneClient(int pos)
 {
     cout << this->clients.at(pos) << endl;
+}
+
+void Agency::printOnePack(int pos)
+{
+    cout << this->packs.at(pos) << endl;
+}
+
+//get the position
+vector<int> Agency::getPacksPos(vector<int> p)
+{
+    vector<int> res;
+    res.clear();
+    for(int i=0; i < p.size(); i++)
+    {
+        for (int j=0; j < this->packs.size(); j++)
+        {
+            if(p.at(i) == abs(this->packs.at(j).getId()))
+            res.push_back(j);
+        }
+    }
+    return res;
 }
 
 //=================
@@ -281,7 +306,6 @@ vector<int> Agency::searchClientName()
         if(found.at(0) == -1)
         {
             cout << "\nThere isn't a client with that name.\nTry again\n";
-            searchClientName();
         }
         else valid=true;
     }
@@ -355,10 +379,10 @@ vector<int> Agency::searchPackMainLocation()
         cout << "\nAll 'main' destinations are listed below:\n\n";
         for (int j = 0; j < packs.size(); j++)
         {
-            cout << packs.at(j).getSites().at(0) << "\t";
-            if(j!=0 && j%4 == 0) cout << endl;
+            const string h = packs.at(j).getSites().at(0);
+            cout << packs.at(j).getSites().at(0) << "\t"; if(j!=0 && j%4 == 0) cout << endl;
 
-            if (packs.at(j).getSites().at(0).find(inputname) != string::npos)
+            if(h.find(inputname) != string::npos)
             {
                 if (found.at(0) == -1) found.at(0) = j;
                 else found.push_back(j);
@@ -421,7 +445,7 @@ void Agency::changeClientName()
     cout << "\n\n==== SEARCH CLIENT NAME ====\n";
     vector<int> c_list = searchClientName();
 
-    cout << "\nSelect which client's NIF you wish to change\n";
+    cout << "\nSelect which client's NAME you wish to change\n";
     for (int j = 0; j < c_list.size(); j++)
         cout << clients.at(c_list.at(j)).getName() << "\n";
         
@@ -478,7 +502,7 @@ void Agency::purchasePack()
         printSomeClients(c_list);
     }
     else return;
-    cout << "\n\n" << c_list.size()+1 << " - BACK";
+    cout << "\n\n" << c_list.size()+1 << " - BACK\n";
     int input = validateInterfaceInput(1, c_list.size()+1);
     if(input == c_list.size()+1) return;
 }   
@@ -506,7 +530,7 @@ int Agency::determineMaxPacksID()
     return maxID;
 }
 
-int Agency::determineMoneySpentByClient(vector<unsigned int> packs_bought)
+int Agency::determineMoneySpentByClient(vector<int> packs_bought)
 {
     int result=0;
     for(int i=0; i<packs_bought.size(); i++)
@@ -522,12 +546,12 @@ int Agency::determineMoneySpentByClient(vector<unsigned int> packs_bought)
     return result;
 }
 
-    /*********************************
- * Mostrar Loja
+/*********************************
+ *          Mostrar Loja
  ********************************/
 
     // mostra o conteudo de uma agencia
-    ostream &operator<<(ostream &out, const Agency &agency)
+ostream &operator<<(ostream &out, const Agency &agency)
 {
     out << agency.name << endl
         << agency.VATnumber << endl

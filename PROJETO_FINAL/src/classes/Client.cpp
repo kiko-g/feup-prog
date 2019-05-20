@@ -8,7 +8,7 @@ Client::Client(string name, unsigned VATnumber, unsigned short familySize, Addre
     this->setAddress(address);
 }
 
-Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<unsigned int> packs, unsigned totalPurchased)
+Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<int> packs, unsigned totalPurchased)
 {  
     this->setName(name);
     this->setVATnumber(VATnumber);
@@ -31,46 +31,27 @@ unsigned short Client::getFamilySize() const
 Address Client::getAddress() const
 { return this->address; }
 
-vector<unsigned int> Client::getPackList() const
+vector<int> Client::getPackList() const
 { return this->packs; }
 
 unsigned Client::getTotalPurchased() const
 { return this->totalPurchased; }
-  
+
 
 //===== metodos SET =====
 void Client::setName(string name)
 { this->name = name; }
 
 void Client::setVATnumber(unsigned VATnumber)
-{  
-    if(VATnumber > 999999999 || VATnumber < 100000000)
-    {
-        cout << "Invalid Client VAT Number";
-        exit(1); 
-    }
-    else
-    {
-        this->VATnumber = VATnumber;
-    }
-}
+{ this->VATnumber = VATnumber; }
 
 void Client::setFamilySize(unsigned short familySize)
-{  
-    if(familySize > 100 || familySize < 0)
-    {
-        cout << "Invalid Family Size";
-        exit(1); 
-    }
-    else
-    {
-        this->familySize = familySize;
-    } 
-}
+{ this->familySize = familySize; }
+
 void Client::setAddress(Address address)
 { this->address = address; } 
 
-void Client::setPackList(vector<unsigned int> & packs)
+void Client::setPackList(vector<int> &packs)
 { this->packs = packs; } 
 
 void Client::setTotalPurchased(unsigned totalPurchased)
@@ -100,6 +81,7 @@ ostream& operator<<(ostream& out, const Client & client)
         if(i != client.packs.size()-1) out << " ; ";
         
     }
+    out << endl << client.totalPurchased;
     out << endl << LIMIT_STRING << endl;
     return out;
 }

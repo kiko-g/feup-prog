@@ -30,7 +30,7 @@ int findClientNIF()     // SIMPLE READ NIF
     return NIF;
 }
 
-int helpRead() // SIMPLE READ!!!!
+int helpRead() // SIMPLE READ STRING THE STOI
 {
     string NIF_str;
     int NIF;
@@ -47,7 +47,7 @@ int findPackID() // SIMPLE READ ID
 {
     string pID_str;
     int pID;
-    cout << "\nInput NIF: ";
+    cout << "\nInput ID: ";
     readline(pID_str);
     while ((stoint(pID_str, pID) != 0))
     {
@@ -125,20 +125,17 @@ Date findPackDate(string which)
 
 Client preAddClient()
 {
-    bool valid = false;
     cout << "\n=== ADDING CLIENT ===\n\n";
 
     unsigned VATnumber;             // VAT number of client
     unsigned short PC1, PC2;        // 4130 then 283 p.e.
     unsigned short familySize;      // number of family members
     unsigned short DN;              // door number
-    unsigned totalPurchased;        // total value spent by the client
     string name;                    // name of the client
     string street;                  // street name
     string Floor;                   // Floor number ("-" is not applicable)
-    string postalCode;              // postal code
     string location;                // site
-    vector<unsigned> packs;
+    vector<int> packs;
 
     //READ THE CLIENT
     cout << "Name: "; readline(name);
@@ -167,18 +164,47 @@ Client preAddClient()
         packs.push_back(packn);
     }
 
-    totalPurchased = 0;
     // total purchased will be set later
     // inside the "addClients" method in Agency class
 
-    //to_string(PC1)+"-"+to_string(PC2)
+    //to_string(PC1)+"-"+to_string(PC2) alternative to PC.str()
 
     Address address(street, DN, Floor, PC.str(), location);
-    Client c(name, VATnumber, familySize, address, packs, totalPurchased);
+    Client c(name, VATnumber, familySize, address, packs, 0);
     cout << "Client successfully added.\n";
     return c;
 }
 
+Pack preAddPack()
+{
+    cout << "\n=== ADDING PACK ===\n\n";
+    int ID, NIF, FAN, pricePP, maxSeats, reserved;
+    string NIF_str, location, first;
+    Date start, end;
+    vector<string> second, sites;
+    //READ THE CLIENT
+    cout << "Dont add a repeated ID please\nID: "; cin >> ID; while(!cin_test()) cin >> ID;
+    cout << "DATES\n\n"; start = findPackDate("START"); end = findPackDate("END");
+    cout << "Price per person: "; cin >> pricePP; while(!cin_test()) cin >> pricePP;
+    cout << "Max seats: "; cin >> maxSeats; while(!cin_test()) cin >> maxSeats; 
+    reserved = maxSeats+1;
+    cout << "Booked seats (< Max Seats): "; while(!cin_test() || maxSeats<reserved) cin >> reserved;
+    cout << "Reading full location\n\n"; 
+
+    sites.push_back(findPackLocation());
+    first = findPackSpecificLocations();
+    second = strtok_cpp(first, ", "); //PART 2
+    cout << second.at(0);
+    cout << second.at(1);
+    for (int i = 0; i < second.size()-1; i++)
+    {
+       sites.push_back(second.at(i+1));
+    }
+    
+    Pack p(ID, sites, start, end, pricePP, maxSeats, reserved);
+    cout << "\nPack successfully added.\n";
+    return p;
+}
 
 string preRemoveClient()
 {

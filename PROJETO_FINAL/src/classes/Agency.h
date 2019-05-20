@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <cmath>
 
 //#include "../utils.h"
 #include "../other.h"
@@ -55,8 +56,8 @@ class Agency
   void savePacksInfo(string filename);
 
   // EDIT METHODS
-  void addClients(Client client);
-  void addPacks(Pack pack);
+  void addClients();
+  void addPacks();
   void rmClients();
   void rmPacks(int packPos);
   void printAllClients();
@@ -64,6 +65,8 @@ class Agency
   void printSomePacks(vector<int> somepacks);
   void printSomeClients(vector<int> someclients);
   void printOneClient(int client_pos);
+  void printOnePack(int pack_pos);
+  vector<int> getPacksPos(vector<int> p);
   // ============
   void changeClientName();
   void changeClientNIF();
@@ -82,9 +85,9 @@ class Agency
   //OTHER
   int determineMaxClientID();
   int determineMaxPacksID();
-  int determineMoneySpentByClient(vector<unsigned int> packs_bought);
+  int determineMoneySpentByClient(vector<int> packs_bought);
   int whichOfThese(int list_size);
 
-  friend ostream& operator<<(ostream& out, const Agency & agency);
+  friend ostream& operator<<(ostream& out, const Agency &agency);
 
 };
