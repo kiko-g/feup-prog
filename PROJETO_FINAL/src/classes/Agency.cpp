@@ -81,6 +81,17 @@ bool Agency::getPacksIHC() const
     return this->packsInfoHasChanged;
 }
 
+void Agency::setClientsIHC(bool d)
+{
+    this->clientsInfoHasChanged = d;
+}
+
+void Agency::setPacksIHC(bool d)
+{
+    this->packsInfoHasChanged = d;
+}
+
+
 
 vector<int> Agency::allPacksSold()
 {
@@ -507,6 +518,37 @@ void Agency::purchasePack()
     if(input == c_list.size()+1) return;
 }   
 
+void Agency::changePackDate(string which)
+{
+    vector<int> pk;
+    pk = searchPackMainLocation();
+    printSomePacks(pk);
+    int decision = validateInterfaceInput(1, pk.size());
+    getPacks().at(pk.at(decision - 1)).setBeginDate(findPackDate(which));
+}
+
+void Agency::changePackSites()
+{
+    vector<int> pk;
+    vector<string> r;
+    pk = searchPackMainLocation();
+    printSomePacks(pk);
+    int which = validateInterfaceInput(1, pk.size());
+    r.push_back(findPackLocation());
+    getPacks().at(pk.at(which - 1)).setSites(r);
+}
+
+
+void Agency::changePricePerPerson()
+{
+    vector<int> pk;
+    pk = searchPackMainLocation();
+    printSomePacks(pk);
+    int input, which = validateInterfaceInput(1, pk.size());
+    cout << "\nNEW PRICE PER PERSON: ";  cin >> input;
+    getPacks().at(which - 1).setPricePerPerson(input);
+}
+
 
 //OTHER
 int Agency::determineMaxClientID()
@@ -543,6 +585,32 @@ int Agency::determineMoneySpentByClient(vector<int> packs_bought)
             break;
           }
     }
+    return result;
+}
+
+vector<int> Agency::packSaleStatus()
+{
+    vector<int> result, prices, nrSold;
+    int sold=0, profit=0;
+    for(int i=0; i < this->packs.size(); i++)
+    {
+        prices.push_back(packs.at(i).getPricePerPerson());
+        nrSold.push_back(packs.at(i).getNrSold());
+        profit += prices.at(i) * nrSold.at(i);
+    }
+
+    for(int i=0; i < this->clients.size(); i++)
+    {
+        result = this->clients.at(i).getPackList();
+        sold += result.size();
+    }
+    result.clear();
+    result.push_back(sold); result.push_back(profit);
+
+    cout << "\nPACK SALE STATUS (OBJ 8)\n";
+    cout << "TOTAL NUMBER OF SOLD PACKS: " << sold << "\n";
+    cout << "INCOME MONEY FROM ALL SOLD PACKS: " << profit << "\n";
+
     return result;
 }
 

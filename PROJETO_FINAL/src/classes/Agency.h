@@ -41,6 +41,8 @@ class Agency
   vector<Pack> getPacks() const;
   bool getClientsIHC() const; //IHC = Info Has Changed
   bool getPacksIHC() const;   //IHC = Info Has Changed
+  void setClientsIHC(bool d);
+  void setPacksIHC(bool d);
   vector<int> allPacksSold();
 
   // SET methods
@@ -73,6 +75,9 @@ class Agency
   void changeClientFAM();
   void changeClientAddress();
   void purchasePack();
+  void changePackDate(string which);
+  void changePackSites();
+  void changePricePerPerson();
 
   // SEARCH METHODS
   vector<int> searchClientName();
@@ -81,12 +86,14 @@ class Agency
   int searchPackID(int ID);
   vector<int> searchPackMainLocation();
   vector<int> searchPacksBetweenDates(Date start, Date end);
+  
 
   //OTHER
   int determineMaxClientID();
   int determineMaxPacksID();
   int determineMoneySpentByClient(vector<int> packs_bought);
-  int whichOfThese(int list_size);
+  vector<int> packSaleStatus();
+  //int whichOfThese(int list_size);
 
   friend ostream& operator<<(ostream& out, const Agency &agency);
 

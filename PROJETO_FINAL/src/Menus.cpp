@@ -33,7 +33,8 @@ void mainMenu(Agency &agency)
 
          case 4:
             clearScreen();
-            cout << "===== Saving all changes made =====\n";
+            cout << "===== Saving all changes made =====\nClientsIHC(): " << agency.getClientsIHC()
+                 << "\nPacksIHC(): " << agency.getPacksIHC();
             if(agency.getClientsIHC()) agency.saveClientsInfo("clientsnew.txt");
             if(agency.getPacksIHC()) agency.savePacksInfo("packsnew.txt");
             
@@ -60,8 +61,8 @@ void browsingInterface(Agency agency)
         cout << "=========== BROWSING MENU ===========\n";
         cout << "| 1 - Clients\n";
         cout << "| 2 - Packs\n";
-        cout << "| 3 - Status View amount of packs sold and profit\n\n";
-        cout << "| 4 - BACK\n";
+        cout << "| 3 - Sale status (View amount of packs sold and profit)\n\n";
+        cout << "| 0 - BACK\n";
         input = validateInterfaceInput(0, 3);
 
         switch (input)
@@ -76,6 +77,7 @@ void browsingInterface(Agency agency)
 
         case 3:
             agency.packSaleStatus();
+            backToMenu();
             return;
 
         case 0:
@@ -222,7 +224,7 @@ void clientsInterface(Agency &agency)
             break;
 
          case 2:
-            editClients(agency); 
+            editClients(agency);
             break;
 
          case 3:
@@ -263,18 +265,22 @@ void editClients(Agency &agency)
         {
          case 1:
             agency.changeClientName();
+            agency.setClientsIHC(true);
             break;
 
          case 2:
             agency.changeClientNIF();
+            agency.setClientsIHC(true);
             break;
 
          case 3:
             agency.changeClientFAM();
+            agency.setClientsIHC(true);
             break;
 
          case 4:
             agency.changeClientAddress();
+            agency.setClientsIHC(true);
             break;
 
          case 5:
@@ -342,6 +348,7 @@ void editPacks(Agency &agency)
     int which, input;
     while (1)
     {
+        pk.clear();
         clearScreen();
         cout << "=============== EDIT PACKS MENU ===============\n";
         cout << "| 1 - Change pack begin date\n";
@@ -358,31 +365,25 @@ void editPacks(Agency &agency)
         switch(input)
         {
         case 1:
-            pk = agency.searchPackMainLocation();
-            agency.printSomePacks(pk);
-            which = validateInterfaceInput(1, pk.size());
-            agency.getPacks().at(pk.at(which - 1)).setBeginDate(findPackDate("NEW BEGIN"));
+            agency.changePackDate("NEW BEGIN");
+            agency.setPacksIHC(true);
             backToMenu();
             break;
         case 2:
-            pk = agency.searchPackMainLocation();
-            agency.printSomePacks(pk);
-            which = validateInterfaceInput(1, pk.size());
-            agency.getPacks().at(pk.at(which - 1)).setEndDate(findPackDate("NEW END"));
+            agency.changePackDate("NEW END");
+            agency.setPacksIHC(true);
             backToMenu();
             break;
 
         case 3:
-            pk = agency.searchPackMainLocation();
-            agency.printSomePacks(pk);
-            which = validateInterfaceInput(1, pk.size());
-            r.push_back(findPackLocation());
-            agency.getPacks().at(pk.at(which - 1)).setSites(r);
+            agency.changePackSites();
+            agency.setPacksIHC(true);
             backToMenu();
             break;
 
         case 4:
-            agency.changeClientAddress();
+            agency.changePricePerPerson();
+            agency.setPacksIHC(true);
             backToMenu();
             break;
 
