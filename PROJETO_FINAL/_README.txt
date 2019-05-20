@@ -12,8 +12,8 @@ OBJETIVOS ("Funcionalidades a implementar")
 6 - Completo
 7 - Completo
 8 - Completo
-9 - Por fazer
-10 - Por fazer
+9 - Completo
+10 - Incompleto (nao implementado)
 
 ===================================================================================================
 Desenlvovemos o projeto no VS CODE usando g++ e o powershell do windows
@@ -28,14 +28,18 @@ O projeto ainda esta ligeiramente incompleto (maps). Os objetivos base estao (1-
 bastante cuidado, verificacao de modo a que seja uma navegacao agradavel e um trabalho
 bem conseguido.
 
-Agradecemos que compreendam a situacao e que nos seja permitido entregar ainda com 2 dias de atraso.
-Vamos submeter o trabalho atraves da minha conta do moodle (Francisco Goncalves) por volta das 23h59 de 19/05 (domingo)
-e depois mais tarde tentaremos desenvolver e submeter o mais depressa possivel o que falta nos pontos 9 e 10.
-Se nao forem aceites, compreendemos e fica o trabalho submetido em primeiro lugar para efeito de avaliacao
 
-As funcionalidades de pesquisa permitem pesquisar um cliente por nome (substring de nome e CASE SENSITIVE)
+FUNCIONALIDADES INTERESSANTES
+- As funcionalidades de pesquisa permitem pesquisar um cliente por nome (substring de nome e CASE SENSITIVE)
 e tambem por NIF apesar de com o tempo apertado acabamos por apenas implementar a procura pelo NIF para efeito
-de visualizacao de um so cliente (NIF/VAT ---> identificador)
+de visualizacao de um so cliente (NIF/VAT ---> identificador).
+- No MAIN MENU e' permitido guardar ou nao as alteracoes feitas ao longo do programa
+Escrita para files tambem so ocorre se houver mudancas efetivas causadas pelo programa
+- A listagem de clientes e validacao de input no interface (numeros inteiros) facilita a navegacao
+nos menus. 
+- O use de clearScreen() com funcoes de sistema permite manter o ecra limpo e organizado.
+O uso da funcao de sistema baxkToMenu ( system("pause") ou system("read") ) permite fazer pausas para
+visualizar conteudo imprimido com calma e seguir com um click rapido.
 
 (...)
 ===================================================================================================

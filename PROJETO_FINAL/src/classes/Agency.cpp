@@ -34,6 +34,7 @@ Agency::Agency(string agency_file_str)
         
     this->clientsInfoHasChanged = false;
     this->packsInfoHasChanged = false;
+    vector<string> theNMostVisited;
     
     this->maxClientsId = determineMaxClientID(); //max_clients_id;
     this->maxPacksId = determineMaxPacksID();   //maxPacks_id;
@@ -80,6 +81,17 @@ bool Agency::getPacksIHC() const
 {
     return this->packsInfoHasChanged;
 }
+
+vector<string> Agency::getMostVisited()
+{
+    return this->theNMostVisited;
+}
+
+void Agency::setMostVisited(vector<string> v)
+{
+    this->theNMostVisited = v;
+}
+
 
 void Agency::setClientsIHC(bool d)
 {
@@ -192,6 +204,9 @@ void Agency::savePacksInfo(string filename)
 // EDIT METHODS
 void Agency::addClients()
 {
+    cout << "1 - Continue with input\n2 - Leave\n\n";
+    int which = validateInterfaceInput(1, 2);
+    switch (which) { case 1: break; case 2: return; }
     Client c = preAddClient();
     c.setTotalPurchased(determineMoneySpentByClient(c.getPackList()));
     this->clients.push_back(c);
@@ -200,6 +215,9 @@ void Agency::addClients()
 
 void Agency::addPacks()
 {
+    cout << "1 - Continue with input\n2 - Leave\n\n";
+    int which = validateInterfaceInput(1, 2);
+    switch (which) { case 1: break; case 2: return; }
     Pack pack = preAddPack();
     this->packs.push_back(pack);
     this->packsInfoHasChanged = true;
@@ -208,10 +226,14 @@ void Agency::addPacks()
 void Agency::rmClients()
 {
     // DEC_WHICH ---> DECISE WHICH OF THE FOUND CLIENTS (IN vpos)
+    cout << "\n\n==== REMOVING CLIENT ====\n";
+    cout << "1 - Continue with input\n2 - Leave\n\n";
+    int which = validateInterfaceInput(1, 2);
+    switch (which) { case 1: break; case 2: return; }    
     cout << "\n\n==== SEARCH CLIENT NAME ====\n";
     vector<int> c_list = searchClientName();
 
-    cout << "\nSelect which client's NIF you wish to change\n";
+    cout << "\nSelect which client you wish to remove\n";
     for (int j = 0; j < c_list.size(); j++)
         cout << clients.at(c_list.at(j)).getName() << "\n";
 
@@ -453,6 +475,10 @@ vector<int> Agency::searchPacksBetweenDates(Date end, Date start)
 //WILL USE OTHER FUNCTIONS IN OTHER.CPP ("find" functions are simple reads)
 void Agency::changeClientName()
 {
+    cout << "\n\n==== CHANGING CLIENT NAME ====\n";
+    cout << "1 - Continue with input\n2 - Leave\n\n";
+    int which = validateInterfaceInput(1, 2);
+    switch (which) { case 1: break; case 2: return; }
     cout << "\n\n==== SEARCH CLIENT NAME ====\n";
     vector<int> c_list = searchClientName();
 
@@ -468,6 +494,10 @@ void Agency::changeClientName()
 
 void Agency::changeClientNIF()
 {
+    cout << "\n\n==== CHANGING CLIENT NIF ====\n";
+    cout << "1 - Continue with input\n2 - Leave\n\n";
+    int which = validateInterfaceInput(1, 2);
+    switch (which) { case 1: break; case 2: return; }
     cout << "\n\n==== SEARCHING WITH NAME ====\n";
     vector<int> c_list = searchClientName();
     cout << "\nSelect which client's NIF you wish to change\n";
@@ -483,6 +513,10 @@ void Agency::changeClientNIF()
 
 void Agency::changeClientFAM()
 {
+    cout << "\n\n==== CHANGING CLIENT FAM AGG NUMBER ====\n";
+    cout << "1 - Continue with input\n2 - Leave\n\n";
+    int which = validateInterfaceInput(1, 2);
+    switch (which) { case 1: break; case 2: return; }
     cout << "\n\n==== SEARCH WITH NAME ====\n";
     vector<int> c_list = searchClientName();
     for (int j = 0; j < c_list.size(); j++)
@@ -497,6 +531,10 @@ void Agency::changeClientFAM()
 
 void Agency::changeClientAddress()
 {
+    cout << "\n\n==== CHANGING CLIENT ADDRESS ====\n";
+    cout << "1 - Continue with input\n2 - Leave\n\n";
+    int which = validateInterfaceInput(1, 2);
+    switch (which) { case 1: break; case 2: return; }    
     cout << "\n\n==== SEARCH WITH NAME ====\n";
     vector<int> c_list = searchClientName();
     cout << "\nSelect which client's ADDRESS you wish to change\n";
@@ -506,6 +544,11 @@ void Agency::changeClientAddress()
 
 void Agency::purchasePack()
 {
+    cout << "\n\n==== BUYING A PACK FOR A CLIENT ====\n";
+    cout << "1 - Continue with input\n2 - Leave\n\n";
+    int which = validateInterfaceInput(1, 2);
+    switch (which) { case 1: break; case 2: return; }
+
     vector<int> c_list=searchClientName();
     if(c_list.at(0) != -1)
     {
@@ -513,9 +556,43 @@ void Agency::purchasePack()
         printSomeClients(c_list);
     }
     else return;
+
     cout << "\n\n" << c_list.size()+1 << " - BACK\n";
     int input = validateInterfaceInput(1, c_list.size()+1);
     if(input == c_list.size()+1) return;
+    int pos = c_list.at(input-1);
+    
+    vector<int> newpacklist = clients.at(pos).getPackList();
+    cout << "\n\n============\nSELECT PACK\n============\n";
+    c_list.clear(); //empty out just making sure
+    c_list = searchPackMainLocation(); //get a list of searched packs
+    printSomePacks(c_list);
+
+    int decision = validateInterfaceInput(1, c_list.size());
+    int pos2 = c_list.at(decision-1);
+    if(pos2 < 0) 
+    {
+        cout << "\nThis pack is no longer available\nSearch Again?\n";
+        cout << "1 - Yes\n2 - No\n\n";
+        decision = validateInterfaceInput(1, 2);
+        switch (decision)
+        { 
+            case 1:
+                cout << "\n\n============\nSELECT PACK\n============\n";
+                c_list = searchPackMainLocation(); //get a list of searched packs
+                printSomePacks(c_list); //now print them
+                decision = validateInterfaceInput(1, c_list.size()); //then choose one
+                break;
+            case 2:
+                return;
+        }
+    }
+    packs.at(pos2).setNrSold(packs.at(pos2).getNrSold()+1);
+    newpacklist.push_back(packs.at(pos2).getId());
+
+    //update money spent
+    this->clients.at(pos).setTotalPurchased(determineMoneySpentByClient(newpacklist));
+    this->clients.at(pos).setPackList(newpacklist);
 }   
 
 void Agency::changePackDate(string which)
@@ -524,7 +601,7 @@ void Agency::changePackDate(string which)
     pk = searchPackMainLocation();
     printSomePacks(pk);
     int decision = validateInterfaceInput(1, pk.size());
-    getPacks().at(pk.at(decision - 1)).setBeginDate(findPackDate(which));
+    this->packs.at(pk.at(decision - 1)).setBeginDate(findPackDate(which));
 }
 
 void Agency::changePackSites()
@@ -535,7 +612,7 @@ void Agency::changePackSites()
     printSomePacks(pk);
     int which = validateInterfaceInput(1, pk.size());
     r.push_back(findPackLocation());
-    getPacks().at(pk.at(which - 1)).setSites(r);
+    this->packs.at(pk.at(which - 1)).setSites(r);
 }
 
 
@@ -546,9 +623,30 @@ void Agency::changePricePerPerson()
     printSomePacks(pk);
     int input, which = validateInterfaceInput(1, pk.size());
     cout << "\nNEW PRICE PER PERSON: ";  cin >> input;
-    getPacks().at(which - 1).setPricePerPerson(input);
+    this->packs.at(which - 1).setPricePerPerson(input);
 }
 
+void Agency::changeMaxSeats()
+{
+    vector<int> pk;
+    pk = searchPackMainLocation();
+    printSomePacks(pk);
+    int input, which = validateInterfaceInput(1, pk.size());
+    cout << "\nNEW MAX SEATS: "; cin >> input;
+    this->packs.at(which - 1).setMaxPersons(input);
+
+}
+
+void Agency::changeSoldSeats()
+{
+    vector<int> pk;
+    pk = searchPackMainLocation();
+    printSomePacks(pk);
+    int input, which = validateInterfaceInput(1, pk.size());
+    cout << "\nNEW SOLD SEATS: ";
+    cin >> input; if(input > packs.at(which-1).getMaxPersons())
+    this->packs.at(which - 1).setNrSold(input);
+}
 
 //OTHER
 int Agency::determineMaxClientID()
@@ -613,6 +711,82 @@ vector<int> Agency::packSaleStatus()
 
     return result;
 }
+
+void Agency::mostVisited(int n)
+{
+    multimap<int,string> M = places_people();
+    int i=0;
+    for (auto it = M.rbegin(); it != M.rend() && i<n; i++, it++)
+    {
+        cout << it->second << endl;
+    }
+}
+
+multimap<int,string>Agency::places_people()
+{
+    map<string,int> M;
+    multimap<int,string> M2;
+    for(int i=0; i<packs.size(); i++)
+    {
+        if(packs.at(i).getSites().size()==1) 
+            M[packs.at(i).getSites().at(0)] += packs.at(i).getNrSold();
+        else
+        {
+            for(int j=1; j<packs.at(i).getSites().size(); j++)
+            M[packs.at(i).getSites().at(j)] += packs.at(i).getNrSold();
+        }
+    }
+    for(auto it : M)
+    {
+        M2.insert(pair<int,string>(it.second, it.first));
+    }
+
+    return M2;
+}
+
+vector<string> Agency::getSitesVec(bool order)
+{
+    vector<string> sites_list;
+    bool now = true;
+    int size1 = packs.size(), size2;
+    for (int i = 0; i < size1; i++)
+    {
+        now = true;
+        size2 = packs.at(i).getSites().size();
+        if(size2 == 1) sites_list.push_back(packs.at(i).getSites().at(0));
+        else
+        {
+            for (int j =1; j < size2; j++)
+            {
+                for (int k = 0; k < sites_list.size(); k++)
+                {
+                    if (sites_list.at(k).find(packs.at(i).getSites().at(j)) != string::npos)
+                    {
+                        bool now = false;
+                    }
+                }
+                if (now) sites_list.push_back(packs.at(i).getSites().at(j));
+            }
+        }
+    }
+    if(order)
+    {
+        sort(sites_list.begin(), sites_list.end());
+        sites_list.erase(unique(sites_list.begin(), sites_list.end()), sites_list.end());
+    }
+        return sites_list;
+} 
+
+
+//not operating
+void Agency::displayUnvisited()
+{
+    //SOON POINT 10
+    return;
+    int foundUV=0; //found UnVisited
+    //for(int)
+}
+
 
 /*********************************
  *          Mostrar Loja

@@ -84,8 +84,8 @@ Milano
 2020/8/3
 2019/8/12
 375
-62
-35
+102
+89
 ::::::::::
 12
 Wales - Cardiff, Newport
@@ -96,7 +96,7 @@ Wales - Cardiff, Newport
 20
 ::::::::::
 13
-Scotland - Edinburgh, Glasgow, Aberdeen
+Scotland - Edinburgh, Glasgow
 2019/6/20
 2019/6/28
 150
@@ -108,8 +108,8 @@ Tunisia - Tunes
 2018/3/18
 2018/3/30
 380
-55
-52
+67
+60
 ::::::::::
 15
 Taiwan - Banqiao
@@ -120,7 +120,7 @@ Taiwan - Banqiao
 16
 ::::::::::
 16
-Taiwan - Taichung, Kaohsiung
+Taiwan - Taichung
 2020/7/20
 2020/7/28
 280

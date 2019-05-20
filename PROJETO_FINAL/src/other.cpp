@@ -60,7 +60,7 @@ int findPackID() // SIMPLE READ ID
 string findPackLocation() // SIMPLE READ NAME
 {
     string input_name="";
-    cout << "\nSearching pack MAIN Destination\nInput name: ";
+    cout << "=== Searching pack MAIN Destination ===\nInput name: ";
     readline(input_name);
     return input_name;
 }
@@ -178,10 +178,10 @@ Client preAddClient()
 Pack preAddPack()
 {
     cout << "\n=== ADDING PACK ===\n\n";
-    int ID, NIF, FAN, pricePP, maxSeats, reserved;
-    string NIF_str, location, first;
+    int ID, pricePP, maxSeats, reserved;
+    string sitelist, first;
     Date start, end;
-    vector<string> second, sites;
+    vector<string> h1, h2, sites;
     //READ THE CLIENT
     cout << "Dont add a repeated ID please\nID: "; cin >> ID; while(!cin_test()) cin >> ID;
     cout << "DATES\n\n"; start = findPackDate("START"); end = findPackDate("END");
@@ -191,14 +191,19 @@ Pack preAddPack()
     cout << "Booked seats (< Max Seats): "; while(!cin_test() || maxSeats<reserved) cin >> reserved;
     cout << "Reading full location\n\n"; 
 
+    sites.clear();
+    string h;
     sites.push_back(findPackLocation());
-    first = findPackSpecificLocations();
-    second = strtok_cpp(first, ", "); //PART 2
-    cout << second.at(0);
-    cout << second.at(1);
-    for (int i = 0; i < second.size()-1; i++)
+    sitelist = findPackSpecificLocations();
+    h = sites.at(0) + sitelist;
+    h1 = strtok_cpp(h, " - "); //PART 2
+    //cout << second.at(0);
+    //cout << second.at(1);
+    first.clear();
+    h2 = strtok_cpp(h1.at(1), ", ");
+    for (int i = 0; i < first.size(); i++)
     {
-       sites.push_back(second.at(i+1));
+       sites.push_back(h2.at(i));
     }
     
     Pack p(ID, sites, start, end, pricePP, maxSeats, reserved);

@@ -11,7 +11,7 @@ void mainMenu(Agency &agency)
         cout << "=============== MAIN MENU ===============\n";
         cout << "| 1 - "; cout << "Browse / Search\n";
         cout << "| 2 - "; cout << "Manage CLIENT data\n";
-        cout << "| 3 - "; cout << "Manage PACK data\n\n";
+        cout << "| 3 - "; cout << "Manage PACK data\n\n\n";
         cout << "| 4 - "; cout << "EXIT AND SAVE ALL CHANGES\n";
         cout << "| 5 - "; cout << "EXIT WITHOUT SAVING\n";
         
@@ -55,15 +55,17 @@ void mainMenu(Agency &agency)
 void browsingInterface(Agency agency)
 {
     int input;
+    vector<string> vec = agency.getSitesVec(true);
     while (1)
     {
         clearScreen();
         cout << "=========== BROWSING MENU ===========\n";
         cout << "| 1 - Clients\n";
         cout << "| 2 - Packs\n";
-        cout << "| 3 - Sale status (View amount of packs sold and profit)\n\n";
+        cout << "| 3 - Sale status (View amount of packs sold and profit [8])\n";
+        cout << "| 4 - Popular sites status [9]\n\n";
         cout << "| 0 - BACK\n";
-        input = validateInterfaceInput(0, 3);
+        input = validateInterfaceInput(0, 4);
 
         switch (input)
         {
@@ -77,6 +79,30 @@ void browsingInterface(Agency agency)
 
         case 3:
             agency.packSaleStatus();
+            backToMenu();
+            return;
+
+        case 4:
+            cout << "\n\n=== PLACES IN THE AGENCY ===\n\n";
+            cout << "1 - View all places ordered\n2 - Most Visited Places\n\n";
+            input = validateInterfaceInput(1, 2);
+            switch (input)
+            { 
+                case 1:
+                    for (int i = 0; i < vec.size(); i++)
+                    {
+                        cout << vec.at(i) << endl;
+                    }
+                    backToMenu();
+                    return;
+                case 2:
+                    break;
+            }
+            cout << "\n==== MOST VISITED PLACES ====\n";
+            cout << "There are under (!) " << agency.getSitesVec(true).size() << " different places available";
+            cout << "\nTo see the ordered TOP N visited places type N below\n";
+            input = validateInterfaceInput(1, agency.getSitesVec(true).size());
+            agency.mostVisited(input);
             backToMenu();
             return;
 
@@ -321,8 +347,10 @@ void packsInterface(Agency &agency)
             break;
 
         case 3:
+            cout << "\n=== REMOVING PACK ===\n";
             pk = agency.searchPackMainLocation();
             agency.printSomePacks(pk);
+            cout << "\nWhich one do you want to delete? ";
             agency.rmPacks(pk.at(validateInterfaceInput(1, pk.size())-1));
             backToMenu();
             break;
@@ -388,9 +416,15 @@ void editPacks(Agency &agency)
             break;
 
         case 5:
+            agency.changeMaxSeats();
+            agency.setPacksIHC(true);
+            backToMenu();
             return;
 
         case 6:
+            agency.changeSoldSeats();
+            agency.setPacksIHC(true);
+            backToMenu();
             return;
 
         case 7:

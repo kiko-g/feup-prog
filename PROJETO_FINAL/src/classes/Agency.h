@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
 #include <fstream>
 #include <cmath>
 
@@ -24,6 +27,7 @@ class Agency
   vector<Client> clients; // vector to store the existing clients
   vector<Pack> packs; // vector to store the existing Packs
   
+  vector<string> theNMostVisited;
   bool clientsInfoHasChanged; // flag that is set to "true" if at least one client has been changed/added/deleted
   bool packsInfoHasChanged; // flag that is set to "true" if at least one Pack has been changed/added/deleted
   unsigned maxClientsId; // maximum value among all clients identifiers
@@ -41,17 +45,19 @@ class Agency
   vector<Pack> getPacks() const;
   bool getClientsIHC() const; //IHC = Info Has Changed
   bool getPacksIHC() const;   //IHC = Info Has Changed
-  void setClientsIHC(bool d);
-  void setPacksIHC(bool d);
   vector<int> allPacksSold();
+  vector<string> getMostVisited();
 
   // SET methods
   void setName(string name);
+  void setClientsIHC(bool d);
+  void setPacksIHC(bool d);
   void setVATnumber(unsigned VATnumber);
   void setAddress(Address address);
   void setURL(string url);
   void setClients(vector<Client> &clients);
   void setPacks(vector<Pack> &packs);
+  void setMostVisited(vector<string> v);
   
   // SAVING FILES METHODS
   void saveClientsInfo(string filename);
@@ -78,6 +84,8 @@ class Agency
   void changePackDate(string which);
   void changePackSites();
   void changePricePerPerson();
+  void changeMaxSeats();
+  void changeSoldSeats();
 
   // SEARCH METHODS
   vector<int> searchClientName();
@@ -93,6 +101,10 @@ class Agency
   int determineMaxPacksID();
   int determineMoneySpentByClient(vector<int> packs_bought);
   vector<int> packSaleStatus();
+  void mostVisited(int n);
+  void displayUnvisited();
+  vector<string> getSitesVec(bool order);
+  multimap<int,string> places_people();
   //int whichOfThese(int list_size);
 
   friend ostream& operator<<(ostream& out, const Agency &agency);
