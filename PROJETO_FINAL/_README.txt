@@ -17,7 +17,7 @@ OBJETIVOS ("Funcionalidades a implementar")
 
 ===================================================================================================
 Desenlvovemos o projeto no VS CODE usando g++ e o powershell do windows
-O comando 'g++ *.cpp /classes *.cpp' compila todos os programas na pasta
+O comando 'g++ *.cpp classes/*.cpp' compila todos os programas na pasta
 
 IMPORTANTE NOTAR que os ficheiros de texto estao dentro da pasta 'src/data' e o
 programa esta implementado de maneira a considerar isso, existindo portanto uma 
