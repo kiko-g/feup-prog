@@ -42,4 +42,6 @@ O uso da funcao de sistema baxkToMenu ( system("pause") ou system("read") ) perm
 visualizar conteudo imprimido com calma e seguir com um click rapido.
 
 (...)
+
+NOTA: 16.5
 ===================================================================================================
