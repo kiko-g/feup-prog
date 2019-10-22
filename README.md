@@ -1,6 +1,9 @@
-FRANCISCO JOSE PAIVA GONCALVES  | 201704790
-JOAO RUANO NETO VEIGA DE MACEDO | 201704464
-PROJETO PROG | ENTREGA 2 | 19-05-2019 23h50
+# PROG2018 2019
+### PROJETO PROG | ENTREGA FINAL | 19-05-2019
+
+#### FRANCISCO JOSE PAIVA GONCALVES  | 201704790
+#### JOAO RUANO NETO VEIGA DE MACEDO | 201704464
+
 (Texto sem caracteres especiais/portugueses)
 
 OBJETIVOS ("Funcionalidades a implementar")
@@ -43,5 +46,4 @@ visualizar conteudo imprimido com calma e seguir com um click rapido.
 
 (...)
 
-NOTA: 16.5
-===================================================================================================
+###### NOTA: 16.5
