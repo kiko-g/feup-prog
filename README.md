@@ -1,10 +1,8 @@
-# PROG2018 2019
-### PROJETO PROG | ENTREGA FINAL | 19-05-2019
+# PROG 2018 2019
+### Projeto PROG | ENTREGA FINAL | 19-05-2019
 
 > Francisco José Paiva Gonçalves  | 201704790\
 > João Ruano Neto Veiga Macedo | 201704464
-
-(Texto sem caracteres especiais/portugueses)
 
 ##### OBJETIVOS ("Funcionalidades a implementar")
 > 1 - Completo
